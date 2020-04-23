@@ -26,7 +26,15 @@ export class AuthState {
   }
 
   @Action(SignUp)
-  signUp({getState, setState}: StateContext<AuthStateModel>, action: SignUp) {
-  return this.authService.signUp(action.user, action.password);
+  signUp({patchState}: StateContext<AuthStateModel>, action: SignUp) {
+  return this.authService.signUp(action.user, action.password)
+    .then((res) => {
+      if (!res) {
+        return;
+      }
+      patchState({
+        currentUser: res
+      });
+    });
   }
 }

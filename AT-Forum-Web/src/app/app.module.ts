@@ -16,6 +16,7 @@ import { CreateUserComponent } from './users/create-user/create-user.component';
 import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

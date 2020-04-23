@@ -6,18 +6,23 @@
   <mat-card class="mat-card-center">
     <mat-card-content>
       <form [formGroup]="newLoginForm">
-        <mat-form-field>
+        <div class="example-container">
+        <mat-form-field appearance="fill">
           <label>
             <input matInput placeholder="Email" type="string" formControlName="email">
           </label>
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <label>
-            <input matInput placeholder="Password" type="string" formControlName="password">
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button style="margin-left: 80%" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </label>
         </mat-form-field>
         <br>
+        </div>
       </form>
     </mat-card-content>
     <mat-card-actions align="end">

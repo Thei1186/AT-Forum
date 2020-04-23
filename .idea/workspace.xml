@@ -27,6 +27,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="D:\WebstormProjects\AT-Forum\AT-Forum-Web\node_modules\typescript\lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\WebstormProjects\AT-Forum\AT-Forum-Web\src\app\users" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -39,7 +44,7 @@
       <updated>1587631874253</updated>
       <workItem from="1587631875829" duration="493000" />
       <workItem from="1587639496006" duration="5751000" />
-      <workItem from="1587645360540" duration="625000" />
+      <workItem from="1587645360540" duration="3169000" />
     </task>
     <servers />
   </component>

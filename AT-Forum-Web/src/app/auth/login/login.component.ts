@@ -11,6 +11,7 @@ import {LoginWithEmail, SignUp} from '../shared/auth.action';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  hide = true;
   newLoginForm: FormGroup;
   password: string;
   email: string;

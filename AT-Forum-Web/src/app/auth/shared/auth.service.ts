@@ -14,9 +14,33 @@ export class AuthService {
               private afs: AngularFirestore) {
   }
 
-  signUp(user: User, password: string) {
+  signUp(user: User, password: string): Promise<any> {
+    return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, password)
+      .then(credentials => {
+          const newUser: User = {
+            uid: credentials.user.uid,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+            photoURL: user.photoURL,
+            role: user.role
+          };
+          this.afs.collection('users').doc(newUser.uid).set(newUser)
+            .then(() => {
+              this.angularFireAuth.auth.currentUser.updateProfile({
+                displayName: newUser.username,
+                photoURL: newUser.photoURL
+              });
+            });
+          console.log('Signup successful for ' + newUser.username);
+          return newUser;
+        })
+      .catch(err => {
+        console.log(err.message);
+      });
+    /*
     return new Promise<User>(() => {
-      this.angularFireAuth
+    this.angularFireAuth
         .auth
         .createUserWithEmailAndPassword(user.email, password)
         .then(res => {
@@ -32,9 +56,10 @@ export class AuthService {
             });
             console.log('Sign up successful!', res);
           });
-        });
     }).catch(err => {
       console.log('Something went wrong: ', err.message);
     });
+    });
+     */
   }
 }

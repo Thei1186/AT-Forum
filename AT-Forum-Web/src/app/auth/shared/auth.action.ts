@@ -13,3 +13,9 @@ export class SignUp {
   constructor(public user: User, public password: string) {
   }
 }
+
+export class GetUser {
+  static readonly type = '[Auth] GetUser';
+  constructor(public uid: string) {
+  }
+}

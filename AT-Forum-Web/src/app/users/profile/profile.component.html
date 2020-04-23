@@ -1,0 +1,23 @@
+<br>
+<header style="text-align: center">Your Profile</header>
+<br>
+<br>
+<div *ngIf="auth$ | async as user">
+  <div class="mat-card-center" style="margin-left: 25%">
+    <mat-card>
+      <div style="position: fixed">
+        <img mat-card-lg-image src="{{user.photoURL}}">
+      </div>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Name: {{user.name}}</mat-list-item>
+          <mat-list-item>Email: {{user.email}}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button>Edit</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

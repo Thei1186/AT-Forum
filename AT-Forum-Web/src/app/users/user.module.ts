@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProfileRoutingModule } from './profile-routing.module';
-import { ProfileComponent } from './profile.component';
+import { UserRoutingModule } from './user-routing.module';
+import { ProfileComponent } from './profile/profile.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 
@@ -11,9 +11,9 @@ import {MatListModule} from '@angular/material/list';
   declarations: [ProfileComponent],
   imports: [
     CommonModule,
-    ProfileRoutingModule,
+    UserRoutingModule,
     MatCardModule,
     MatListModule
   ]
 })
-export class ProfileModule { }
+export class UserModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../shared/user';
 import {Store} from '@ngxs/store';
-import {LoginWithEmail, SignUp} from "../../auth/shared/auth.action";
-import {FormGroup} from "@angular/forms";
+import {SignUp} from '../../auth/shared/auth.action';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -26,6 +26,7 @@ export class CreateUserComponent implements OnInit {
     newUser.username = this.newSignUpForm.get('username').value;
     newUser.name = this.newSignUpForm.get('name').value;
     this.password = this.newSignUpForm.get('password').value;
+
     this.store.dispatch(new SignUp(newUser, this.password));
   }
 }

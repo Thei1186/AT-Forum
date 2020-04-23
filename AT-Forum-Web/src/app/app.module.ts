@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import {NgxsModule} from '@ngxs/store';
-import {environment} from '../environments/environment';
+import {environment, firebaseConfig} from '../environments/environment';
 import {AuthState} from './auth/shared/auth.state';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {LoginComponent} from './auth/login/login.component';
@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { CreateUserComponent } from './users/create-user/create-user.component';
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { CreateUserComponent } from './users/create-user/create-user.component';
     NgxsLoggerPluginModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

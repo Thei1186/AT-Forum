@@ -118,8 +118,13 @@
               "devServerTarget": "AT-Forum-Web:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "AT-Forum-Web"
 }

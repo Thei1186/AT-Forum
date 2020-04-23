@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "at-forum": {
+      "hosting": {
+        "AT-Forum-Web": [
+          "at-forum"
+        ]
+      }
+    }
+  }
+}

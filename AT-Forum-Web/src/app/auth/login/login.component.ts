@@ -12,12 +12,10 @@ import {LoginWithEmail, SignUp} from '../shared/auth.action';
 })
 export class LoginComponent implements OnInit {
   newLoginForm: FormGroup;
-  user: User;
-  username: string;
   password: string;
   email: string;
 
-  constructor(private store: Store, private fb: FormBuilder) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
 

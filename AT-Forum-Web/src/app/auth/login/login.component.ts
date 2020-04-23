@@ -15,10 +15,13 @@ export class LoginComponent implements OnInit {
   password: string;
   email: string;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit() {
-
+    this.newLoginForm = this.fb.group({
+      email: '',
+      password: ''
+    });
   }
 
   login() {

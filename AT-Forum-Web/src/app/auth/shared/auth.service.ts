@@ -6,7 +6,7 @@ import {User} from '../../users/shared/user';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private angularFireAuth) { }
 
   signUp(user: User, password: string) {
 

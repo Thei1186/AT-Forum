@@ -15,10 +15,9 @@ export class CreateUserComponent implements OnInit {
   newSignUpForm: FormGroup;
   password: string;
   hide = true;
-
-  constructor(private store: Store, private fb: FormBuilder, private router: Router) { }
   fileToUpload: File = null;
   photoURL: string;
+
   constructor(private store: Store, private fb: FormBuilder,
               private router: Router, private uService: UploadsService) {
   }

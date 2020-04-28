@@ -20,9 +20,9 @@ export class AuthService {
       .createUserWithEmailAndPassword(user.email, password)
       .then(res => {
         this.afs.collection('users').doc(res.user.uid).set({
-          email: res.user.email,
+          email: user.email,
           username: user.username,
-          photoUrl: res.user.photoURL,
+          photoUrl: user.photoURL,
           name: user.name,
           role: 'user'
         });

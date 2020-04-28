@@ -35,6 +35,7 @@ export class AuthState {
       patchState({
         currentUser: res
       });
+      console.log('auth state user: ' + res);
     });
   }
 }

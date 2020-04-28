@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {Select, Store} from '@ngxs/store';
+import {AuthState} from '../auth/shared/auth.state';
+import {Observable} from 'rxjs';
+import {User} from '../users/shared/user';
+import {GetUser} from '../auth/shared/auth.action';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
+  @Select(AuthState.currentUser) user$: Observable<User>;
 
   ngOnInit() {
   }

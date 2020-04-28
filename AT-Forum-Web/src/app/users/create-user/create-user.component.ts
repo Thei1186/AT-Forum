@@ -36,19 +36,18 @@ export class CreateUserComponent implements OnInit {
   }
 
   async signUp() {
-    this.uService.upload(this.fileToUpload).subscribe( () => {
-      const userFromForm = this.newSignUpForm.value;
-      this.photoURL = this.uService.getFilePath();
-      const newUser = {
-        name: userFromForm.name,
-        email: userFromForm.email,
-        username: userFromForm.username,
-        photoURL: this.photoURL,
-        role: 'user'
-      };
-      this.password = this.newSignUpForm.get('password').value;
-      this.store.dispatch(new SignUp(newUser as User, this.password));
-    });
+    this.uService.upload(this.fileToUpload);
+    const userFromForm = this.newSignUpForm.value;
+    this.photoURL = this.uService.getFilePath();
+    const newUser = {
+      name: userFromForm.name,
+      email: userFromForm.email,
+      username: userFromForm.username,
+      photoURL: this.photoURL,
+      role: 'user'
+    };
+    this.password = this.newSignUpForm.get('password').value;
+    this.store.dispatch(new SignUp(newUser as User, this.password));
     await this.router.navigateByUrl('/user/profile');
   }
 }

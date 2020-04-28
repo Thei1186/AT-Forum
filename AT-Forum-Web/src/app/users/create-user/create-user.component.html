@@ -3,9 +3,16 @@
 <br>
 <br>
 <div>
+
   <mat-card class="mat-card-center">
     <mat-card-content>
+      <img src="{{photoURL}}" alt="Profile picture" style="height: 150px; width: 150px">
+      <br>
+      <label>
+        <input type="file" id="file" (change)="handleFileInput($event)">
+      </label>
       <form [formGroup]="newSignUpForm">
+
         <mat-form-field>
           <label>
             <input matInput placeholder="email" type="string" formControlName="email">

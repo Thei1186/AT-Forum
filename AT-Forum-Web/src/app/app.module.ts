@@ -16,13 +16,15 @@ import { CreateUserComponent } from './users/create-user/create-user.component';
 import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {MatIconModule} from "@angular/material/icon";
+import {MatIconModule} from '@angular/material/icon';
+import {HeaderComponent} from './header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateUserComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatInputModule,
     MatButtonModule,
     AppRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

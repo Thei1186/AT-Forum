@@ -3,7 +3,7 @@ import {User} from '../shared/user';
 import {Store} from '@ngxs/store';
 import {SignUp} from '../../auth/shared/auth.action';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -12,9 +12,6 @@ import {Router} from "@angular/router";
 })
 export class CreateUserComponent implements OnInit {
   newSignUpForm: FormGroup;
-  user: User;
-  email: string;
-  name: string;
   password: string;
 
   constructor(private store: Store, private fb: FormBuilder, private router: Router) { }
@@ -24,18 +21,23 @@ export class CreateUserComponent implements OnInit {
       email: '',
       username: '',
       name: '',
-      password: ''
+      password: '',
+      photoURL: ''
     });
   }
 
   async signUp() {
-    const newUser = this.user;
-    newUser.email = this.newSignUpForm.get('email').value;
-    newUser.username = this.newSignUpForm.get('username').value;
-    newUser.name = this.newSignUpForm.get('name').value;
+    const userFromForm = this.newSignUpForm.value;
+    const newUser = {
+      name: userFromForm.name,
+      email: userFromForm.email,
+      username: userFromForm.username,
+      photoURL: userFromForm.photoURL,
+      role: 'user'
+    };
     this.password = this.newSignUpForm.get('password').value;
 
-    this.store.dispatch(new SignUp(newUser, this.password));
+    this.store.dispatch(new SignUp(newUser as User, this.password));
     await this.router.navigateByUrl('/user/profile');
   }
 }

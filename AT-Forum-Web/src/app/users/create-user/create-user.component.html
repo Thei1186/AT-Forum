@@ -4,7 +4,7 @@
 <br>
 <div>
   <mat-card class="mat-card-center">
-    <mat-card-content>
+    <mat-card-content style="text-align: center">
       <form [formGroup]="newSignUpForm">
         <mat-form-field>
           <label>
@@ -26,8 +26,11 @@
         <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="Password" type="string" formControlName="password">
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
           </label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
         <br>
       </form>

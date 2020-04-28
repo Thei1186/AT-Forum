@@ -2,10 +2,8 @@
   <div>
     <ul>
       <li><a routerLink="/">HOME</a></li>
-      <ul *ngIf="user$ | async as user">
         <li><a routerLink="user/profile">PROFILE</a></li>
       </ul>
-        </ul>
         <button class="mat-button1" mat-flat-button routerLink="/login">Login</button>
     <button class="mat-button2" mat-flat-button routerLink="user/create-user">Sign Up</button>
   </div>

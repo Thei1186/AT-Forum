@@ -6,10 +6,11 @@
   <div class="mat-card-center" style="margin-left: 25%">
     <mat-card>
       <div style="position: fixed">
-        <img mat-card-lg-image src="{{user.photoURL}}">
+        <img src="{{user.photoURL}}">
       </div>
       <mat-card-content>
         <mat-list>
+          <mat-list-item>Username: {{user.username}}</mat-list-item>
           <mat-list-item>Name: {{user.name}}</mat-list-item>
           <mat-list-item>Email: {{user.email}}</mat-list-item>
         </mat-list>

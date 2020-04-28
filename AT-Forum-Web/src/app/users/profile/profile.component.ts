@@ -11,7 +11,7 @@ import {AuthState} from '../../auth/shared/auth.state';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor() { }
   @Select(AuthState.currentUser) auth$: Observable<User>;
 
   ngOnInit() {

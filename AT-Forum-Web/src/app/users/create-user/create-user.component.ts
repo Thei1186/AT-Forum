@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class CreateUserComponent implements OnInit {
   newSignUpForm: FormGroup;
   password: string;
+  hide = true;
 
   constructor(private store: Store, private fb: FormBuilder, private router: Router) { }
 

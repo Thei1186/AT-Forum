@@ -5,6 +5,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as firebase from 'firebase';
+import {AuthUser} from './auth-user';
+import {Role} from '../../users/shared/role';
 
 @Injectable({
   providedIn: 'root'
@@ -35,28 +37,31 @@ export class AuthService {
       .catch(error => {
         console.log('Something is wrong:', error.message);
       });
-    /*
-    return new Promise<User>(() => {
-    this.angularFireAuth
-        .auth
-        .createUserWithEmailAndPassword(user.email, password)
-        .then(res => {
-          const newUser = res.user;
-          this.afs.collection('users').doc(newUser.uid).set({
-            email: newUser.email,
-            username: user.username,
-            name: user.name
-          }).then(() => {
-            this.angularFireAuth.auth.currentUser.updateProfile({
-              displayName: user.username,
-              photoURL: user.photoURL
-            });
-            console.log('Sign up successful!', res);
-          });
-    }).catch(err => {
-      console.log('Something went wrong: ', err.message);
-    });
-    });
-     */
+  }
+
+  loginWithEmail(email: string, password: string): Observable<AuthUser> {
+    return from(this.angularFireAuth.auth.signInWithEmailAndPassword(email, password))
+      .pipe(
+        map(credentials => this.firebaseUserToAuthUser(credentials.user))
+      );
+  }
+
+  getRole(uid: string): Observable<Role> {
+    return this.afs.collection('roles').doc(uid).get()
+      .pipe(
+        map(value => {
+          return value.data().role;
+        }));
+  }
+
+  private firebaseUserToAuthUser(user: firebase.User): AuthUser {
+    if (user) {
+      return {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL
+      };
+    }
   }
 }

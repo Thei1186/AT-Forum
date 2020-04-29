@@ -5,8 +5,8 @@
 <div *ngIf="auth$ | async as user">
   <div class="mat-card-center" style="margin-left: 25%">
     <mat-card>
-      <div style="position: fixed">
-        <img src="{{user.photoURL}}">
+      <div style="position: fixed;">
+        <img src="{{user.photoURL}}" style=" height: 150px; width: 150px">
       </div>
       <mat-card-content>
         <mat-list>

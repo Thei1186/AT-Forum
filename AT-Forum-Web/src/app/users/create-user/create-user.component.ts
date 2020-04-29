@@ -5,6 +5,7 @@ import {SignUp} from '../../auth/shared/auth.action';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UploadsService} from '../../shared/uploads/uploads.service';
+import {finalize, first, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-user',
@@ -16,7 +17,6 @@ export class CreateUserComponent implements OnInit {
   password: string;
   hide = true;
   fileToUpload: File = null;
-  photoURL: string;
 
   constructor(private store: Store, private fb: FormBuilder,
               private router: Router, private uService: UploadsService) {
@@ -36,18 +36,25 @@ export class CreateUserComponent implements OnInit {
   }
 
   async signUp() {
-    this.uService.upload(this.fileToUpload);
-    const userFromForm = this.newSignUpForm.value;
-    this.photoURL = this.uService.getFilePath();
-    const newUser = {
-      name: userFromForm.name,
-      email: userFromForm.email,
-      username: userFromForm.username,
-      photoURL: this.photoURL,
-      role: 'user'
-    };
-    this.password = this.newSignUpForm.get('password').value;
-    this.store.dispatch(new SignUp(newUser as User, this.password));
-    await this.router.navigateByUrl('/user/profile');
+    const timestamp = Date.now();
+    this.uService.upload(timestamp.toString(), this.fileToUpload).pipe(
+      finalize(() => {
+        this.uService.getImageRefPath(timestamp.toString())
+          .pipe(first()).subscribe(URL => {
+          const userFromForm = this.newSignUpForm.value;
+          const newUser = {
+            name: userFromForm.name,
+            email: userFromForm.email,
+            username: userFromForm.username,
+            photoURL: URL,
+            role: 'user'
+          };
+
+          this.password = this.newSignUpForm.get('password').value;
+          this.store.dispatch(new SignUp(newUser as User, this.password));
+          this.router.navigateByUrl('/user/profile');
+        });
+      })
+    ).subscribe();
   }
 }

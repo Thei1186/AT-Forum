@@ -57,17 +57,16 @@ export class AuthState {
   }
 
   @Action(SignUp)
-  signUp({patchState}: StateContext<AuthStateModel>, action: SignUp) {
+  signUp({getState, setState}: StateContext<AuthStateModel>, action: SignUp) {
     return this.authService.signUp(action.user, action.password)
-      .then((res) => {
-        if (!res) {
-          return;
-        }
-        patchState({
-          currentUser: res
-        });
-        console.log('auth state user: ' + res);
-      });
+      .pipe(
+        tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            currentUser: result
+          });
+        }));
   }
 
   @Action(GetRole)

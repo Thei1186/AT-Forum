@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {User} from '../../users/shared/user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {from, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {from, Observable, pipe} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {AuthUser} from './auth-user';
 import {Role} from '../../users/shared/role';
@@ -17,26 +17,40 @@ export class AuthService {
               private afs: AngularFirestore) {
   }
 
-  signUp(user: User, password: string): Promise<any> {
-    return this.angularFireAuth.auth
-      .createUserWithEmailAndPassword(user.email, password)
-      .then(res => {
-        this.afs.collection('users').doc(res.user.uid).set({
-          email: user.email,
-          username: user.username,
-          photoUrl: user.photoURL,
+  signUp(user: User, password: string): Observable<any> {
+    return from(this.angularFireAuth.auth
+      .createUserWithEmailAndPassword(user.email, password))
+      .pipe(map((cred) => {
+        const newUser = {
           name: user.name,
-          role: 'user'
-        });
-        this.angularFireAuth.auth.currentUser.updateProfile({
-          displayName: user.username,
+          username: user.username,
+          email: user.email,
           photoURL: user.photoURL
-        });
-        console.log('You are Successfully signed up!', res);
-      })
-      .catch(error => {
-        console.log('Something is wrong:', error.message);
+        };
+        this.afs.collection('users').doc(cred.user.uid).set(newUser);
+        return newUser;
+      }));
+
+    /*
+    .then(res => {
+      this.afs.collection('users').doc(res.user.uid).set({
+        email: user.email,
+        username: user.username,
+        photoUrl: user.photoURL,
+        name: user.name,
+        role: 'user'
       });
+      this.angularFireAuth.auth.currentUser.updateProfile({
+        displayName: user.username,
+        photoURL: user.photoURL
+      });
+      console.log('You are Successfully signed up!', res);
+    })
+    .catch(error => {
+      console.log('Something is wrong:', error.message);
+    });
+
+     */
   }
 
   loginWithEmail(email: string, password: string): Observable<AuthUser> {

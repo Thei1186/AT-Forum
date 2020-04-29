@@ -19,3 +19,10 @@ export class GetUser {
   constructor(public uid: string) {
   }
 }
+
+export class GetRole {
+  static readonly type = '[Auth] GetRole';
+
+  constructor(public uid: string) {
+  }
+}

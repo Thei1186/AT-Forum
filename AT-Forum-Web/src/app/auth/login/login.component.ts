@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Store} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {User} from '../../users/shared/user';
-import {LoginWithEmail, SignUp} from '../shared/auth.action';
+import {LoginWithEmail} from '../shared/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +13,7 @@ export class LoginComponent implements OnInit {
   newLoginForm: FormGroup;
   password: string;
   email: string;
+  id: string;
 
   constructor(private store: Store, private fb: FormBuilder) { }
 

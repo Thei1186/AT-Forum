@@ -11,12 +11,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     CreateUserComponent,
+    AdminPageComponent,
     ],
   imports: [
     CommonModule,

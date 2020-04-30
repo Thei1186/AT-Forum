@@ -29,6 +29,11 @@ export class UserState {
     return state.currentUser;
   }
 
+  @Selector()
+  static allUsers(state: UserStateModel) {
+    return state.allUsers;
+  }
+
   @Action(DeleteUser)
   deleteUser({getState, setState}: StateContext<UserStateModel>, {uid}: DeleteUser) {
     return this.userService.deleteUser(uid)

@@ -1,0 +1,27 @@
+<br>
+<header style="text-align: center">Users</header>
+<br>
+<br>
+<div *ngIf="users$ | async as user">
+  <div *ngFor="let user of users">
+    <div class="mat-card-center" style="margin-left: 25%">
+      <mat-card>
+        <div style="position: absolute">
+          <img mat-card-lg-image src="{{user.photoURL}}">
+        </div>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Name: {{user.name}}</mat-list-item>
+            <mat-list-item>Email: {{user.email}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button (click)="deleteUser(user.uid)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+

@@ -14,12 +14,6 @@ export class SignUp {
   }
 }
 
-export class GetUser {
-  static readonly type = '[Auth] GetUser';
-  constructor(public uid: string) {
-  }
-}
-
 export class GetRole {
   static readonly type = '[Auth] GetRole';
 

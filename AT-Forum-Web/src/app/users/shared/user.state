@@ -32,7 +32,7 @@ export class UserState {
   @Action(DeleteUser)
   deleteUser({getState, setState}: StateContext<UserStateModel>, {uid}: DeleteUser) {
     return this.userService.deleteUser(uid)
-      .pipe(tap((result) => {
+      .pipe(tap(() => {
         const state = getState();
         const filteredArray = state.allUsers.filter(user => user.uid !== uid);
         setState({

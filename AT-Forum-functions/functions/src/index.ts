@@ -1,8 +1,15 @@
 import * as functions from 'firebase-functions';
+import {DependencyFactory} from "./dependency-factory";
+import * as admin from "firebase-admin";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const difa = new DependencyFactory();
+
+admin.initializeApp({
+databaseURL: 'https://at-forum.firebaseio.com'
+});
+
+exports.userDeleted = functions.firestore
+.document('users/{uid}')
+.onDelete((snap, context) => {
+   return difa.getUserController().deletedUsers(snap, context);
+});

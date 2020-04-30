@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export class DeleteUser {
   static readonly type = '[User] DeleteUser';
 
@@ -13,4 +15,11 @@ export class GetUser {
 
 export class GetAllUsers {
   static readonly type = '[User] GetAllUsers';
+}
+
+export class EditUser {
+  static readonly type = '[User] EditUser';
+
+  constructor(public user: User) {
+  }
 }

@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 
@@ -20,6 +21,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     ProfileComponent,
     CreateUserComponent,
     AdminPageComponent,
+    EditUserComponent,
     ],
   imports: [
     CommonModule,

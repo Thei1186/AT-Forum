@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {User} from './user';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+  }
 
   deleteUser(uid: string) {
     console.log('deleted user ' + uid);
-    return from (this.afs.collection('users').doc<User>(uid).delete());
+    return from(this.afs.collection('users').doc<User>(uid).delete());
   }
 
   getUser(uid: string): Observable<User> {
@@ -49,5 +51,25 @@ export class UserService {
           return userArray;
         })
       );
+  }
+
+  editUser(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data = {
+      name: user.name,
+      username: user.username,
+      photoURL: user.photoURL
+    };
+    from(userRef.set(data as User, {merge: true})).pipe(map(() => {
+        const updatedUser: User = {
+          uid: user.uid,
+          name: user.name,
+          username: user.username,
+          photoURL: user.photoURL,
+          email: user.email
+        };
+        return updatedUser;
+      }
+    ));
   }
 }

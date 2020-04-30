@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {User} from '../../users/shared/user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {from, Observable, pipe} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {from, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {AuthUser} from './auth-user';
 import {Role} from '../../users/shared/role';
@@ -16,18 +16,32 @@ export class AuthService {
   constructor(private angularFireAuth: AngularFireAuth,
               private afs: AngularFirestore) {
   }
-
-  signUp(user: User, password: string): Observable<any> {
+  /*
+  updateAuthProfile(user: User): Observable<AuthUser> {
+    return from(this.angularFireAuth.auth.currentUser.updateProfile({
+      displayName: user.username,
+      photoURL: user.photoURL
+    })).pipe(map( () => {
+      return this.angularFireAuth.auth.currentUser as AuthUser;
+    }));
+  }
+   */
+  signUp(user: User, password: string): Observable<User> {
     return from(this.angularFireAuth.auth
       .createUserWithEmailAndPassword(user.email, password))
       .pipe(map((cred) => {
-        const newUser = {
+        this.afs.collection('users').doc(cred.user.uid).set(user);
+        const newUser: User = {
+          uid: cred.user.uid,
           name: user.name,
           username: user.username,
           email: user.email,
-          photoURL: user.photoURL
+          photoURL: user.photoURL,
         };
-        this.afs.collection('users').doc(cred.user.uid).set(newUser);
+        this.angularFireAuth.auth.currentUser.updateProfile({
+          displayName: user.username,
+          photoURL: user.photoURL
+        });
         return newUser;
       }));
 
@@ -64,8 +78,24 @@ export class AuthService {
     return this.afs.collection('roles').doc(uid).get()
       .pipe(
         map(value => {
-          return value.data().role;
+          return {
+            roleName: value.data().role
+          };
         }));
+  }
+
+  setRole(uid: string, newRoleName: string): Observable<Role> {
+    console.log(uid + ' ' + newRoleName);
+    return from(this.afs.collection('roles').doc(uid).set({
+      role: newRoleName
+    }))
+      .pipe(
+        map(() => {
+          return {
+            roleName: newRoleName
+          };
+        })
+      );
   }
 
   private firebaseUserToAuthUser(user: firebase.User): AuthUser {

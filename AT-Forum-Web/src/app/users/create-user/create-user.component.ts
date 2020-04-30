@@ -46,8 +46,7 @@ export class CreateUserComponent implements OnInit {
             name: userFromForm.name,
             email: userFromForm.email,
             username: userFromForm.username,
-            photoURL: URL,
-            role: 'user'
+            photoURL: URL
           };
 
           this.password = this.newSignUpForm.get('password').value;

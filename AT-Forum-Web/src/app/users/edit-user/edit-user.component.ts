@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
@@ -7,6 +7,7 @@ import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
 import {finalize, first} from 'rxjs/operators';
 import {UploadsService} from '../../shared/uploads/uploads.service';
+import {EditUser} from '../shared/user.action';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,14 +16,15 @@ import {UploadsService} from '../../shared/uploads/uploads.service';
 })
 export class EditUserComponent implements OnInit {
   editUserForm: FormGroup;
-  id: string;
   password: string;
   fileToUpload: File = null;
   photoURL: string;
+  uid: string;
 
   constructor(private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute,
-              private  store: Store, private uService: UploadsService) { }
+              private  store: Store, private uService: UploadsService) {
+  }
 
   @Select(UserState.currentUser) user$: Observable<User>;
 
@@ -36,6 +38,9 @@ export class EditUserComponent implements OnInit {
       if (!user) {
         return;
       }
+      this.uid = user.uid;
+      this.photoURL = user.photoURL;
+
       this.editUserForm.patchValue({
         name: user.name,
         username: user.username,
@@ -44,25 +49,23 @@ export class EditUserComponent implements OnInit {
   }
 
   editProfile(user: User) {
-    const newUser = {
-      uid: this.id,
+    const newUser: User = {
+      uid: user.uid,
       name: this.editUserForm.get('name').value,
       username: this.editUserForm.get('username').value,
+      email: user.email,
+      photoURL: this.photoURL
     };
-
+    this.store.dispatch(new EditUser(newUser));
   }
 
   handleFileInput(event) {
     this.fileToUpload = event.target.files[0];
-  }
-
-  changeProfilePic() {
-    const timestamp = Date.now();
-    this.uService.upload(timestamp.toString(), this.fileToUpload).pipe(
+    this.uService.upload(this.uid, this.fileToUpload).pipe(
       finalize(() => {
-        this.uService.getImageRefPath(timestamp.toString())
+        this.uService.getImageRefPath(this.uid)
           .pipe(first()).subscribe(URL => {
-            this.photoURL = URL;
+          this.photoURL = URL;
         });
       })
     ).subscribe();

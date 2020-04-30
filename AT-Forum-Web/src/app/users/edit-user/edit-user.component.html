@@ -3,7 +3,7 @@
 <div *ngIf="user$ | async as user">
   <mat-card class="mat-card-center">
     <mat-card-content>
-      <img src="{{user.photoURL}}" alt="Profile picture" style="height: 150px; width: 150px">
+      <img src="{{photoURL}}" alt="Profile picture" style="height: 150px; width: 150px">
       <br>
       <label>
         <input type="file" id="file" (change)="handleFileInput($event)">
@@ -30,7 +30,6 @@
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-raised-button (click)="editProfile(user)">Submit</button>
-      <button mat-raised-button (click)="changeProfilePic()">Change Picture</button>
     </mat-card-actions>
   </mat-card>
 </div>

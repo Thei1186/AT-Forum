@@ -76,12 +76,14 @@ export class UserState {
 
   @Action(EditUser)
   editUser({setState, getState}: StateContext<UserStateModel>, action: EditUser) {
-    return from (this.userService.editUser(action.user)).pipe(tap((result) => {
-      const state = getState();
-      setState({
-        ...state,
-        currentUser: result
-      });
-    }));
+    return this.userService.editUser(action.user).pipe(
+      tap((result) => {
+        const state = getState();
+        setState({
+          ...state,
+          currentUser: result
+        });
+      })
+    );
   }
 }

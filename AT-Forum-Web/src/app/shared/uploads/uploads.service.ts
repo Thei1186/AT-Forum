@@ -8,8 +8,6 @@ import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
   providedIn: 'root'
 })
 export class UploadsService {
-  downloadURL: Observable<string>;
-  filepath: string;
 
   constructor(private storage: AngularFireStorage) {
   }
@@ -17,7 +15,6 @@ export class UploadsService {
   public upload(id: string, data): Observable<UploadTaskSnapshot> {
 
     const filePath = `images/${id}`;
-    const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, data);
 
     return task.snapshotChanges();
@@ -27,12 +24,5 @@ export class UploadsService {
     const filePath = `images/${id}`;
     const fileRef = this.storage.ref(filePath);
     return fileRef.getDownloadURL();
-  }
-
-  public getFilePath(): string {
-    if (this.filepath != null) {
-      return this.filepath;
-    }
-    return null;
   }
 }

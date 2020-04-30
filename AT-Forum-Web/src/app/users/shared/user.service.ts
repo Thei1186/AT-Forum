@@ -53,23 +53,25 @@ export class UserService {
       );
   }
 
-  editUser(user: User) {
+  editUser(user: User): Observable<User> {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     const data = {
       name: user.name,
       username: user.username,
       photoURL: user.photoURL
     };
-    from(userRef.set(data as User, {merge: true})).pipe(map(() => {
-        const updatedUser: User = {
-          uid: user.uid,
-          name: user.name,
-          username: user.username,
-          photoURL: user.photoURL,
-          email: user.email
-        };
-        return updatedUser;
-      }
-    ));
+    return from(userRef.set(data as User, {merge: true}))
+      .pipe(
+        map(() => {
+            const updatedUser: User = {
+              uid: user.uid,
+              name: user.name,
+              username: user.username,
+              photoURL: user.photoURL,
+              email: user.email
+            };
+            return updatedUser;
+          }
+        ));
   }
 }

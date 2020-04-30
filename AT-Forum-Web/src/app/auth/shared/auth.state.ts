@@ -2,7 +2,7 @@ import {User} from '../../users/shared/user';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetRole, GetUser, LoginWithEmail, SetRole, SignUp, UpdateAuthProfile} from './auth.action';
+import {GetRole, LoginWithEmail, SetRole, SignUp} from './auth.action';
 import {Role} from '../../users/shared/role';
 import {map, tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
@@ -25,7 +25,7 @@ export class AuthStateModel {
 @Injectable()
 export class AuthState {
 
-  constructor(private authService: AuthService, private store: Store) {
+  constructor(private authService: AuthService) {
   }
 
   @Selector()
@@ -113,16 +113,5 @@ export class AuthState {
 
   }
 
-  @Action(GetUser)
-  getUser({getState, setState}: StateContext<AuthStateModel>, {uid}: GetUser) {
-    return this.authService.getUser(uid).pipe(
-      tap((result) => {
-        const state = getState();
-        setState({
-          ...state,
-          currentUser: result
-        });
-      })
-    );
-  }
+ 
 }

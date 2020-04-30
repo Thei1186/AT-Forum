@@ -108,20 +108,4 @@ export class AuthService {
       };
     }
   }
-
-  getUser(uid: string): Observable<User> {
-    return this.afs.collection('users').doc<User>(uid)
-      .snapshotChanges().pipe(map(user => {
-        const data = user.payload.data();
-        const currentUser: User = {
-          uid: user.payload.id,
-          username: data.username,
-          name: data.name,
-          email: data.email,
-          photoURL: data.photoURL,
-          role: data.role
-        };
-        return currentUser;
-      }));
-  }
 }

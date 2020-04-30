@@ -5,7 +5,7 @@ export class DeleteUser {
 }
 
 export class GetUser {
-  static readonly type = '[Auth] GetUser';
+  static readonly type = '[User] GetUser';
   constructor(public uid: string) {
   }
 }

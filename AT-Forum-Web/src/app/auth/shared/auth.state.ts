@@ -4,8 +4,9 @@ import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {AuthService} from './auth.service';
 import {GetRole, LoginWithEmail, SetRole, SignUp} from './auth.action';
 import {Role} from '../../users/shared/role';
-import {map, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
+import {GetUser} from '../../users/shared/user.action';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -60,6 +61,7 @@ export class AuthState {
             loggedInUser: result
           });
           dispatch(new SetRole(result.uid, 'user'));
+          dispatch(new GetUser(result.uid));
         }));
   }
 

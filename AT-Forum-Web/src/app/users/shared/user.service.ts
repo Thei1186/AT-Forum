@@ -20,8 +20,8 @@ export class UserService {
         const data = user.payload.data();
         const currentUser: User = {
           uid: user.payload.id,
-          username: data.username,
           name: data.name,
+          username: data.username,
           email: data.email,
           photoURL: data.photoURL,
         };

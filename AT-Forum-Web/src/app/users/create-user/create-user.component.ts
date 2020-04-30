@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../shared/user';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {SignUp} from '../../auth/shared/auth.action';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UploadsService} from '../../shared/uploads/uploads.service';
-import {finalize, first, map} from 'rxjs/operators';
+import {finalize, first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-user',
@@ -36,6 +36,28 @@ export class CreateUserComponent implements OnInit {
   }
 
   async signUp() {
+    if (this.fileToUpload != null) {
+      this.signUpWithPicture();
+    } else {
+      this.signUpWithoutPicture();
+    }
+  }
+
+  signUpWithoutPicture() {
+    const userFromForm = this.newSignUpForm.value;
+    const newUser = {
+      name: userFromForm.name,
+      email: userFromForm.email,
+      username: userFromForm.username,
+      photoURL: null
+    };
+
+    this.password = this.newSignUpForm.get('password').value;
+    this.store.dispatch(new SignUp(newUser as User, this.password));
+    this.router.navigateByUrl('user/profile');
+  }
+
+  signUpWithPicture() {
     const timestamp = Date.now();
     this.uService.upload(timestamp.toString(), this.fileToUpload).pipe(
       finalize(() => {
@@ -51,7 +73,7 @@ export class CreateUserComponent implements OnInit {
 
           this.password = this.newSignUpForm.get('password').value;
           this.store.dispatch(new SignUp(newUser as User, this.password));
-          this.router.navigateByUrl('/user/profile');
+          this.router.navigateByUrl('user/profile');
         });
       })
     ).subscribe();

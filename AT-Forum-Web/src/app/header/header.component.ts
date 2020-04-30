@@ -4,6 +4,8 @@ import {AuthState} from '../auth/shared/auth.state';
 import {Observable} from 'rxjs';
 import {Role} from '../users/shared/role';
 import {AuthUser} from '../auth/shared/auth-user';
+import {Router} from '@angular/router';
+import {GetUser} from '../users/shared/user.action';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +14,16 @@ import {AuthUser} from '../auth/shared/auth-user';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store,
+              private router: Router) { }
   @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   @Select(AuthState.role) role$: Observable<Role>;
 
   ngOnInit() {
+  }
+
+  goToProfile(uid: string) {
+    this.store.dispatch(new GetUser(uid));
+    this.router.navigateByUrl('user/profile');
   }
 }

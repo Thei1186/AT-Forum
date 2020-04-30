@@ -22,6 +22,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.karma.karma_node_package_dir" value="" />
     <property name="nodejs.jest.jest_package" value="" />
+    <property name="ts.external.directory.path" value="D:\Users\Kokushi\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.npm">
@@ -55,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588246905759</updated>
-      <workItem from="1588246907184" duration="701000" />
+      <workItem from="1588246907184" duration="956000" />
     </task>
     <servers />
   </component>

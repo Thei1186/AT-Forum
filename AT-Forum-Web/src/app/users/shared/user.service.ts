@@ -11,6 +11,7 @@ export class UserService {
   constructor(private afs: AngularFirestore) { }
 
   deleteUser(uid: string) {
+    console.log('deleted user ' + uid);
     return from (this.afs.collection('users').doc<User>(uid).delete());
   }
 
@@ -27,5 +28,26 @@ export class UserService {
         };
         return currentUser;
       }));
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.afs.collection<User>('users')
+      .snapshotChanges().pipe(
+        map(doc => {
+          const userArray: User[] = [];
+          doc.forEach(document => {
+            const user = document.payload.doc.data();
+            console.log('id ' + document.payload.doc.id);
+            userArray.push({
+              uid: document.payload.doc.id,
+              email: user.email,
+              name: user.name,
+              username: user.username,
+              photoURL: user.photoURL,
+            });
+          });
+          return userArray;
+        })
+      );
   }
 }

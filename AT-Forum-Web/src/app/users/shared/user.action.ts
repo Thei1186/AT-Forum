@@ -6,6 +6,11 @@ export class DeleteUser {
 
 export class GetUser {
   static readonly type = '[User] GetUser';
+
   constructor(public uid: string) {
   }
+}
+
+export class GetAllUsers {
+  static readonly type = '[User] GetAllUsers';
 }

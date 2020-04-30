@@ -3,7 +3,6 @@ import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {User} from '../shared/user';
 import {AuthState} from '../../auth/shared/auth.state';
-import {GetUser} from '../../auth/shared/auth.action';
 import {ActivatedRoute} from '@angular/router';
 import {tap} from 'rxjs/operators';
 

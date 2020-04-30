@@ -26,15 +26,14 @@ export class AuthService {
     }));
   }
    */
-  signUp(user: User, password: string): Observable<User> {
+  signUp(user: User, password: string): Observable<AuthUser> {
     return from(this.angularFireAuth.auth
       .createUserWithEmailAndPassword(user.email, password))
       .pipe(map((cred) => {
         this.afs.collection('users').doc(cred.user.uid).set(user);
-        const newUser: User = {
+        const newUser: AuthUser = {
           uid: cred.user.uid,
-          name: user.name,
-          username: user.username,
+          displayName: user.username,
           email: user.email,
           photoURL: user.photoURL,
         };

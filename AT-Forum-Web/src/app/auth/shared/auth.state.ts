@@ -9,7 +9,6 @@ import {AuthUser} from './auth-user';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
-  currentUser: User;
   role: Role;
 }
 
@@ -17,7 +16,6 @@ export class AuthStateModel {
   name: 'auth',
   defaults: {
     loggedInUser: undefined,
-    currentUser: undefined,
     role: undefined
   }
 })
@@ -26,11 +24,6 @@ export class AuthStateModel {
 export class AuthState {
 
   constructor(private authService: AuthService) {
-  }
-
-  @Selector()
-  static currentUser(state: AuthStateModel) {
-    return state.currentUser;
   }
 
   @Selector()
@@ -64,11 +57,12 @@ export class AuthState {
           const state = getState();
           setState({
             ...state,
-            currentUser: result
+            loggedInUser: result
           });
           dispatch(new SetRole(result.uid, 'user'));
         }));
   }
+
   /*
   @Action(UpdateAuthProfile)
   updateAuthProfile({getState, setState}: StateContext<AuthStateModel>, action: UpdateAuthProfile) {
@@ -113,5 +107,5 @@ export class AuthState {
 
   }
 
- 
+
 }

@@ -24,7 +24,6 @@ export class UserService {
           name: data.name,
           email: data.email,
           photoURL: data.photoURL,
-          role: data.role
         };
         return currentUser;
       }));

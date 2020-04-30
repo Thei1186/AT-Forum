@@ -5,6 +5,7 @@ import {User} from '../shared/user';
 import {AuthState} from '../../auth/shared/auth.state';
 import {ActivatedRoute} from '@angular/router';
 import {tap} from 'rxjs/operators';
+import {UserState} from '../shared/user.state';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(private store: Store, private route: ActivatedRoute) {
   }
 
-  @Select(AuthState.currentUser) auth$: Observable<User>;
+  @Select(UserState.currentUser) auth$: Observable<User>;
 
   ngOnInit() {
     if (this.auth$) {

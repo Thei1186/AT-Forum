@@ -3,7 +3,8 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {UserService} from './user.service';
 import {tap} from 'rxjs/operators';
-import {DeleteUser, GetUser} from './user.action';
+import {DeleteUser, EditUser, GetAllUsers, GetUser} from './user.action';
+import {from} from 'rxjs';
 
 export class UserStateModel {
   currentUser: User;
@@ -47,9 +48,35 @@ export class UserState {
       }));
   }
 
+  @Action(GetAllUsers)
+  getAllUsers({getState, setState}: StateContext<UserStateModel>) {
+    return this.userService.getAllUsers().pipe(
+      tap((result => {
+        const state = getState();
+        setState({
+          ...state,
+          allUsers: result
+        });
+      }))
+    );
+  }
+
   @Action(GetUser)
   getUser({getState, setState}: StateContext<UserStateModel>, {uid}: GetUser) {
     return this.userService.getUser(uid).pipe(
+      tap((result) => {
+        const state = getState();
+        setState({
+          ...state,
+          currentUser: result
+        });
+      })
+    );
+  }
+
+  @Action(EditUser)
+  editUser({setState, getState}: StateContext<UserStateModel>, action: EditUser) {
+    return this.userService.editUser(action.user).pipe(
       tap((result) => {
         const state = getState();
         setState({

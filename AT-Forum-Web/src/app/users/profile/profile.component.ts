@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {User} from '../shared/user';
 import {AuthState} from '../../auth/shared/auth.state';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 import {UserState} from '../shared/user.state';
 
@@ -13,9 +13,8 @@ import {UserState} from '../shared/user.state';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  id: string;
 
-  constructor(private store: Store, private route: ActivatedRoute) {
+  constructor(private store: Store, private router: Router) {
   }
 
   @Select(UserState.currentUser) auth$: Observable<User>;
@@ -34,4 +33,7 @@ export class ProfileComponent implements OnInit {
     //  });
   }
 
+  editUserRoute(id: string) {
+    this.router.navigateByUrl('user/edit-user/' + id);
+  }
 }

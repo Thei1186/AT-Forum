@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
 import {User} from '../shared/user';
-import {DeleteUser} from "../shared/user.action";
+import {DeleteUser, GetAllUsers} from '../shared/user.action';
 
 @Component({
   selector: 'app-admin-page',
@@ -12,12 +12,12 @@ import {DeleteUser} from "../shared/user.action";
 })
 export class AdminPageComponent implements OnInit {
 
-  users: User[];
   constructor(private store: Store) { }
 
   @Select(UserState.allUsers) users$: Observable<User[]>;
 
   ngOnInit() {
+    this.store.dispatch(new GetAllUsers());
   }
 
   deleteUser(uid: string) {

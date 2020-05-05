@@ -2,8 +2,8 @@
 <header style="text-align: center">Admin Page</header>
 <br>
 <br>
-<div *ngIf="users$ | async as user">
-  <div *ngFor="let user of users">
+<div>
+  <div *ngFor="let user of users$ | async as user">
     <div class="mat-card-center" style="margin-left: 25%">
       <mat-card>
         <div style="position: absolute">

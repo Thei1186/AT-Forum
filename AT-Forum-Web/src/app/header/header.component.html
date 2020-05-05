@@ -4,10 +4,10 @@
       <li><a routerLink="/home">HOME</a></li>
       <ul *ngIf="user$ | async as user">
         <li><a (click)="goToProfile(user.uid)">PROFILE</a></li>
-      </ul>
-      <ul *ngIf="role$ | async as role">
-        <ul *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
-          <li><a routerLink="user/admin">ADMIN</a></li>
+        <ul *ngIf="role$ | async as role">
+          <ul *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
+            <li><a routerLink="user/admin">ADMIN</a></li>
+          </ul>
         </ul>
       </ul>
       </ul>

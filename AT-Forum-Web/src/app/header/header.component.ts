@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {AuthState} from '../auth/shared/auth.state';
 import {Observable} from 'rxjs';
-import {User} from '../users/shared/user';
-import {GetUser} from '../auth/shared/auth.action';
 import {Role} from '../users/shared/role';
 import {AuthUser} from '../auth/shared/auth-user';
 import {Router} from '@angular/router';
+import {Logout} from '../auth/shared/auth.action';
 import {GetUser} from '../users/shared/user.action';
-import {Logout} from "../auth/shared/auth.action";
 
 @Component({
   selector: 'app-header',

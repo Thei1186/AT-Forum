@@ -4,6 +4,11 @@ import {AuthState} from '../auth/shared/auth.state';
 import {Observable} from 'rxjs';
 import {User} from '../users/shared/user';
 import {GetUser} from '../auth/shared/auth.action';
+import {Role} from '../users/shared/role';
+import {AuthUser} from '../auth/shared/auth-user';
+import {Router} from '@angular/router';
+import {GetUser} from '../users/shared/user.action';
+import {Logout} from "../auth/shared/auth.action";
 
 @Component({
   selector: 'app-header',
@@ -18,4 +23,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToProfile(uid: string) {
+    this.store.dispatch(new GetUser(uid));
+    this.router.navigateByUrl('user/profile');
+  }
+
+  logout() {
+    this.store.dispatch(new Logout());
+  }
 }

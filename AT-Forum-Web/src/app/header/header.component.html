@@ -11,7 +11,14 @@
         </ul>
       </ul>
       </ul>
-        <button class="mat-button1" mat-flat-button routerLink="/login">Login</button>
-    <button class="mat-button2" mat-flat-button routerLink="user/create-user">Sign Up</button>
+    <ul *ngIf="user$ | async as user; else login">
+      <button class="mat-button1" mat-flat-button (click)="logout()">Logout</button>
+    </ul>
+      <button class="mat-button2" mat-flat-button routerLink="user/create-user">Sign Up</button>
   </div>
 </mat-toolbar>
+
+
+<ng-template #login>
+  <button class="mat-button1" mat-flat-button routerLink="/login">Login</button>
+</ng-template>

@@ -84,20 +84,22 @@ export class AuthService {
       .pipe(
         map(value => {
           return {
-            roleName: value.data().roleName
+            roleName: value.data().roleName,
+            uid: value.id
           };
         }));
   }
 
-  setRole(uid: string, newRoleName: string): Observable<Role> {
-    console.log(uid + ' ' + newRoleName);
-    return from(this.afs.collection('roles').doc(uid).set({
+  setRole(id: string, newRoleName: string): Observable<Role> {
+    console.log(id + ' ' + newRoleName);
+    return from(this.afs.collection('roles').doc(id).set({
       role: newRoleName
     }))
       .pipe(
         map(() => {
           return {
-            roleName: newRoleName
+            roleName: newRoleName,
+            uid: id
           };
         })
       );

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Store} from '@ngxs/store';
 import {LoginWithEmail} from '../shared/auth.action';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.email = this.newLoginForm.get('email').value;
     this.password = this.newLoginForm.get('password').value;
-    console.log(this.email, this.password);
     this.store.dispatch(new LoginWithEmail(this.email, this.password));
     this.router.navigateByUrl('');
   }

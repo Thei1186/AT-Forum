@@ -21,6 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { AngularFireStorageModule} from '@angular/fire/storage';
 import {UserState} from './users/shared/user.state';
 import { HomeComponent } from './home/home.component';
+import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HomeComponent } from './home/home.component';
     NgxsModule.forRoot([AuthState, UserState]
       , {developmentMode: !environment.production}),
     NgxsLoggerPluginModule,
+    NgxsStoragePluginModule.forRoot({key: ['auth', 'user']}),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,

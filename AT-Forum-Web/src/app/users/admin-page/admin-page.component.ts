@@ -4,6 +4,8 @@ import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
 import {User} from '../shared/user';
 import {DeleteUser, GetAllUsers} from '../shared/user.action';
+import {AuthState} from '../../auth/shared/auth.state';
+import {AuthUser} from '../../auth/shared/auth-user';
 
 @Component({
   selector: 'app-admin-page',
@@ -15,7 +17,7 @@ export class AdminPageComponent implements OnInit {
   constructor(private store: Store) { }
 
   @Select(UserState.allUsers) users$: Observable<User[]>;
-
+  @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   ngOnInit() {
     this.store.dispatch(new GetAllUsers());
   }

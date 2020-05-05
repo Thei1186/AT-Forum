@@ -28,6 +28,10 @@ export class SetRole {
   }
 }
 
+export class Logout {
+  static readonly type = '[Auth] Logout';
+}
+
 /*
 export class UpdateAuthProfile {
   static readonly  type = '[Auth] UpdateAuthProfile';

@@ -16,6 +16,7 @@ export class AuthService {
   constructor(private angularFireAuth: AngularFireAuth,
               private afs: AngularFirestore) {
   }
+
   /*
   updateAuthProfile(user: User): Observable<AuthUser> {
     return from(this.angularFireAuth.auth.currentUser.updateProfile({
@@ -26,6 +27,11 @@ export class AuthService {
     }));
   }
    */
+
+  logout(): Observable<void> {
+    return from(this.angularFireAuth.auth.signOut());
+  }
+
   signUp(user: User, password: string): Observable<AuthUser> {
     return from(this.angularFireAuth.auth
       .createUserWithEmailAndPassword(user.email, password))

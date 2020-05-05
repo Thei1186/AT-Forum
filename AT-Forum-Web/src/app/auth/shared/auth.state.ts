@@ -2,7 +2,7 @@ import {User} from '../../users/shared/user';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetRole, LoginWithEmail, SetRole, SignUp} from './auth.action';
+import {GetRole, LoginWithEmail, Logout, SetRole, SignUp} from './auth.action';
 import {Role} from '../../users/shared/role';
 import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
@@ -47,6 +47,19 @@ export class AuthState {
           loggedInUser: result
         });
         dispatch(new GetRole(result.uid));
+      }));
+  }
+
+  @Action(Logout)
+  logout({getState, setState}: StateContext<AuthStateModel>) {
+    return this.authService.logout()
+      .pipe(tap(() => {
+        const state = getState();
+        setState({
+          ...state,
+          loggedInUser: undefined,
+          role: undefined
+        });
       }));
   }
 

@@ -84,7 +84,7 @@ export class AuthService {
       .pipe(
         map(value => {
           return {
-            roleName: value.data().role
+            roleName: value.data().roleName
           };
         }));
   }

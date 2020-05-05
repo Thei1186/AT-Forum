@@ -20,12 +20,14 @@ import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AngularFireStorageModule} from '@angular/fire/storage';
 import {UserState} from './users/shared/user.state';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

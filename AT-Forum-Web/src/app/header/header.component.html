@@ -1,7 +1,7 @@
 <mat-toolbar style="background-color: #7d8085">
   <div>
     <ul>
-      <li><a routerLink="/">HOME</a></li>
+      <li><a routerLink="/home">HOME</a></li>
       <ul *ngIf="user$ | async as user">
         <li><a (click)="goToProfile(user.uid)">PROFILE</a></li>
       </ul>

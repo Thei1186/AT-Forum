@@ -30,5 +30,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(new Logout());
+    this.router.navigateByUrl('');
   }
 }

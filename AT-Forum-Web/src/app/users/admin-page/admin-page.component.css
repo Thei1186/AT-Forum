@@ -2,28 +2,18 @@
 mat-card {
   max-width: 60%;
   margin-top: 2%;
-}
-mat-card{
-  max-width: 60%;
+  height: 155px;
 
 }
+
 header {
   font-size: 40px;
   font-weight: bold;
 }
 
-.cardLayout {
-  display: flex;
-  flex-direction: column;
-}
 
 mat-list{
   margin-left: 25%;
-}
-
-.mat-card-center{
-  width: 75%;
-  text-align: center;
 }
 
 button {

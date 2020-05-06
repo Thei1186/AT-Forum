@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {AuthState} from '../shared/auth.state';
 import {AuthUser} from '../shared/auth-user';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +18,15 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.user$) {
-      this.router.navigateByUrl('login');
-      return false;
-    }
-    this.user$.pipe(
-      tap(a => {
-        console.log(a.displayName);
+    return this.user$.pipe(
+      map(user => {
+        if (user) {
+          return true;
+        } else {
+          this.router.navigateByUrl('login');
+          return false;
+        }
       })
     );
-    return true;
   }
 }

@@ -115,4 +115,20 @@ export class AuthService {
       };
     }
   }
+
+  getRoles(): Observable<Role[]> {
+    return this.afs.collection<Role>('roles')
+      .snapshotChanges()
+      .pipe(
+        map(docActions => {
+          return docActions.map(docAction => {
+            const data = docAction.payload.doc.data();
+            const role: Role = {
+              roleName: data.roleName,
+              uid: docAction.payload.doc.id
+            };
+            return role;
+          });
+        }));
+  }
 }

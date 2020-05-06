@@ -2,7 +2,7 @@
 <header style="text-align: center">Admin Page</header>
 <br>
 <br>
-<div>
+<div *ngIf="roles$ | async">
   <div *ngFor="let user of users$ | async as user">
     <div class="mat-card-center" style="margin-left: 25%">
       <mat-card>
@@ -15,7 +15,7 @@
             <mat-list-item>Email: {{user.email}}</mat-list-item>
           </mat-list>
         </mat-card-content>
-        <mat-card-actions align="end">
+        <mat-card-actions *ngIf="isUser(user)" align="end">
           <button mat-raised-button (click)="deleteUser(user.uid)">Delete</button>
         </mat-card-actions>
       </mat-card>

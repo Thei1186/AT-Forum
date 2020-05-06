@@ -32,6 +32,10 @@ export class Logout {
   static readonly type = '[Auth] Logout';
 }
 
+export class GetRoles {
+  static readonly type = '[Auth] GetRoles';
+}
+
 /*
 export class UpdateAuthProfile {
   static readonly  type = '[Auth] UpdateAuthProfile';

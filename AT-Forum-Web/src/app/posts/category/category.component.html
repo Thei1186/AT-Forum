@@ -1,0 +1,25 @@
+<br>
+<header style="text-align: center">Categories</header>
+<br>
+<br>
+<div>
+  <div *ngFor="let category of categories$ | async as category">
+    <div style="margin-left: 25%">
+      <mat-card>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Category Name: {{category.categoryName}}</mat-list-item>
+            <mat-list-item>Description: {{category.description}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button (click)="deleteCat(category.id)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+
+

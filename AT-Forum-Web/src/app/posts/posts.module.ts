@@ -13,11 +13,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { CategoryComponent } from './category/category.component';
 import {MatListModule} from "@angular/material/list";
+import { EditCategoryComponent } from './category/edit-category/edit-category.component';
 
 
 
 @NgModule({
-  declarations: [CreateCategoryComponent, TopicComponent, CommentComponent, CreateTopicComponent, CategoryComponent],
+  declarations: [CreateCategoryComponent, TopicComponent, CommentComponent, CreateTopicComponent, CategoryComponent, EditCategoryComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,

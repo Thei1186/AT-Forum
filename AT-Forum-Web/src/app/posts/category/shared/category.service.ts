@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
 import {Category} from '../../shared/category';
 import {map} from 'rxjs/operators';
-import {User} from "../../../users/shared/user";
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +42,13 @@ export class CategoryService {
 
   deleteCategory(id: string) {
     return from(this.afs.collection('categories').doc<Category>(id).delete());
+  }
+
+  editCategory(category: Category) {
+    const userRef: AngularFirestoreDocument<Category> = this.afs.doc(`categories/${category.id}`);
+    return from(userRef.set(category, {merge: true}))
+      .pipe(map(() => {
+        return category;
+      }));
   }
 }

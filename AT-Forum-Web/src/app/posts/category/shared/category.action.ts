@@ -17,3 +17,10 @@ export class DeleteCategory {
   constructor(public id: string) {
   }
 }
+
+export class EditCategory {
+  static readonly type: '[Category] EditCategory';
+
+  constructor(public category: Category) {
+  }
+}

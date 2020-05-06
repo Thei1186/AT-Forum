@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {Topic} from '../topic';
-import {TopicService} from '../services/topic.service';
+import {Topic} from '../../shared/topic';
+import {TopicService} from './topic.service';
 import {CreateTopic, GetAllTopics} from './topic.action';
 import {tap} from 'rxjs/operators';
 

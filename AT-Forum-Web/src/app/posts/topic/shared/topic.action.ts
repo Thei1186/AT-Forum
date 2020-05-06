@@ -1,4 +1,4 @@
-import {Topic} from '../topic';
+import {Topic} from '../../shared/topic';
 
 export class CreateTopic {
   static readonly type = '[Topic] CreateTopic';

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Select, Store} from '@ngxs/store';
-import {CategoryState} from '../../shared/states/category.state';
+import {CategoryState} from '../shared/category.state';
 import {Observable} from 'rxjs';
 import {Category} from '../../shared/category';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CreateCategory} from '../../shared/states/category.action';
+import {CreateCategory} from '../shared/category.action';
 
 @Component({
   selector: 'app-category',

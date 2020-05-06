@@ -22,8 +22,8 @@ import { AngularFireStorageModule} from '@angular/fire/storage';
 import {UserState} from './users/shared/user.state';
 import { HomeComponent } from './home/home.component';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
-import {CategoryState} from './posts/shared/states/category.state';
-import {TopicState} from './posts/shared/states/topic.state';
+import {CategoryState} from './posts/category/shared/category.state';
+import {TopicState} from './posts/topic/shared/topic.state';
 
 @NgModule({
   declarations: [

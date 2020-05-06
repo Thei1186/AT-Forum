@@ -1,4 +1,4 @@
-import {Category} from '../category';
+import {Category} from '../../shared/category';
 
 export class CreateCategory {
   static readonly type = '[Category] CreateCategory';

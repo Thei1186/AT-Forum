@@ -1,7 +1,7 @@
-import {Category} from '../category';
+import {Category} from '../../shared/category';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {CategoryService} from '../services/category.service';
+import {CategoryService} from './category.service';
 import {CreateCategory} from './category.action';
 
 

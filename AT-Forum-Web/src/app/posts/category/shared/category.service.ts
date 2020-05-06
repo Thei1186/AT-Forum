@@ -46,8 +46,24 @@ export class CategoryService {
 
   editCategory(category: Category) {
     const userRef: AngularFirestoreDocument<Category> = this.afs.doc(`categories/${category.id}`);
+    console.log('edit: ' + category);
     return from(userRef.set(category, {merge: true}))
       .pipe(map(() => {
+        return category;
+      }));
+  }
+
+  getCategory(id: string): Observable<Category> {
+    console.log(id);
+    return this.afs.collection('categories').doc<Category>(id).snapshotChanges()
+      .pipe(map((document) => {
+        const data = document.payload.data();
+        const category: Category = {
+          id: document.payload.id,
+          categoryName: data.categoryName,
+          description: data.description,
+          topic: data.topic
+        };
         return category;
       }));
   }

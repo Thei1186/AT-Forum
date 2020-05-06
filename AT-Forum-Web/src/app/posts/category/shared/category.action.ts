@@ -24,3 +24,10 @@ export class EditCategory {
   constructor(public category: Category) {
   }
 }
+
+export class GetCategory {
+  static readonly type: '[Category] GetCategory';
+
+  constructor(public id: string) {
+  }
+}

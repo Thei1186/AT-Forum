@@ -12,7 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { CategoryComponent } from './category/category.component';
-import {MatListModule} from "@angular/material/list";
+import {MatListModule} from '@angular/material/list';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component';
 
 

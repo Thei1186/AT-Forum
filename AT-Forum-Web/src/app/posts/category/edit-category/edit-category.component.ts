@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryState} from '../shared/category.state';
 import {Observable} from 'rxjs';
 import {Category} from '../../shared/category';
-import {EditCategory} from "../shared/category.action";
+import {EditCategory, GetCategory} from '../shared/category.action';
 
 @Component({
   selector: 'app-edit-category',
@@ -19,7 +19,7 @@ export class EditCategoryComponent implements OnInit {
   id: string;
 
   constructor(private store: Store, private fb: FormBuilder,
-              private router: Router) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,11 +27,12 @@ export class EditCategoryComponent implements OnInit {
       catName: '',
       description: ''
     });
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new GetCategory(this.id));
     this.category$.subscribe(cat => {
       if (!cat) {
         return;
       }
-      this.id = cat.id;
 
       this.editCategoryForm.patchValue({
         categoryName: cat.categoryName,
@@ -40,7 +41,7 @@ export class EditCategoryComponent implements OnInit {
     });
   }
 
-  editCategory(category: any) {
+  editCategory(category: Category) {
     const newCat: Category = {
       id: category.id,
       categoryName: this.editCategoryForm.get('catName').value,

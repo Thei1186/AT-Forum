@@ -8,7 +8,7 @@ import {EditCategoryComponent} from './category/edit-category/edit-category.comp
 const routes: Routes = [
   { path: 'categories', component: CategoryComponent},
   { path: 'create-category', component: CreateCategoryComponent},
-  { path: 'edit-category/:id', component: EditCategoryComponent}
+  { path: 'edit-category/:id', component: EditCategoryComponent},
   { path: 'create-topic', component: CreateTopicComponent}
   ];
 

@@ -2,7 +2,7 @@ import {Category} from '../../shared/category';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CategoryService} from './category.service';
-import {CreateCategory, DeleteCategory, EditCategory, GetAllCategories} from './category.action';
+import {CreateCategory, DeleteCategory, EditCategory, GetAllCategories, GetCategory} from './category.action';
 import {tap} from 'rxjs/operators';
 
 
@@ -74,6 +74,21 @@ export class CategoryState {
           ...state,
           category: result
         });
+        console.log('state: ' + result);
+      })
+    );
+  }
+
+  @Action(GetCategory)
+  getCategory({getState, setState}: StateContext<CategoryStateModel>, action: GetCategory) {
+    return this.categoryService.getCategory(action.id).pipe(
+      tap((result) => {
+        const state = getState();
+        setState({
+          ...state,
+          category: result
+        });
+        debugger;
       })
     );
   }

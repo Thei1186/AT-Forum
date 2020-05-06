@@ -24,8 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToProfile(uid: string) {
-    this.store.dispatch(new GetUser(uid));
-    this.router.navigateByUrl('user/profile');
+    this.router.navigateByUrl('user/profile/' + uid);
   }
 
   logout() {

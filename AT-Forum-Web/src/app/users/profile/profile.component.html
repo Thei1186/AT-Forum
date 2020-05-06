@@ -2,7 +2,7 @@
 <header style="text-align: center">Your Profile</header>
 <br>
 <br>
-<div *ngIf="auth$ | async as user">
+<div *ngIf="user$ | async as user">
   <div style="margin-left: 25%">
     <mat-card>
       <div style="position: fixed;">

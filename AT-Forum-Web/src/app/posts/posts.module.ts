@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PostsRoutingModule } from './posts-routing.module';
-import { CategoryComponent } from './category/category.component';
+import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { TopicComponent } from './topic/topic.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateTopicComponent } from './topic/create-topic/create-topic.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatCardModule} from "@angular/material/card";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
 @NgModule({
-  declarations: [CategoryComponent, TopicComponent, CommentComponent, CreateTopicComponent],
+  declarations: [CreateCategoryComponent, TopicComponent, CommentComponent, CreateTopicComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,

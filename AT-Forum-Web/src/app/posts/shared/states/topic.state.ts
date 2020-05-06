@@ -5,11 +5,11 @@ import {TopicService} from '../services/topic.service';
 import {CreateTopic, GetAllTopics} from './topic.action';
 import {tap} from 'rxjs/operators';
 
-export class CategoryStateModel {
+export class TopicStateModel {
   topics: Topic[];
 }
 
-@State<CategoryStateModel>({
+@State<TopicStateModel>({
   name: 'topic',
   defaults: {
     topics: []
@@ -17,22 +17,22 @@ export class CategoryStateModel {
 })
 
 @Injectable()
-export class CategoryState {
+export class TopicState {
   constructor(private topicService: TopicService) {
   }
 
   @Selector()
-  static topics(state: CategoryStateModel) {
+  static topics(state: TopicStateModel) {
     return state.topics;
   }
 
   @Action(CreateTopic)
-  createTopic({getState, setState}: StateContext<CategoryStateModel>, action: CreateTopic) {
+  createTopic({getState, setState}: StateContext<TopicStateModel>, action: CreateTopic) {
     return this.topicService.createTopic(action.topic);
   }
 
   @Action(GetAllTopics)
-  getAllTopics({getState, setState}: StateContext<CategoryStateModel>) {
+  getAllTopics({getState, setState}: StateContext<TopicStateModel>) {
     return this.topicService.getAllTopics()
       .pipe(
         tap((result) => {

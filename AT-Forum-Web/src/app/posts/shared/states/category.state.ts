@@ -2,9 +2,8 @@ import {Category} from '../category';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CategoryService} from '../services/category.service';
-import {CreateCategory} from "./category.action";
-import {tap} from "rxjs/operators";
-import set = Reflect.set;
+import {CreateCategory} from './category.action';
+
 
 export class CategoryStateModel {
   categories: Category[];
@@ -29,6 +28,7 @@ export class CategoryState {
 
 @Action(CreateCategory)
   createCategory({getState, setState}: StateContext<CategoryStateModel>, action: CreateCategory) {
+    console.log('CAAAAAKE');
     return this.categoryService.createCategory(action.category);
   }
 }

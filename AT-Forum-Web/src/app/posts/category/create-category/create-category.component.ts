@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {Select, Store} from '@ngxs/store';
-import {CategoryState} from '../shared/states/category.state';
+import {CategoryState} from '../../shared/states/category.state';
 import {Observable} from 'rxjs';
-import {Category} from '../shared/category';
+import {Category} from '../../shared/category';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CreateCategory} from '../shared/states/category.action';
+import {CreateCategory} from '../../shared/states/category.action';
 
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  templateUrl: './create-category.component.html',
+  styleUrls: ['./create-category.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class CreateCategoryComponent implements OnInit {
   @Select(CategoryState.categories) categories$: Observable<Category[]>;
   newCategoryForm: FormGroup;
 

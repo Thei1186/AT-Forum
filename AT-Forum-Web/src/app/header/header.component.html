@@ -3,7 +3,7 @@
     <ul>
       <li><a routerLink="/home">HOME</a></li>
       <ul *ngIf="user$ | async as user">
-        <li><a (click)="goToProfile(user.uid)">PROFILE</a></li>
+        <li><a (click)="goToProfile(user.uid)" style="cursor: pointer">PROFILE</a></li>
         <ul *ngIf="role$ | async as role">
           <ul *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
             <li><a routerLink="user/admin">ADMIN</a></li>

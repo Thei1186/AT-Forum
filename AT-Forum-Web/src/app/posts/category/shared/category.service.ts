@@ -40,4 +40,8 @@ export class CategoryService {
         })
       );
   }
+
+  deleteCategory(id: string) {
+    return from(this.afs.collection('categories').doc<Category>(id).delete());
+  }
 }

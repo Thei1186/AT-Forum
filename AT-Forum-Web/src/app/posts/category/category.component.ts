@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {CategoryState} from './shared/category.state';
 import {Observable} from 'rxjs';
 import {Category} from '../shared/category';
-import {GetAllCategories} from './shared/category.action';
+import {DeleteCategory, GetAllCategories} from './shared/category.action';
 
 @Component({
   selector: 'app-category',
@@ -19,4 +19,7 @@ export class CategoryComponent implements OnInit {
     this.store.dispatch(new GetAllCategories());
   }
 
+  deleteCat(id: string) {
+    this.store.dispatch(new DeleteCategory(id));
+  }
 }

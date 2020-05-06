@@ -2,7 +2,7 @@ import {Category} from '../../shared/category';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CategoryService} from './category.service';
-import {CreateCategory, GetAllCategories} from './category.action';
+import {CreateCategory, DeleteCategory, GetAllCategories} from './category.action';
 import {tap} from 'rxjs/operators';
 
 
@@ -34,7 +34,7 @@ export class CategoryState {
   }
 
   @Action(GetAllCategories)
-  getAllCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetAllCategories) {
+  getAllCategories({getState, setState}: StateContext<CategoryStateModel>) {
     return this.categoryService.getAllCategories()
       .pipe(tap((result) => {
           const state = getState();
@@ -44,5 +44,18 @@ export class CategoryState {
           });
         })
       );
+  }
+
+  @Action(DeleteCategory)
+  deleteCategory({getState, setState}: StateContext<CategoryStateModel>, action: DeleteCategory) {
+    return this.categoryService.deleteCategory(action.id)
+      .pipe(tap(() => {
+        const state = getState();
+        const filteredArray = state.categories.filter(cat => cat.id !== action.id);
+        setState({
+          ...state,
+          categories: filteredArray
+        });
+      }));
   }
 }

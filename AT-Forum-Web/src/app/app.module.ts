@@ -35,7 +35,7 @@ import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
     NgxsModule.forRoot([AuthState, UserState]
       , {developmentMode: !environment.production}),
     NgxsLoggerPluginModule,
-    NgxsStoragePluginModule.forRoot({key: ['auth', 'user']}),
+    NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic']}),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,

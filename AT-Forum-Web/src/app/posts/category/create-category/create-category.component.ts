@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Select, Store} from '@ngxs/store';
-import {CategoryState} from '../shared/category.state';
-import {Observable} from 'rxjs';
+import {Store} from '@ngxs/store';
 import {Category} from '../../shared/category';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CreateCategory} from '../shared/category.action';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -12,10 +11,11 @@ import {CreateCategory} from '../shared/category.action';
   styleUrls: ['./create-category.component.css']
 })
 export class CreateCategoryComponent implements OnInit {
-  @Select(CategoryState.categories) categories$: Observable<Category[]>;
+
   newCategoryForm: FormGroup;
 
-  constructor(private store: Store, private fb: FormBuilder) {
+  constructor(private store: Store, private fb: FormBuilder,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -32,5 +32,6 @@ export class CreateCategoryComponent implements OnInit {
       description: categoryFromForm.description
     };
     this.store.dispatch(new CreateCategory(newCategory as Category));
+    this.router.navigateByUrl('posts/categories');
   }
 }

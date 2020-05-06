@@ -5,3 +5,7 @@ export class CreateCategory {
   constructor(public category: Category) {
   }
 }
+
+export class GetAllCategories {
+  static readonly type = '[Category] GetAllCategories';
+}

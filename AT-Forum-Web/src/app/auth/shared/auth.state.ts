@@ -122,9 +122,6 @@ export class AuthState {
             ...state,
             role: result
           });
-          if (result.roleName === 'admin') {
-            dispatch(new GetRoles());
-          }
         }));
 
   }

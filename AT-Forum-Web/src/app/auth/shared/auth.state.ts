@@ -54,6 +54,7 @@ export class AuthState {
           loggedInUser: result
         });
         dispatch(new GetRole(result.uid));
+        dispatch(new GetUser(result.uid));
       }));
   }
 

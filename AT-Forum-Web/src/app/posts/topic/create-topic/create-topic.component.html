@@ -1,1 +1,33 @@
-<p>create-topic works!</p>
+<br>
+<header style="text-align: center">Create Topic</header>
+<br>
+<br>
+<div>
+
+  <mat-card class="mat-card-center">
+    <mat-card-content style="text-align: center">
+      <br>
+      <form [formGroup]="newTopicForm">
+
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Topic Name" type="string" formControlName="topName">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Description" type="string" formControlName="description">
+          </label>
+        </mat-form-field>
+        <br>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="CreateTopic()">Create</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

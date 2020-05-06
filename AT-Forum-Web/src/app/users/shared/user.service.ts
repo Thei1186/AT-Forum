@@ -39,7 +39,6 @@ export class UserService {
           const userArray: User[] = [];
           doc.forEach(document => {
             const user = document.payload.doc.data();
-            console.log('id ' + document.payload.doc.id);
             userArray.push({
               uid: document.payload.doc.id,
               email: user.email,

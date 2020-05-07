@@ -2,26 +2,41 @@ import {Category} from '../../shared/category';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CategoryService} from './category.service';
-import {CreateCategory, DeleteCategory, EditCategory, GetAllCategories, GetCategory} from './category.action';
+import {
+  CreateCategory,
+  DeleteCategory,
+  EditCategory,
+  GetAllCategories,
+  GetAllCategoryTopics,
+  GetCategory
+} from './category.action';
 import {tap} from 'rxjs/operators';
+import {Topic} from '../../shared/topic';
 
 
 export class CategoryStateModel {
   categories: Category[];
   category: Category;
+  categoryTopics: Topic[];
 }
 
 @State<CategoryStateModel>({
   name: 'category',
   defaults: {
     categories: [],
-    category: undefined
+    category: undefined,
+    categoryTopics: []
   }
 })
 
 @Injectable()
 export class CategoryState {
   constructor(private categoryService: CategoryService) {
+  }
+
+  @Selector()
+  static categoryTopics(state: CategoryStateModel) {
+    return state.categoryTopics;
   }
 
   @Selector()
@@ -37,6 +52,19 @@ export class CategoryState {
   @Action(CreateCategory)
   createCategory({getState, setState}: StateContext<CategoryStateModel>, action: CreateCategory) {
     return this.categoryService.createCategory(action.category);
+  }
+
+  @Action(GetAllCategoryTopics)
+  getAllCategoryTopics({getState, setState}: StateContext<CategoryStateModel>, action: GetAllCategoryTopics) {
+    return this.categoryService.getAllCategoryTopics(action.id)
+      .pipe(tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            categoryTopics: result
+          });
+        })
+      );
   }
 
   @Action(GetAllCategories)

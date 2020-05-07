@@ -8,4 +8,6 @@ export class CreateTopic {
 
 export class GetAllTopics {
   static readonly type = '[Topic] GetAllTopics';
+  constructor() {
+  }
 }

@@ -18,6 +18,13 @@ export class DeleteCategory {
   }
 }
 
+export class GetAllCategoryTopics {
+  static readonly type = '[Category] GetAllCategoryTopics';
+
+  constructor(public id: string) {
+  }
+}
+
 export class EditCategory {
   static readonly type = '[Category] EditCategory';
 

@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {from, Observable} from 'rxjs';
 import {Category} from '../../shared/category';
 import {map} from 'rxjs/operators';
+import {Topic} from "../../shared/topic";
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,14 @@ export class CategoryService {
           topic: data.topic
         };
         return category;
+      }));
+  }
+
+  getAllCategoryTopics(id: string): Observable<Topic[]> {
+    return this.afs.collection('categories').doc<Category>(id)
+      .snapshotChanges()
+      .pipe(map(snap => {
+        return snap.payload.data().topic;
       }));
   }
 }

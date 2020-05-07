@@ -33,7 +33,7 @@ export class CategoryService {
               id: document.payload.doc.id,
               categoryName: category.categoryName,
               description: category.description,
-              topic: category.topic
+              topics: category.topics
             });
           });
           return catArray;
@@ -61,7 +61,7 @@ export class CategoryService {
           id: document.payload.id,
           categoryName: data.categoryName,
           description: data.description,
-          topic: data.topic
+          topics: data.topics
         };
         return category;
       }));
@@ -71,7 +71,7 @@ export class CategoryService {
     return this.afs.collection('categories').doc<Category>(id)
       .snapshotChanges()
       .pipe(map(snap => {
-        return snap.payload.data().topic;
+        return snap.payload.data().topics;
       }));
   }
 }

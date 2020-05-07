@@ -32,7 +32,7 @@ export class TopicState {
   }
 
   @Action(GetAllTopics)
-  getAllTopics({getState, setState}: StateContext<TopicStateModel>, action: GetAllTopics) {
+  getAllTopics({getState, setState}: StateContext<TopicStateModel>) {
     return this.topicService.getAllTopics()
       .pipe(
         tap((result) => {

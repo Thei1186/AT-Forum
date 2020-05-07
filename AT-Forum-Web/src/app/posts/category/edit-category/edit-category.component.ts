@@ -46,7 +46,7 @@ export class EditCategoryComponent implements OnInit {
       id: category.id,
       categoryName: this.editCategoryForm.get('catName').value,
       description: this.editCategoryForm.get('description').value,
-      topic: category.topic
+      topics: category.topics
     };
     this.store.dispatch(new EditCategory(newCat));
   }

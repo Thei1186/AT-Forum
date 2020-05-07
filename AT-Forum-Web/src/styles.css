@@ -1,6 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; box-sizing: border-box;}
-html {background-color: whitesmoke; margin: 0; box-sizing: border-box}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: whitesmoke;
+  margin: 0;
+  box-sizing: border-box
+}
+
+header {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.mat-card-center{
+  width: 40%;
+  text-align: center;
+  margin-left: 30%;
+}
+
+button {
+  background: #7d8085;
+}
+
+mat-card {
+  max-width: 60%;
+  margin-top: 2%;
+
+}
+
+mat-list {
+  margin-left: 25%;
+}

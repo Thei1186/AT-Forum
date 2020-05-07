@@ -1,20 +1,5 @@
 
-mat-card {
-  max-width: 60%;
-  margin-top: 2%;
-  height: 155px;
-
-}
-
-header {
-  font-size: 40px;
-  font-weight: bold;
-}
-
-mat-list{
-  margin-left: 25%;
-}
 
 button {
-  background-color: #7d8085;
+  background: #7d8085;
 }

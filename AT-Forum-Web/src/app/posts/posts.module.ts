@@ -21,7 +21,16 @@ import { CreateCommentComponent } from './comment/create-comment/create-comment.
 
 
 @NgModule({
-  declarations: [CreateCategoryComponent, TopicComponent, CommentComponent, CreateTopicComponent, CategoryComponent, EditCategoryComponent, CategoryDetailsComponent, TopicDetailsComponent, CreateCommentComponent],
+  declarations: [
+    CreateCategoryComponent,
+    TopicComponent,
+    CommentComponent,
+    CreateTopicComponent,
+    CategoryComponent,
+    EditCategoryComponent,
+    CategoryDetailsComponent,
+    TopicDetailsComponent,
+    CreateCommentComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,

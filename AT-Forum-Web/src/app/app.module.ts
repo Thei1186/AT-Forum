@@ -25,15 +25,14 @@ import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {CategoryState} from './posts/category/shared/category.state';
 import {TopicState} from './posts/topic/shared/topic.state';
 import {MatMenuModule} from '@angular/material/menu';
-import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    HomeComponent,
-    CreateCommentComponent,
+    HomeComponent
   ],
     imports: [
         BrowserModule,

@@ -11,3 +11,9 @@ export class GetAllTopics {
   constructor() {
   }
 }
+
+export class GetTopic {
+ static readonly type = '[Topic] GetTopic';
+ constructor(public id: string) {
+ }
+}

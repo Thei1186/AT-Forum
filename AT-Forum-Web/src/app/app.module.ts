@@ -20,32 +20,40 @@ import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AngularFireStorageModule} from '@angular/fire/storage';
 import {UserState} from './users/shared/user.state';
+import { HomeComponent } from './home/home.component';
+import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
+import {CategoryState} from './posts/category/shared/category.state';
+import {TopicState} from './posts/topic/shared/topic.state';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
+    HomeComponent,
   ],
-  imports: [
-    BrowserModule,
-    NgxsModule.forRoot([AuthState, UserState]
-      , {developmentMode: !environment.production}),
-    NgxsLoggerPluginModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    AppRoutingModule,
-    MatIconModule,
-    MatToolbarModule
-  ],
+    imports: [
+        BrowserModule,
+        NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState]
+            , {developmentMode: !environment.production}),
+        NgxsLoggerPluginModule.forRoot(),
+        NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic']}),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        AppRoutingModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatMenuModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

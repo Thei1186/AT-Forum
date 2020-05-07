@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {User} from '../shared/user';
-import {AuthState} from '../../auth/shared/auth.state';
-import {ActivatedRoute} from '@angular/router';
-import {tap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserState} from '../shared/user.state';
+import {GetUser} from '../shared/user.action';
 
 @Component({
   selector: 'app-profile',
@@ -14,24 +13,18 @@ import {UserState} from '../shared/user.state';
 })
 export class ProfileComponent implements OnInit {
   id: string;
-
-  constructor(private store: Store, private route: ActivatedRoute) {
+  constructor(private store: Store, private router: Router,
+              private route: ActivatedRoute) {
   }
 
-  @Select(UserState.currentUser) auth$: Observable<User>;
+  @Select(UserState.currentUser) user$: Observable<User>;
 
   ngOnInit() {
-    if (this.auth$) {
-      this.auth$.pipe(tap(user => {
-        console.log(user.email);
-      }));
-    }
-    // this.store.dispatch(new GetUser(this.id));
-    // this.auth$.subscribe(user => {
-    //    if (!user) {
-    //     return;
-    //    }
-    //  });
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new GetUser(this.id));
   }
 
+  editUserRoute(id: string) {
+    this.router.navigateByUrl('user/edit-user/' + id);
+  }
 }

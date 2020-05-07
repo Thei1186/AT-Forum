@@ -16,6 +16,7 @@ export class AuthService {
   constructor(private angularFireAuth: AngularFireAuth,
               private afs: AngularFirestore) {
   }
+
   /*
   updateAuthProfile(user: User): Observable<AuthUser> {
     return from(this.angularFireAuth.auth.currentUser.updateProfile({
@@ -26,6 +27,11 @@ export class AuthService {
     }));
   }
    */
+
+  logout(): Observable<void> {
+    return from(this.angularFireAuth.auth.signOut());
+  }
+
   signUp(user: User, password: string): Observable<AuthUser> {
     return from(this.angularFireAuth.auth
       .createUserWithEmailAndPassword(user.email, password))
@@ -78,20 +84,22 @@ export class AuthService {
       .pipe(
         map(value => {
           return {
-            roleName: value.data().role
+            roleName: value.data().roleName,
+            uid: value.id
           };
         }));
   }
 
-  setRole(uid: string, newRoleName: string): Observable<Role> {
-    console.log(uid + ' ' + newRoleName);
-    return from(this.afs.collection('roles').doc(uid).set({
+  setRole(id: string, newRoleName: string): Observable<Role> {
+    console.log(id + ' ' + newRoleName);
+    return from(this.afs.collection('roles').doc(id).set({
       role: newRoleName
     }))
       .pipe(
         map(() => {
           return {
-            roleName: newRoleName
+            roleName: newRoleName,
+            uid: id
           };
         })
       );
@@ -106,5 +114,21 @@ export class AuthService {
         photoURL: user.photoURL
       };
     }
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.afs.collection<Role>('roles')
+      .snapshotChanges()
+      .pipe(
+        map(docActions => {
+          return docActions.map(docAction => {
+            const data = docAction.payload.doc.data();
+            const role: Role = {
+              roleName: data.roleName,
+              uid: docAction.payload.doc.id
+            };
+            return role;
+          });
+        }));
   }
 }

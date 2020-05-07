@@ -1,0 +1,26 @@
+<h2 style="text-align: center">Edit Category</h2>
+<br>
+<div *ngIf="category$ | async as category">
+  <mat-card class="mat-card-center">
+    <mat-card-content>
+      <form [formGroup]="editCategoryForm">
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Category Name" type="string" formControlName="catName">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Description" type="string" formControlName="description">
+          </label>
+        </mat-form-field>
+        <br>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="editCategory(category)">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

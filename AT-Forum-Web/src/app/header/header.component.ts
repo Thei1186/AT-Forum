@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Role} from '../users/shared/role';
 import {AuthUser} from '../auth/shared/auth-user';
 import {Router} from '@angular/router';
+import {Logout} from '../auth/shared/auth.action';
 import {GetUser} from '../users/shared/user.action';
 
 @Component({
@@ -23,7 +24,15 @@ export class HeaderComponent implements OnInit {
   }
 
   goToProfile(uid: string) {
-    this.store.dispatch(new GetUser(uid));
-    this.router.navigateByUrl('user/profile');
+    this.router.navigateByUrl('user/profile/' + uid);
+  }
+
+  logout() {
+    this.store.dispatch(new Logout());
+    this.router.navigateByUrl('');
+  }
+
+  createCat() {
+    this.router.navigateByUrl('posts/create-category');
   }
 }

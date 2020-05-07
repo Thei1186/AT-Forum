@@ -1,0 +1,30 @@
+<br>
+<header style="text-align: center">Topics</header>
+<br>
+<br>
+<div>
+  <div *ngFor="let topic of topics$ | async as topic">
+    <div style="margin-left: 25%">
+      <mat-card>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Category Name: {{topic.topicName}}</mat-list-item>
+            <mat-list-item>Description: {{topic.description}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <div *ngIf="role$ | async as role">
+          <div *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
+            <mat-card-actions align="end">
+              <button mat-raised-button (click)="deleteTopic(topic.id)">Delete</button>
+              <button mat-raised-button (click)="editTopic(topic.id)">Edit</button>
+            </mat-card-actions>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+
+

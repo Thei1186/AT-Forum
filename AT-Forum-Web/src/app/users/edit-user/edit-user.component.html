@@ -1,0 +1,36 @@
+<h2 style="text-align: center">Edit Profile</h2>
+<br>
+<div *ngIf="user$ | async as user">
+  <mat-card class="mat-card-center">
+    <mat-card-content>
+      <img mat-card-lg-image src="{{photoURL}}" alt="Profile picture">
+      <br>
+      <label>
+        <input type="file" id="file" (change)="handleFileInput($event)">
+      </label>
+      <form [formGroup]="editUserForm">
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Name" type="string" formControlName="name">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Username" type="string" formControlName="username">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Password" type="string" formControlName="password">
+          </label>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="editProfile(user)">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

@@ -2,7 +2,7 @@ import {User} from '../../users/shared/user';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetRole, LoginWithEmail, SetRole, SignUp} from './auth.action';
+import {GetRole, GetRoles, LoginWithEmail, Logout, SetRole, SignUp} from './auth.action';
 import {Role} from '../../users/shared/role';
 import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
@@ -11,13 +11,15 @@ import {GetUser} from '../../users/shared/user.action';
 export class AuthStateModel {
   loggedInUser: AuthUser;
   role: Role;
+  roles: Role[];
 }
 
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
     loggedInUser: undefined,
-    role: undefined
+    role: undefined,
+    roles: []
   }
 })
 
@@ -30,6 +32,11 @@ export class AuthState {
   @Selector()
   static loggedInUser(state: AuthStateModel) {
     return state.loggedInUser;
+  }
+
+  @Selector()
+  static roles(state: AuthStateModel) {
+    return state.roles;
   }
 
   @Selector()
@@ -47,6 +54,31 @@ export class AuthState {
           loggedInUser: result
         });
         dispatch(new GetRole(result.uid));
+        dispatch(new GetUser(result.uid));
+      }));
+  }
+
+  @Action(GetRoles)
+  getRoles({getState, setState, dispatch}: StateContext<AuthStateModel>) {
+    return this.authService.getRoles()
+      .pipe(tap((result) => {
+        const state = getState();
+        setState({
+          ...state,
+          roles: result
+        });
+      }));
+  }
+  @Action(Logout)
+  logout({getState, setState}: StateContext<AuthStateModel>) {
+    return this.authService.logout()
+      .pipe(tap(() => {
+        const state = getState();
+        setState({
+          ...state,
+          loggedInUser: undefined,
+          role: undefined
+        });
       }));
   }
 
@@ -82,7 +114,7 @@ export class AuthState {
 
    */
   @Action(GetRole)
-  getRole({getState, setState}: StateContext<AuthStateModel>, action: GetRole) {
+  getRole({getState, setState, dispatch}: StateContext<AuthStateModel>, action: GetRole) {
     return this.authService.getRole(action.uid)
       .pipe(
         tap((result) => {

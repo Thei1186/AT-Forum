@@ -1,0 +1,33 @@
+<br>
+<header style="text-align: center">Create Category</header>
+<br>
+<br>
+<div>
+
+  <mat-card class="mat-card-center">
+    <mat-card-content style="text-align: center">
+      <br>
+      <form [formGroup]="newCategoryForm">
+
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Category Name" type="string" formControlName="catName">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Description" type="string" formControlName="description">
+          </label>
+        </mat-form-field>
+        <br>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="CreateCategory()">Create</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

@@ -2,20 +2,20 @@
 <header style="text-align: center">Admin Page</header>
 <br>
 <br>
-<div *ngIf="users$ | async as user">
-  <div *ngFor="let user of users">
-    <div class="mat-card-center" style="margin-left: 25%">
+<div *ngIf="roles$ | async; let roles">
+  <div *ngFor="let user of users$ | async as user">
+    <div style="margin-left: 25%">
       <mat-card>
-        <div style="position: absolute">
-          <img mat-card-lg-image src="{{user.photoURL}}">
-        </div>
         <mat-card-content>
+          <div style="position: absolute">
+            <img mat-card-lg-image src="{{user.photoURL}}">
+          </div>
           <mat-list>
-            <mat-list-item>Name: {{user.name}}</mat-list-item>
+            <mat-list-item>Username: {{user.username}}</mat-list-item>
             <mat-list-item>Email: {{user.email}}</mat-list-item>
           </mat-list>
         </mat-card-content>
-        <mat-card-actions align="end">
+        <mat-card-actions *ngIf="isUser(user, roles)" align="end">
           <button mat-raised-button (click)="deleteUser(user.uid)">Delete</button>
         </mat-card-actions>
       </mat-card>

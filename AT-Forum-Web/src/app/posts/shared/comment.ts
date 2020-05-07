@@ -5,4 +5,5 @@ export interface Comment {
   message: string;
   header: string;
   author: User;
+  topicId?: string;
 }

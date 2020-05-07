@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {Topic} from '../../shared/topic';
-import {Select} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {UserState} from '../../../users/shared/user.state';
 import {Observable} from 'rxjs';
 import {User} from '../../../users/shared/user';
+import {CreateComment} from '../shared/comment.action';
+import {Comment} from '../../shared/comment';
 
 @Component({
   selector: 'app-create-comment',
@@ -17,7 +18,8 @@ export class CreateCommentComponent implements OnInit {
   @Select(UserState.currentUser) user$: Observable<User>;
   newCommentForm: FormGroup;
   topicId: string;
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private fb: FormBuilder,
+              private store: Store) { }
 
   ngOnInit() {
     this.newCommentForm = this.fb.group({
@@ -38,7 +40,7 @@ export class CreateCommentComponent implements OnInit {
             author: user,
             topicId: this.topicId
           };
-          // this.store.dispatch(new CreateComment(newComment as Comment));
+          this.store.dispatch(new CreateComment(newComment as Comment));
         }
       })
     ).subscribe();

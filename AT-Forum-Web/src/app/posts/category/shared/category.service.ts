@@ -46,7 +46,6 @@ export class CategoryService {
 
   editCategory(category: Category) {
     const userRef: AngularFirestoreDocument<Category> = this.afs.doc(`categories/${category.id}`);
-    console.log('edit: ' + category);
     return from(userRef.set(category, {merge: true}))
       .pipe(map(() => {
         return category;
@@ -54,7 +53,6 @@ export class CategoryService {
   }
 
   getCategory(id: string): Observable<Category> {
-    console.log(id);
     return this.afs.collection('categories').doc<Category>(id).snapshotChanges()
       .pipe(map((document) => {
         const data = document.payload.data();

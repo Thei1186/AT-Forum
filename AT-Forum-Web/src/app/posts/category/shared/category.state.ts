@@ -74,7 +74,6 @@ export class CategoryState {
           ...state,
           category: result
         });
-        console.log('state: ' + result);
       })
     );
   }
@@ -88,7 +87,6 @@ export class CategoryState {
           ...state,
           category: result
         });
-        debugger;
       })
     );
   }

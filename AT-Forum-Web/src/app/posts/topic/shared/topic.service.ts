@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
@@ -9,7 +9,8 @@ import {map} from 'rxjs/operators';
 })
 export class TopicService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+  }
 
   createTopic(topic: Topic): Observable<Topic> {
     return from(this.afs.collection('topics').add(topic))
@@ -34,5 +35,23 @@ export class TopicService {
             return topic;
           });
         }));
+  }
+
+  getTopic(id: string) {
+    return this.afs.collection('topics').doc<Topic>(id).snapshotChanges()
+      .pipe(
+        map((document) => {
+          const data = document.payload.data();
+          const topic: Topic = {
+            id: document.payload.id,
+            categoryId: data.categoryId,
+            author: data.author,
+            topicName: data.topicName,
+            description: data.description,
+            comments: data.comments
+          };
+          return topic;
+        })
+      );
   }
 }

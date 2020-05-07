@@ -8,7 +8,9 @@ import {Topic} from '../../shared/topic';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
-import {GetAllCategoryTopics} from "../shared/category.action";
+import {GetAllCategoryTopics, GetCategory} from '../shared/category.action';
+import {Category} from '../../shared/category';
+
 
 @Component({
   selector: 'app-category-details',
@@ -19,6 +21,7 @@ export class CategoryDetailsComponent implements OnInit {
   @Select(AuthState.role) role$: Observable<Role>;
   @Select(CategoryState.categoryTopics) topics$: Observable<Topic[]>;
   @Select(UserState.currentUser) user$: Observable<User>;
+  @Select(CategoryState.category) category$: Observable<Category>;
   id: string;
 
   constructor(private store: Store, private router: Router,
@@ -26,6 +29,7 @@ export class CategoryDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new GetCategory(this.id));
     this.store.dispatch(new GetAllCategoryTopics(this.id));
   }
 
@@ -33,7 +37,10 @@ export class CategoryDetailsComponent implements OnInit {
 
   }
 
-  editTopic(id: any) {
+  goToEditTopic(id: any) {
+  }
 
+  goToCreateTopic(id: string) {
+   this.router.navigateByUrl('posts/create-topic/' + id);
   }
 }

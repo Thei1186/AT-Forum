@@ -13,3 +13,9 @@ exports.userDeleted = functions.firestore
 .onDelete((snap, context) => {
    return difa.getUserController().deletedUsers(snap, context);
 });
+
+exports.createTopicUpdatesCategory = functions.firestore
+.document('topics/{id}')
+.onCreate((snap, context) => {
+   return difa.getCategoryController().updateCategoryTopics(snap, context);
+});

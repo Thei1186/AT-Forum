@@ -37,7 +37,7 @@ export class TopicService {
         }));
   }
 
-  getTopic(id: string) {
+  getTopic(id: string): Observable<Topic> {
     return this.afs.collection('topics').doc<Topic>(id).snapshotChanges()
       .pipe(
         map((document) => {
@@ -53,5 +53,9 @@ export class TopicService {
           return topic;
         })
       );
+  }
+
+  deleteTopic(id: string) {
+    return from(this.afs.collection('topics').doc<Topic>(id).delete());
   }
 }

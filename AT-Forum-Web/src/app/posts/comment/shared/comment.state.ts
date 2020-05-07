@@ -2,6 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CommentService} from './comment.service';
 import {CreateComment} from './comment.action';
+import {Comment} from '../../shared/comment';
 
 export class CommentStateModel {
   comments: Comment[];
@@ -19,7 +20,7 @@ export class CommentState {
   }
 
   @Selector()
-  static topics(state: CommentStateModel) {
+  static comments(state: CommentStateModel) {
     return state.comments;
   }
 

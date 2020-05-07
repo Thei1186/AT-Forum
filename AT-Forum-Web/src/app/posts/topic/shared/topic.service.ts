@@ -42,15 +42,17 @@ export class TopicService {
       .pipe(
         map((document) => {
           const data = document.payload.data();
-          const topic: Topic = {
-            id: document.payload.id,
-            categoryId: data.categoryId,
-            author: data.author,
-            topicName: data.topicName,
-            description: data.description,
-            comments: data.comments
-          };
-          return topic;
+          if (data) {
+            const topic: Topic = {
+              id: document.payload.id,
+              categoryId: data.categoryId,
+              author: data.author,
+              topicName: data.topicName,
+              description: data.description,
+              comments: data.comments
+            };
+            return topic;
+          }
         })
       );
   }

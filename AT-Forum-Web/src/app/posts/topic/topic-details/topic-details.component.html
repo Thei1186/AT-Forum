@@ -1,5 +1,5 @@
 <br>
-<header style="text-align: center">Categories</header>
+<header style="text-align: center">Topics</header>
 <br>
 <br>
 <div *ngIf="topic$ | async as topic">
@@ -10,7 +10,7 @@
       </mat-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Topic</button>
+      <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Comment</button>
     </mat-card-actions>
   </mat-card>
 </div>

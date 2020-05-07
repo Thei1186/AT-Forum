@@ -25,6 +25,7 @@ import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {CategoryState} from './posts/category/shared/category.state';
 import {TopicState} from './posts/topic/shared/topic.state';
 import {MatMenuModule} from '@angular/material/menu';
+import {CommentState} from './posts/comment/shared/comment.state';
 
 
 @NgModule({
@@ -36,10 +37,10 @@ import {MatMenuModule} from '@angular/material/menu';
   ],
     imports: [
         BrowserModule,
-        NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState]
+        NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState, CommentState]
             , {developmentMode: !environment.production}),
         NgxsLoggerPluginModule.forRoot(),
-        NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic']}),
+        NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic', 'comment']}),
         ReactiveFormsModule,
         BrowserAnimationsModule,
         AngularFireAuthModule,

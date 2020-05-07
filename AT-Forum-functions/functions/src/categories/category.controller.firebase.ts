@@ -11,6 +11,6 @@ export class CategoryControllerFirebase implements CategoryController{
 
     updateCategoryTopics(snap: DocumentSnapshot, context: EventContext): any {
         const topic = snap.data() as Topic;
-        this.categoryService.updateCategoryTopics(context.params.id, topic);
+        this.categoryService.updateCategoryTopics(topic);
     }
 }

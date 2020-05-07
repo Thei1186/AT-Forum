@@ -4,9 +4,11 @@ import * as admin from "firebase-admin";
 
 export class CategoryRepositoryFirebase implements CategoryRepository{
     categoryPath = 'categories';
-    updateCategoryTopics(id: string, topic: Topic): void {
-        this.db().collection(`${this.categoryPath}`).doc(`${id}`)
-            .set(topic, {merge: true})
+    updateCategoryTopics(topic: Topic): void {
+        this.db().collection(`${this.categoryPath}`).doc(`${topic.categoryId}`)
+            .update({
+                topics: admin.firestore.FieldValue.arrayUnion(topic)
+            })
             .catch(err => {
                 console.log(err.message);
             })

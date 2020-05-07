@@ -7,6 +7,7 @@ import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {CreateTopic} from '../shared/topic.action';
 import {map, tap} from 'rxjs/operators';
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -17,8 +18,9 @@ import {map, tap} from 'rxjs/operators';
 export class CreateTopicComponent implements OnInit {
   @Select(UserState.currentUser) user$: Observable<User>;
   newTopicForm: FormGroup;
-
-  constructor(private store: Store, private fb: FormBuilder) {
+  categoryId: string;
+  constructor(private store: Store, private fb: FormBuilder,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class CreateTopicComponent implements OnInit {
       topName: '',
       description: ''
     });
+    this.categoryId = this.route.snapshot.paramMap.get('id');
   }
 
   CreateTopic() {
@@ -36,7 +39,8 @@ export class CreateTopicComponent implements OnInit {
           const newTopic = {
             topicName: topicFromForm.topName,
             description: topicFromForm.description,
-            author: user
+            author: user,
+            categoryId: this.categoryId
           };
           this.store.dispatch(new CreateTopic(newTopic as Topic));
         }

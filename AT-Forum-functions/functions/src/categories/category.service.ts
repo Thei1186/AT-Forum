@@ -6,7 +6,7 @@ export class CategoryService {
 
     }
 
-    updateCategoryTopics(id: string, topic: Topic) {
-        this.categoryRepository.updateCategoryTopics(id, topic);
+    updateCategoryTopics( topic: Topic) {
+        this.categoryRepository.updateCategoryTopics(topic);
     }
 }

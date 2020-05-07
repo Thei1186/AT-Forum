@@ -19,14 +19,14 @@ export class DeleteCategory {
 }
 
 export class EditCategory {
-  static readonly type: '[Category] EditCategory';
+  static readonly type = '[Category] EditCategory';
 
   constructor(public category: Category) {
   }
 }
 
 export class GetCategory {
-  static readonly type: '[Category] GetCategory';
+  static readonly type = '[Category] GetCategory';
 
   constructor(public id: string) {
   }

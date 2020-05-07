@@ -54,6 +54,26 @@ import {MatMenuModule} from '@angular/material/menu';
         MatToolbarModule,
         MatMenuModule
     ],
+  imports: [
+    BrowserModule,
+    NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState]
+      , {developmentMode: !environment.production}),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic']}),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatToolbarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

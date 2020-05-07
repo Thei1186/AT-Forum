@@ -33,13 +33,10 @@ export class AdminPageComponent implements OnInit {
     this.store.dispatch(new DeleteUser(uid));
   }
 
-   isUser(user: User) {
-   this.roles$.pipe(
-      map(roles => {
-        return roles.map((role) => {
-          return role.uid === user.uid && role.roleName === 'user';
-        });
-      })
-    ).subscribe();
+   isUser(user: User, roles: Role[]) {
+    const roleFound = roles.filter(role => role.uid === user.uid);
+    if (roleFound.length > 0) {
+      return roleFound[0].roleName === 'user';
+    }
   }
 }

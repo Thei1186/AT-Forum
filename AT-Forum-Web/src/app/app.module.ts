@@ -25,6 +25,7 @@ import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {CategoryState} from './posts/category/shared/category.state';
 import {TopicState} from './posts/topic/shared/topic.state';
 import {MatMenuModule} from '@angular/material/menu';
+import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatMenuModule} from '@angular/material/menu';
     LoginComponent,
     HeaderComponent,
     HomeComponent,
+    CreateCommentComponent,
   ],
     imports: [
         BrowserModule,

@@ -7,7 +7,7 @@ import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {CreateTopic} from '../shared/topic.action';
 import {map, tap} from 'rxjs/operators';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({

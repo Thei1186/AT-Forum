@@ -16,7 +16,7 @@
   <div *ngFor="let topic of topics$ | async as topic">
     <div style="margin-left: 25%">
       <mat-card>
-        <mat-card-content>
+        <mat-card-content (click)="goToComments(topic.id)" style="cursor: pointer">
           <mat-list>
             <mat-list-item>Author: {{topic.author.username}}</mat-list-item>
             <mat-list-item>Topic Name: {{topic.topicName}}</mat-list-item>

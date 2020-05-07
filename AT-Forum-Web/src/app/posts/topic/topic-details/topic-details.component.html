@@ -1,1 +1,16 @@
-<p>topic-details works!</p>
+<br>
+<header style="text-align: center">Categories</header>
+<br>
+<br>
+<div *ngIf="topic$ | async as topic">
+  <mat-card>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Create your own Topic here</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Topic</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -35,7 +35,7 @@ export class EditCategoryComponent implements OnInit {
       }
 
       this.editCategoryForm.patchValue({
-        categoryName: cat.categoryName,
+        catName: cat.categoryName,
         description: cat.description,
       });
     });

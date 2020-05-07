@@ -36,7 +36,7 @@ import {TopicState} from './posts/topic/shared/topic.state';
     BrowserModule,
     NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState]
       , {developmentMode: !environment.production}),
-    NgxsLoggerPluginModule,
+    NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic']}),
     ReactiveFormsModule,
     BrowserAnimationsModule,

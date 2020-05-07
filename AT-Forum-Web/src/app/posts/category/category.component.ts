@@ -31,4 +31,8 @@ export class CategoryComponent implements OnInit {
   editCategory(id: string) {
     this.router.navigateByUrl('posts/edit-category/' + id);
   }
+
+  goToTopics(id: string) {
+    this.router.navigateByUrl('posts/category-details/' + id);
+  }
 }

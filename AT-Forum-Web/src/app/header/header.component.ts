@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new Logout());
     this.router.navigateByUrl('');
   }
+
+  createCat() {
+    this.router.navigateByUrl('posts/create-category');
+  }
 }

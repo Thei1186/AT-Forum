@@ -2,23 +2,29 @@
   <div>
     <ul>
       <li><a routerLink="/home">HOME</a></li>
+      <li><a routerLink="posts/categories">CATEGORIES</a></li>
       <ul *ngIf="user$ | async as user">
         <li><a (click)="goToProfile(user.uid)" style="cursor: pointer">PROFILE</a></li>
         <ul *ngIf="role$ | async as role">
           <ul *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
             <li><a routerLink="user/admin">ADMIN</a></li>
-            <li><a routerLink="posts/categories">CATEGORIES</a></li>
-            <li><a routerLink="posts/create-category">CREATE CAT</a></li>
+            <ul *ngIf="user$">
+              <button class="mat-button2" mat-flat-button [matMenuTriggerFor]="menu">Menu</button>
+            </ul>
           </ul>
         </ul>
       </ul>
-      </ul>
+    </ul>
     <ul *ngIf="user$ | async as user; else login">
       <button class="mat-button1" mat-flat-button (click)="logout()">Logout</button>
     </ul>
   </div>
 </mat-toolbar>
 
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="createCat()">Create category</button>
+</mat-menu>
 
 <ng-template #login>
   <button class="mat-button1" mat-flat-button routerLink="/login">Login</button>

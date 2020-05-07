@@ -33,9 +33,14 @@ li a:hover {
   position: absolute; right: 10px; top: 10px;
 }
 .mat-button2 {
+   background-color: #7d8085;
+   color: black;
+   position: absolute; right: 70px; top: 10px;
+ }
+.mat-button3 {
   background-color: #7d8085;
   color: black;
-  position: absolute; right: 70px; top: 10px;
+  position: absolute; right: 120px; top: 10px;
 }
 .mat-button:hover {
   background-color: whitesmoke;

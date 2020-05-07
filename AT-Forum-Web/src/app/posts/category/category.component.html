@@ -12,10 +12,14 @@
             <mat-list-item>Description: {{category.description}}</mat-list-item>
           </mat-list>
         </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-raised-button (click)="deleteCat(category.id)">Delete</button>
-          <button mat-raised-button (click)="editCategory(category.id)">Edit</button>
-        </mat-card-actions>
+        <div *ngIf="role$ | async as role">
+          <div *ngIf="role.roleName === 'admin' || role.roleName === 'superAdmin'">
+            <mat-card-actions align="end">
+              <button mat-raised-button (click)="deleteCat(category.id)">Delete</button>
+              <button mat-raised-button (click)="editCategory(category.id)">Edit</button>
+            </mat-card-actions>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>

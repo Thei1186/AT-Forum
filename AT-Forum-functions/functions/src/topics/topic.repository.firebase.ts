@@ -11,7 +11,7 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 comments: admin.firestore.FieldValue.arrayUnion(comment)
             })
             .catch(err => {
-                return Promise.reject('Failed to update topic got message: \n' + err.message);
+                return Promise.reject('Failed to update topic comments got message: \n' + err.message);
             });
         return Promise.resolve();
     }
@@ -30,7 +30,20 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 });
                 return batch.commit();
             }).catch((err) => {
-                return Promise.reject('Failed to delete all topics with category id: ' + catId)
+                return Promise.reject('Failed to delete all topics with category id: ' + catId + '\n threw error: ' +
+                    err.message)
+            });
+    }
+
+    async removeCommentFromTopic(comment: Comment, topicId: string): Promise<void> {
+        await this.db().collection(`${this.topicPath}`).doc(`${topicId}`)
+            .update({
+                comments: admin.firestore.FieldValue.arrayRemove(comment)
+            }).then(() => {
+                return Promise.resolve()
+            })
+            .catch(err => {
+                return Promise.reject('Failed to remove comment from Topic with message: ' + err.message);
             });
     }
 }

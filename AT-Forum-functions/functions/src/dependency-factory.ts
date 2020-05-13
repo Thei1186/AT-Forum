@@ -31,4 +31,12 @@ export class DependencyFactory {
         const service: TopicService = new TopicService(repo);
         return new TopicControllerFirebase(service);
     }
+/*
+    getCommentController() {
+        const repo: CommentRepository = new CommentRepositoryFirebase();
+        const service: CommentService = new CommentService(repo);
+        return new CommentControllerFirebase(service);
+    }
+
+ */
 }

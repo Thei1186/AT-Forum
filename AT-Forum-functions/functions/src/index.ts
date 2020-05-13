@@ -33,3 +33,9 @@ exports.deleteTopicWhenCategoryDeleted = functions.firestore
         return difa.getTopicController().deleteTopics(snap, context);
     });
 
+exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
+    .document('comment/{id}')
+    .onDelete((snap, context) => {
+        return difa.getTopicController().removeCommentFromTopic(snap, context);
+    });
+

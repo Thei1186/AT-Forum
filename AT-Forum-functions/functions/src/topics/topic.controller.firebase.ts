@@ -19,4 +19,10 @@ export class TopicControllerFirebase implements TopicController {
         const catId = context.params.id as string;
         return this.service.deleteTopics(catId);
     }
+
+    removeCommentFromTopic(snap: DocumentSnapshot, context: EventContext): Promise<void> {
+        const comment = snap.data() as Comment;
+        const topicId = comment.topicId as string;
+        return this.service.removeCommentFromTopic(comment, topicId);
+    }
 }

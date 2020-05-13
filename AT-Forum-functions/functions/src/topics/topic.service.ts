@@ -12,4 +12,8 @@ export class TopicService {
     deleteTopics(catId: String) {
        return this.topicRepository.deleteTopics(catId);
     }
+
+    removeCommentFromTopic(comment: Comment, topicId: string) {
+        return this.topicRepository.removeCommentFromTopic(comment, topicId);
+    }
 }

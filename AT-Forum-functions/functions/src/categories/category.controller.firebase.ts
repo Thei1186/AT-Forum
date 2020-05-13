@@ -5,6 +5,7 @@ import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
 import {Topic} from "../models/topic";
 
 
+
 export class CategoryControllerFirebase implements CategoryController{
     constructor(private categoryService: CategoryService) {
 
@@ -15,4 +16,11 @@ export class CategoryControllerFirebase implements CategoryController{
         topic.id = context.params.id;
       return this.categoryService.updateCategoryTopics(topic);
     }
+
+    /*
+    deleteCategory(snap: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>, context: EventContext): Promise<Category> {
+
+    }
+
+     */
 }

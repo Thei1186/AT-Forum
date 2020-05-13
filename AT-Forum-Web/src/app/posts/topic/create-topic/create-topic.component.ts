@@ -7,7 +7,7 @@ import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {CreateTopic} from '../shared/topic.action';
 import {map, tap} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class CreateTopicComponent implements OnInit {
   newTopicForm: FormGroup;
   categoryId: string;
   constructor(private store: Store, private fb: FormBuilder,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -43,6 +43,7 @@ export class CreateTopicComponent implements OnInit {
             categoryId: this.categoryId
           };
           this.store.dispatch(new CreateTopic(newTopic as Topic));
+          this.router.navigateByUrl('posts/category-details/' + this.categoryId);
         }
       })
     ).subscribe();

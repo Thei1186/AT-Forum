@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Select, Store} from '@ngxs/store';
 import {UserState} from '../../../users/shared/user.state';
@@ -19,7 +19,7 @@ export class CreateCommentComponent implements OnInit {
   newCommentForm: FormGroup;
   topicId: string;
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
-              private store: Store) { }
+              private store: Store, private router: Router) { }
 
   ngOnInit() {
     this.newCommentForm = this.fb.group({
@@ -41,6 +41,7 @@ export class CreateCommentComponent implements OnInit {
             topicId: this.topicId
           };
           this.store.dispatch(new CreateComment(newComment as Comment));
+          this.router.navigateByUrl('posts/topic-details/' + this.topicId);
         }
       })
     ).subscribe();

@@ -40,6 +40,6 @@ export class TopicDetailsComponent implements OnInit {
   }
 
   goToEditComment(id: string) {
-
+    this.router.navigateByUrl('posts/edit-comment/' + id);
   }
 }

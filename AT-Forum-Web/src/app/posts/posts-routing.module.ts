@@ -8,6 +8,7 @@ import {CategoryDetailsComponent} from './category/category-details/category-det
 import {TopicDetailsComponent} from './topic/topic-details/topic-details.component';
 import {CreateCommentComponent} from './comment/create-comment/create-comment.component';
 import {EditTopicComponent} from './topic/edit-topic/edit-topic.component';
+import {EditCommentComponent} from './comment/edit-comment/edit-comment.component';
 
 const routes: Routes = [
   { path: 'categories', component: CategoryComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'category-details/:id', component: CategoryDetailsComponent},
   { path: 'topic-details/:id', component: TopicDetailsComponent},
   { path: 'create-comment/:id', component: CreateCommentComponent},
+  { path: 'edit-comment/:id', component: EditCommentComponent},
   ];
 
 

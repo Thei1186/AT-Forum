@@ -1,18 +1,20 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CommentService} from './comment.service';
-import {CreateComment, DeleteComment} from './comment.action';
+import {CreateComment, DeleteComment, EditComment, GetComment} from './comment.action';
 import {Comment} from '../../shared/comment';
 import {tap} from 'rxjs/operators';
 
 export class CommentStateModel {
   comments: Comment[];
+  comment: Comment;
 }
 
 @State<CommentStateModel>({
   name: 'comment',
   defaults: {
     comments: [],
+    comment: undefined
   }
 })
 @Injectable()
@@ -23,6 +25,25 @@ export class CommentState {
   @Selector()
   static comments(state: CommentStateModel) {
     return state.comments;
+  }
+
+  @Selector()
+  static comment(state: CommentStateModel) {
+    return state.comment;
+  }
+
+  @Action(GetComment)
+  getComment({getState, setState}: StateContext<CommentStateModel>, action: GetComment) {
+    return this.commentService.getComment(action.id)
+      .pipe(
+        tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            comment: result
+          });
+        })
+      );
   }
 
   @Action(CreateComment)
@@ -40,6 +61,19 @@ export class CommentState {
           setState({
             ...state,
             comments: filteredArray
+          });
+        })
+      );
+  }
+
+  @Action(EditComment)
+  editComment({getState, setState}: StateContext<CommentStateModel>, action: EditComment) {
+    return this.commentService.editComment(action.comment)
+      .pipe(tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            comment: result
           });
         })
       );

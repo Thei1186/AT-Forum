@@ -18,6 +18,7 @@ import { CategoryDetailsComponent } from './category/category-details/category-d
 import { TopicDetailsComponent } from './topic/topic-details/topic-details.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { EditTopicComponent } from './topic/edit-topic/edit-topic.component';
+import { EditCommentComponent } from './comment/edit-comment/edit-comment.component';
 
 
 
@@ -32,7 +33,8 @@ import { EditTopicComponent } from './topic/edit-topic/edit-topic.component';
     CategoryDetailsComponent,
     TopicDetailsComponent,
     CreateCommentComponent,
-    EditTopicComponent],
+    EditTopicComponent,
+    EditCommentComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,

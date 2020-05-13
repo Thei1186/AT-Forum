@@ -49,5 +49,6 @@ export class EditCategoryComponent implements OnInit {
       topics: category.topics
     };
     this.store.dispatch(new EditCategory(newCat));
+    this.router.navigateByUrl('posts/categories');
   }
 }

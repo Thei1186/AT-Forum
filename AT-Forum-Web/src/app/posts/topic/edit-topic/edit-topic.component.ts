@@ -45,7 +45,7 @@ export class EditTopicComponent implements OnInit {
       topicName: this.editTopicForm.get('topicName').value,
       description: this.editTopicForm.get('description').value,
       comments: topic.comments,
-      author: topic.author
+      author: topic.author,
     };
     console.log(topic);
     this.store.dispatch(new EditTopic(newTopic));

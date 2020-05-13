@@ -2,7 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
 import {TopicService} from './topic.service';
-import {CreateTopic, DeleteTopic, GetAllTopics, GetTopic} from './topic.action';
+import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetTopic} from './topic.action';
 import {tap} from 'rxjs/operators';
 
 export class TopicStateModel {
@@ -75,6 +75,19 @@ export class TopicState {
           setState({
             ...state,
             topics: filteredArray
+          });
+        })
+      );
+  }
+
+  @Action(EditTopic)
+  editTopic({getState, setState}: StateContext<TopicStateModel>, action: EditTopic) {
+    return this.topicService.editTopic(action.topic)
+      .pipe(tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            topic: result
           });
         })
       );

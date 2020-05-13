@@ -23,3 +23,9 @@ export class DeleteTopic {
   constructor(public id: string) {
   }
 }
+
+export class EditTopic {
+  static readonly type = '[Topic] EditTopic';
+  constructor(public topic: Topic) {
+  }
+}

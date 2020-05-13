@@ -1,0 +1,28 @@
+<br>
+<header style="text-align: center">Edit Topic</header>
+<br>
+<div *ngIf="topic$ | async as topic">
+  <mat-card class="mat-card-center">
+    <mat-card-content>
+      <form [formGroup]="editTopicForm">
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Topic Name" type="string" formControlName="topicName">
+          </label>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Description" type="string" formControlName="description">
+          </label>
+        </mat-form-field>
+        <br>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="editTopic(topic)">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

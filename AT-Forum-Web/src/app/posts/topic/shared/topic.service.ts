@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -59,5 +59,13 @@ export class TopicService {
 
   deleteTopic(id: string) {
     return from(this.afs.collection('topics').doc<Topic>(id).delete());
+  }
+
+  editTopic(topic: Topic) {
+    const userRef: AngularFirestoreDocument<Topic> = this.afs.doc(`topics/${topic.id}`);
+    return from(userRef.set(topic, {merge: true}))
+      .pipe(map(() => {
+        return topic;
+      }));
   }
 }

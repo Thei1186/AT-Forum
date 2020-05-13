@@ -39,6 +39,7 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   goToEditTopic(id: string) {
+    this.router.navigateByUrl('posts/edit-topic/' + id);
   }
 
   goToCreateTopic(id: string) {

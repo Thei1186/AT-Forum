@@ -8,4 +8,8 @@ export class TopicService {
     updateTopicComments(comment: Comment): Promise<void> {
         return this.topicRepository.updateTopicComments(comment);
     }
+
+    deleteTopics(catId: String) {
+       return this.topicRepository.deleteTopics(catId);
+    }
 }

@@ -3,8 +3,9 @@ import {Topic} from "../models/topic";
 import * as admin from "firebase-admin";
 
 
-export class CategoryRepositoryFirebase implements CategoryRepository{
+export class CategoryRepositoryFirebase implements CategoryRepository {
     categoryPath = 'categories';
+
     async updateCategoryTopics(topic: Topic): Promise<void> {
         await this.db().collection(`${this.categoryPath}`).doc(`${topic.categoryId}`)
             .update({
@@ -19,4 +20,5 @@ export class CategoryRepositoryFirebase implements CategoryRepository{
     db() {
         return admin.firestore();
     }
+
 }

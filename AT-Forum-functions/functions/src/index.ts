@@ -36,7 +36,6 @@ exports.deleteTopicWhenCategoryDeleted = functions.firestore
 exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
     .document('comments/{id}')
     .onDelete((snap, context) => {
-        console.log('it got called in index');
         return difa.getTopicController().removeCommentFromTopic(snap, context);
     });
 

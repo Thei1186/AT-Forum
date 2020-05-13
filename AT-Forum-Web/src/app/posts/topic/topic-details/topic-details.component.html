@@ -13,4 +13,23 @@
       <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Comment</button>
     </mat-card-actions>
   </mat-card>
+  <div *ngFor="let comment of comments$ | async as comment">
+    <div style="margin-left: 25%">
+      <mat-card>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Title: {{comment.header}}</mat-list-item>
+            <mat-list-item>Author: {{comment.author.username}}</mat-list-item>
+            <mat-list-item>Message: {{comment.message}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <div *ngIf="authUser$ | async as user">
+          <mat-card-actions align="end">
+            <button mat-raised-button (click)="deleteComment(topic.id)">Delete</button>
+            <button mat-raised-button (click)="goToEditComment(topic.id)">Edit</button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
+  </div>
 </div>

@@ -5,6 +5,10 @@ import {Observable} from 'rxjs';
 import {Topic} from '../../shared/topic';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GetTopic} from '../shared/topic.action';
+import {CommentState} from '../../comment/shared/comment.state';
+import {Comment} from '../../shared/comment';
+import {AuthState} from '../../../auth/shared/auth.state';
+import {AuthUser} from '../../../auth/shared/auth-user';
 
 @Component({
   selector: 'app-topic-details',
@@ -13,6 +17,8 @@ import {GetTopic} from '../shared/topic.action';
 })
 export class TopicDetailsComponent implements OnInit {
   @Select(TopicState.topic) topic$: Observable<Topic>;
+  @Select(CommentState.comments) comments$: Observable<Comment[]>;
+  @Select(AuthState.loggedInUser) authUser$: Observable<AuthUser>;
   id: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -26,5 +32,13 @@ export class TopicDetailsComponent implements OnInit {
 
   goToCreateComment(id: any) {
     this.router.navigateByUrl('posts/create-comment/' + id);
+  }
+
+  deleteComment(id: string) {
+
+  }
+
+  goToEditComment(id: string) {
+
   }
 }

@@ -3,5 +3,5 @@ import {EventContext} from "firebase-functions";
 
 export interface CategoryController {
 
-    updateCategoryTopics(snap: DocumentSnapshot, context: EventContext): any;
+    updateCategoryTopics(snap: DocumentSnapshot, context: EventContext): Promise<void>;
 }

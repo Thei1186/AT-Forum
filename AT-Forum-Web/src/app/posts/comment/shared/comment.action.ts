@@ -6,8 +6,8 @@ export class CreateComment {
   }
 }
 
-export class GetAllComments {
-  static readonly type = '[Comment] GetAllComments';
-  constructor() {
+export class GetAllTopicComments {
+  static readonly type = '[Comment] GetAllTopicComments';
+  constructor(public id: string) {
   }
 }

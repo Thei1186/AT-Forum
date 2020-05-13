@@ -5,10 +5,10 @@ import {Observable} from 'rxjs';
 import {Topic} from '../../shared/topic';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GetTopic} from '../shared/topic.action';
-import {CommentState} from '../../comment/shared/comment.state';
 import {Comment} from '../../shared/comment';
 import {AuthState} from '../../../auth/shared/auth.state';
 import {AuthUser} from '../../../auth/shared/auth-user';
+import {GetAllTopicComments} from '../../comment/shared/comment.action';
 
 @Component({
   selector: 'app-topic-details',
@@ -17,7 +17,7 @@ import {AuthUser} from '../../../auth/shared/auth-user';
 })
 export class TopicDetailsComponent implements OnInit {
   @Select(TopicState.topic) topic$: Observable<Topic>;
-  @Select(CommentState.comments) comments$: Observable<Comment[]>;
+  @Select(TopicState.topicComments) comments$: Observable<Comment[]>;
   @Select(AuthState.loggedInUser) authUser$: Observable<AuthUser>;
   id: string;
 
@@ -28,6 +28,7 @@ export class TopicDetailsComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new GetTopic(this.id));
+    this.store.dispatch(new GetAllTopicComments(this.id));
   }
 
   goToCreateComment(id: any) {

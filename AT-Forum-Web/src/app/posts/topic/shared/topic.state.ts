@@ -4,17 +4,21 @@ import {Topic} from '../../shared/topic';
 import {TopicService} from './topic.service';
 import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetTopic} from './topic.action';
 import {tap} from 'rxjs/operators';
+import {GetAllTopicComments} from '../../comment/shared/comment.action';
+import {Comment} from '../../shared/comment';
 
 export class TopicStateModel {
   topics: Topic[];
   topic: Topic;
+  topicComments: Comment[];
 }
 
 @State<TopicStateModel>({
   name: 'topic',
   defaults: {
     topics: [],
-    topic: undefined
+    topic: undefined,
+    topicComments: []
   }
 })
 
@@ -33,6 +37,11 @@ export class TopicState {
     return state.topic;
   }
 
+  @Selector()
+  static topicComments(state: TopicStateModel) {
+    return state.topicComments;
+  }
+
   @Action(CreateTopic)
   createTopic({getState, setState}: StateContext<TopicStateModel>, action: CreateTopic) {
     return this.topicService.createTopic(action.topic);
@@ -49,6 +58,19 @@ export class TopicState {
             topics: result
           });
         }));
+  }
+
+  @Action(GetAllTopicComments)
+  getAllTopicComments({getState, setState}: StateContext<TopicStateModel>, action: GetAllTopicComments) {
+    return this.topicService.getAllTopicComments(action.id)
+      .pipe(tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            topicComments: result
+          });
+        })
+      );
   }
 
   @Action(GetTopic)

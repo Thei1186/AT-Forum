@@ -3,6 +3,8 @@ import {Topic} from '../../shared/topic';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Comment} from '../../shared/comment';
+import {Category} from "../../shared/category";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,14 @@ export class TopicService {
             return topic;
           });
         }));
+  }
+
+  getAllTopicComments(id: string): Observable<Comment[]> {
+    return this.afs.collection('topics').doc<Topic>(id)
+      .snapshotChanges()
+      .pipe(map(snap => {
+        return snap.payload.data().comments;
+      }));
   }
 
   getTopic(id: string): Observable<Topic> {

@@ -11,3 +11,9 @@ export class GetAllTopicComments {
   constructor(public id: string) {
   }
 }
+
+export class DeleteComment {
+  static readonly type = '[Comment] DeleteComment';
+  constructor(public id: string) {
+  }
+}

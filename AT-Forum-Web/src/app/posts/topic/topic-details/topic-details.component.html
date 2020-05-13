@@ -25,8 +25,8 @@
         </mat-card-content>
         <div *ngIf="authUser$ | async as user">
           <mat-card-actions align="end">
-            <button mat-raised-button (click)="deleteComment(topic.id)">Delete</button>
-            <button mat-raised-button (click)="goToEditComment(topic.id)">Edit</button>
+            <button mat-raised-button (click)="deleteComment(comment.id)">Delete</button>
+            <button mat-raised-button (click)="goToEditComment(comment.id)">Edit</button>
           </mat-card-actions>
         </div>
       </mat-card>

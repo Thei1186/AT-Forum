@@ -1,8 +1,9 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CommentService} from './comment.service';
-import {CreateComment} from './comment.action';
+import {CreateComment, DeleteComment} from './comment.action';
 import {Comment} from '../../shared/comment';
+import {tap} from 'rxjs/operators';
 
 export class CommentStateModel {
   comments: Comment[];
@@ -27,5 +28,20 @@ export class CommentState {
   @Action(CreateComment)
   createComment({getState, setState}: StateContext<CommentStateModel>, action: CreateComment) {
     return this.commentService.createComment(action.comment);
+  }
+
+  @Action(DeleteComment)
+  deleteComment({getState, setState}: StateContext<CommentStateModel>, action: DeleteComment) {
+    return this.commentService.deleteComment(action.id)
+      .pipe(
+        tap(() => {
+          const state = getState();
+          const filteredArray = state.comments.filter(comment => comment.id !== action.id);
+          setState({
+            ...state,
+            comments: filteredArray
+          });
+        })
+      );
   }
 }

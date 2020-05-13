@@ -8,7 +8,7 @@ import {GetTopic} from '../shared/topic.action';
 import {Comment} from '../../shared/comment';
 import {AuthState} from '../../../auth/shared/auth.state';
 import {AuthUser} from '../../../auth/shared/auth-user';
-import {GetAllTopicComments} from '../../comment/shared/comment.action';
+import {DeleteComment, GetAllTopicComments} from '../../comment/shared/comment.action';
 
 @Component({
   selector: 'app-topic-details',
@@ -36,7 +36,7 @@ export class TopicDetailsComponent implements OnInit {
   }
 
   deleteComment(id: string) {
-
+    this.store.dispatch(new DeleteComment(id));
   }
 
   goToEditComment(id: string) {

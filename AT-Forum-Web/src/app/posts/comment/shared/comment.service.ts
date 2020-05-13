@@ -18,4 +18,8 @@ export class CommentService {
         return comment;
       }));
   }
+
+  deleteComment(id: string) {
+    return from(this.afs.collection('comments').doc<Comment>(id).delete());
+  }
 }

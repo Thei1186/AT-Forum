@@ -10,7 +10,7 @@ import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {GetAllCategoryTopics, GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
-import {DeleteTopic} from "../../topic/shared/topic.action";
+import {DeleteTopic} from '../../topic/shared/topic.action';
 
 
 @Component({

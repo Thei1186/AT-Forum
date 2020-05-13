@@ -23,13 +23,19 @@ exports.createTopicUpdatesCategory = functions.firestore
 exports.createCommentUpdatesTopic = functions.firestore
     .document('comments/{id}')
     .onCreate((snap, context) => {
-       return difa.getTopicController().updateTopicComments(snap, context);
+        return difa.getTopicController().updateTopicComments(snap, context);
     });
 
-/*
-exports.categoryDeleted = functions.firestore
+
+exports.deleteTopicWhenCategoryDeleted = functions.firestore
     .document('categories/{id}')
     .onDelete((snap, context) => {
-       return difa.getCategoryController().deleteCategory(snap, context);
+        return difa.getTopicController().deleteTopics(snap, context);
     });
- */
+
+exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
+    .document('comment/{id}')
+    .onDelete((snap, context) => {
+        return difa.getTopicController().removeCommentFromTopic(snap, context);
+    });
+

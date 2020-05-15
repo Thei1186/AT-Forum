@@ -22,9 +22,9 @@ header {
 }
 
 .mat-card-center{
-  width: 40%;
+  width: 50%;
   text-align: center;
-  margin-left: 30%;
+  margin-left: 25%;
 }
 
 button {
@@ -32,9 +32,10 @@ button {
 }
 
 mat-card {
-  max-width: 60%;
+  width: 50%;
   margin-top: 2%;
-
+  text-align: center;
+  margin-left: 25%;
 }
 
 mat-list {

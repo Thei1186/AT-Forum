@@ -4,19 +4,19 @@
 <br>
 <div *ngIf="category$ | async as category">
   <div *ngIf="user$ | async as user">
-  <mat-card>
+  <mat-card class="mat-card-center">
     <mat-card-content>
       <mat-list>
         <mat-list-item>Create your own Topic here</mat-list-item>
       </mat-list>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions align="end">
       <button mat-raised-button (click)="goToCreateTopic(category.id)">Create Topic</button>
     </mat-card-actions>
   </mat-card>
   </div>
   <div *ngFor="let topic of topics$ | async as topic">
-    <div style="margin-left: 25%">
+    <div>
       <mat-card>
         <mat-card-content (click)="goToComments(topic.id)" style="cursor: pointer">
           <mat-list>

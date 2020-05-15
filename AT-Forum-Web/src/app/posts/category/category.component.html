@@ -4,7 +4,7 @@
 <br>
 <div>
   <div *ngFor="let category of categories$ | async as category">
-    <div style="margin-left: 25%">
+    <div>
       <mat-card>
         <mat-card-content (click)="goToTopics(category.id)" style="cursor: pointer">
           <mat-list>

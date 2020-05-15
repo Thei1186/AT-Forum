@@ -15,6 +15,7 @@ export class TopicService {
   }
 
   createTopic(topic: Topic): Observable<Topic> {
+    debugger;
     return from(this.afs.collection('topics').add(topic))
       .pipe(map(() => {
         return topic;

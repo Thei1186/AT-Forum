@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {Select, Store} from '@ngxs/store';
 import {UserState} from '../../../users/shared/user.state';
 import {Observable} from 'rxjs';
@@ -31,6 +31,7 @@ export class CreateCommentComponent implements OnInit {
 
   CreateComment() {
     this.user$.pipe(
+      first(),
       map(user => {
         if (user) {
           const CommentFromForm = this.newCommentForm.value;

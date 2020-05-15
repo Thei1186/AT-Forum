@@ -6,7 +6,7 @@ import {Topic} from '../../shared/topic';
 import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {CreateTopic} from '../shared/topic.action';
-import {map, tap} from 'rxjs/operators';
+import {first, map, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
@@ -33,6 +33,7 @@ export class CreateTopicComponent implements OnInit {
 
   CreateTopic() {
     this.user$.pipe(
+      first(),
       map(user => {
         if (user) {
           const topicFromForm = this.newTopicForm.value;

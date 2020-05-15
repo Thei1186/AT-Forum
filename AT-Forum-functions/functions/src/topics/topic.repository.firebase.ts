@@ -36,6 +36,7 @@ export class TopicRepositoryFirebase implements TopicRepository {
     }
 
     async removeCommentFromTopic(comment: Comment, topicId: string): Promise<void> {
+        console.log("Comment", comment);
         await this.db().collection(`${this.topicPath}`).doc(`${topicId}`)
             .update({
                 comments: admin.firestore.FieldValue.arrayRemove(comment)

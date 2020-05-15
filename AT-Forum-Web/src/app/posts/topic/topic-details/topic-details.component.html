@@ -1,18 +1,20 @@
 <br>
-<header style="text-align: center">Topics</header>
+<header style="text-align: center">Comments</header>
 <br>
 <br>
 <div *ngIf="topic$ | async as topic">
-  <mat-card>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>Create your own Comment here</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Comment</button>
-    </mat-card-actions>
-  </mat-card>
+  <div *ngIf="authUser$ | async as user">
+    <mat-card>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Create your own Comment here</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="goToCreateComment(topic.id)">Create Comment</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
   <div *ngFor="let comment of comments$ | async as comment">
     <div style="margin-left: 25%">
       <mat-card>

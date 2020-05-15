@@ -11,6 +11,7 @@ import {User} from '../../../users/shared/user';
 import {GetAllCategoryTopics, GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
 import {DeleteTopic} from '../../topic/shared/topic.action';
+import {AuthUser} from "../../../auth/shared/auth-user";
 
 
 @Component({
@@ -21,7 +22,7 @@ import {DeleteTopic} from '../../topic/shared/topic.action';
 export class CategoryDetailsComponent implements OnInit {
   @Select(AuthState.role) role$: Observable<Role>;
   @Select(CategoryState.categoryTopics) topics$: Observable<Topic[]>;
-  @Select(UserState.currentUser) user$: Observable<User>;
+  @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   @Select(CategoryState.category) category$: Observable<Category>;
   id: string;
 

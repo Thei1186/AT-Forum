@@ -3,6 +3,7 @@
 <br>
 <br>
 <div *ngIf="category$ | async as category">
+  <div *ngIf="user$ | async as user">
   <mat-card>
     <mat-card-content>
       <mat-list>
@@ -13,6 +14,7 @@
       <button mat-raised-button (click)="goToCreateTopic(category.id)">Create Topic</button>
     </mat-card-actions>
   </mat-card>
+  </div>
   <div *ngFor="let topic of topics$ | async as topic">
     <div style="margin-left: 25%">
       <mat-card>

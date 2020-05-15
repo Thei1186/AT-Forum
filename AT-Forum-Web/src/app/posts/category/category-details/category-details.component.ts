@@ -12,6 +12,7 @@ import {GetAllCategoryTopics, GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
 import {DeleteTopic} from '../../topic/shared/topic.action';
 import {AuthUser} from "../../../auth/shared/auth-user";
+import {SetFavoriteTopic} from "../../../users/shared/user.action";
 
 
 @Component({
@@ -49,5 +50,9 @@ export class CategoryDetailsComponent implements OnInit {
 
   goToComments(id: string) {
     this.router.navigateByUrl('posts/topic-details/' + id);
+  }
+
+  markAsFavorite(topic: Topic, user: AuthUser) {
+    this.store.dispatch(new SetFavoriteTopic(topic, user.uid));
   }
 }

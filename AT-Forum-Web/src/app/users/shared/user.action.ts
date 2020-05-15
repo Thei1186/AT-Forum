@@ -1,4 +1,5 @@
 import {User} from "./user";
+import {Topic} from "../../posts/shared/topic";
 
 export class DeleteUser {
   static readonly type = '[User] DeleteUser';
@@ -21,5 +22,12 @@ export class EditUser {
   static readonly type = '[User] EditUser';
 
   constructor(public user: User) {
+  }
+}
+
+export class SetFavoriteTopic {
+  static readonly type = '[User] SetFavoriteTopic';
+
+  constructor(public topic: Topic, public id: string) {
   }
 }

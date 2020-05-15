@@ -3,19 +3,22 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {UserService} from './user.service';
 import {tap} from 'rxjs/operators';
-import {DeleteUser, EditUser, GetAllUsers, GetUser} from './user.action';
+import {DeleteUser, EditUser, GetAllUsers, GetUser, SetFavoriteTopic} from './user.action';
 import {from} from 'rxjs';
+import {Topic} from "../../posts/shared/topic";
 
 export class UserStateModel {
   currentUser: User;
   allUsers: User[];
+  favoriteTopics: Topic[];
 }
 
 @State<UserStateModel>({
   name: 'user',
   defaults: {
     currentUser: undefined,
-    allUsers: []
+    allUsers: [],
+    favoriteTopics: []
   }
 })
 
@@ -85,5 +88,11 @@ export class UserState {
         });
       })
     );
+  }
+
+
+  @Action(SetFavoriteTopic)
+  setFavoriteTopic({setState, getState}: StateContext<UserStateModel>, action: SetFavoriteTopic) {
+    return this.userService.setFavoriteTopic(action.topic, action.id);
   }
 }

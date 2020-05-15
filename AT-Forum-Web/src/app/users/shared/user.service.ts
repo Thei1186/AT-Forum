@@ -76,10 +76,10 @@ export class UserService {
   }
 
   setFavoriteTopic(topic: Topic, uid: string): Observable<void> {
-    const favTopics: Topic[] = [];
-    favTopics.push(topic);
-    return from(this.afs.collection('favTopics').doc(uid).set({
-      favoriteTopics: favTopics
-    }, {merge: true}));
+     const favTopics: Topic[] = [];
+     favTopics.push(topic);
+     return from(this.afs.collection('favoriteTopics').doc(uid).set({
+       favoriteTopics: favTopics
+     }, {merge: true}));
   }
 }

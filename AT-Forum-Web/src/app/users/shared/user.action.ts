@@ -1,5 +1,5 @@
-import {User} from "./user";
-import {Topic} from "../../posts/shared/topic";
+import {User} from './user';
+import {Topic} from '../../posts/shared/topic';
 
 export class DeleteUser {
   static readonly type = '[User] DeleteUser';

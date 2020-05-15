@@ -94,6 +94,7 @@ export class AuthState {
           });
           dispatch(new SetRole(result.uid, 'user'));
           dispatch(new GetUser(result.uid));
+          dispatch(new GetRole(result.uid));
         }));
   }
 
@@ -128,17 +129,8 @@ export class AuthState {
   }
 
   @Action(SetRole)
-  setRole({getState, setState}: StateContext<AuthStateModel>, action: SetRole) {
-    return this.authService.setRole(action.uid, action.newRoleName)
-      .pipe(
-        tap((result) => {
-          const state = getState();
-          setState({
-            ...state,
-            role: result
-          });
-        }));
-
+  setRole({dispatch}: StateContext<AuthStateModel>, action: SetRole) {
+    return this.authService.setRole(action.uid, action.newRoleName);
   }
 
 

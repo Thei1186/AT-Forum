@@ -4,6 +4,7 @@ import {User} from './user';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Topic} from '../../posts/shared/topic';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -76,10 +77,9 @@ export class UserService {
   }
 
   setFavoriteTopic(topic: Topic, uid: string): Observable<void> {
-    const favTopics: Topic[] = [];
-    favTopics.push(topic);
-    return from(this.afs.collection('favTopics').doc(uid).set({
-      favoriteTopics: favTopics
-    }, {merge: true}));
+     const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
+     return from(this.afs.collection('favoriteTopics').doc(uid).set({
+       favoriteTopics: arrayUnion(topic)
+     }, {merge: true}));
   }
 }

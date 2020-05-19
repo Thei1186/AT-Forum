@@ -90,19 +90,10 @@ export class AuthService {
         }));
   }
 
-  setRole(id: string, newRoleName: string): Observable<Role> {
-    console.log(id + ' ' + newRoleName);
+  setRole(id: string, newRoleName: string): Observable<void> {
     return from(this.afs.collection('roles').doc(id).set({
-      role: newRoleName
-    }))
-      .pipe(
-        map(() => {
-          return {
-            roleName: newRoleName,
-            uid: id
-          };
-        })
-      );
+      roleName: newRoleName
+    }));
   }
 
   private firebaseUserToAuthUser(user: firebase.User): AuthUser {

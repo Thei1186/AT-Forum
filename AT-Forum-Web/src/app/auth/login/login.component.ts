@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   email: string;
   id: string;
 
-  constructor(private store: Store, private fb: FormBuilder, private router: Router) { }
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.newLoginForm = this.fb.group({
@@ -29,6 +29,5 @@ export class LoginComponent implements OnInit {
     this.email = this.newLoginForm.get('email').value;
     this.password = this.newLoginForm.get('password').value;
     this.store.dispatch(new LoginWithEmail(this.email, this.password));
-    this.router.navigateByUrl('');
   }
 }

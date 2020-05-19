@@ -12,6 +12,8 @@ import {
 } from './category.action';
 import {tap} from 'rxjs/operators';
 import {Topic} from '../../shared/topic';
+import {Logout} from "../../../auth/shared/auth.action";
+import {CommentStateModel} from "../../comment/shared/comment.state";
 
 
 export class CategoryStateModel {
@@ -117,5 +119,14 @@ export class CategoryState {
         });
       })
     );
+  }
+
+  @Action(Logout)
+  logout({setState}: StateContext<CategoryStateModel>) {
+    setState({
+      categories: [],
+      category: undefined,
+      categoryTopics: []
+    });
   }
 }

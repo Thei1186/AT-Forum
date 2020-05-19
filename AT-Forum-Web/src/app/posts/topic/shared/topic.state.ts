@@ -6,6 +6,8 @@ import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetFavorites, GetTopi
 import {tap} from 'rxjs/operators';
 import {GetAllTopicComments} from '../../comment/shared/comment.action';
 import {Comment} from '../../shared/comment';
+import {Logout} from "../../../auth/shared/auth.action";
+import {AuthStateModel} from "../../../auth/shared/auth.state";
 
 export class TopicStateModel {
   topics: Topic[];
@@ -133,5 +135,15 @@ export class TopicState {
           });
         })
       );
+  }
+
+  @Action(Logout)
+  logout({setState}: StateContext<TopicStateModel>) {
+    setState({
+      topics: [],
+      topic: undefined,
+      topicComments: [],
+      favoriteTopics: []
+    });
   }
 }

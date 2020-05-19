@@ -4,6 +4,8 @@ import {CommentService} from './comment.service';
 import {CreateComment, DeleteComment, EditComment, GetComment} from './comment.action';
 import {Comment} from '../../shared/comment';
 import {tap} from 'rxjs/operators';
+import {Logout} from "../../../auth/shared/auth.action";
+import {TopicStateModel} from "../../topic/shared/topic.state";
 
 export class CommentStateModel {
   comments: Comment[];
@@ -77,5 +79,13 @@ export class CommentState {
           });
         })
       );
+  }
+
+  @Action(Logout)
+  logout({setState}: StateContext<CommentStateModel>) {
+    setState({
+      comments: [],
+      comment: undefined
+    });
   }
 }

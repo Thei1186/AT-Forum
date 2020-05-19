@@ -7,6 +7,7 @@ import {Role} from '../../users/shared/role';
 import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
 import {GetUser} from '../../users/shared/user.action';
+import {Router} from "@angular/router";
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -26,7 +27,7 @@ export class AuthStateModel {
 @Injectable()
 export class AuthState {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   @Selector()
@@ -55,6 +56,7 @@ export class AuthState {
         });
         dispatch(new GetRole(result.uid));
         dispatch(new GetUser(result.uid));
+        this.router.navigateByUrl('');
       }));
   }
 
@@ -77,7 +79,8 @@ export class AuthState {
         setState({
           ...state,
           loggedInUser: undefined,
-          role: undefined
+          role: undefined,
+          roles: undefined
         });
       }));
   }

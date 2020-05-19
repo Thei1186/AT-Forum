@@ -6,6 +6,8 @@ import {tap} from 'rxjs/operators';
 import {DeleteUser, EditUser, GetAllUsers, GetUser, SetFavoriteTopic} from './user.action';
 import {from} from 'rxjs';
 import {Topic} from "../../posts/shared/topic";
+import {Logout} from "../../auth/shared/auth.action";
+import {CategoryStateModel} from "../../posts/category/shared/category.state";
 
 export class UserStateModel {
   currentUser: User;
@@ -94,5 +96,14 @@ export class UserState {
   @Action(SetFavoriteTopic)
   setFavoriteTopic({setState, getState}: StateContext<UserStateModel>, action: SetFavoriteTopic) {
     return this.userService.setFavoriteTopic(action.topic, action.id);
+  }
+
+  @Action(Logout)
+  logout({setState}: StateContext<UserStateModel>) {
+    setState({
+      currentUser: undefined,
+      allUsers: [],
+      favoriteTopics: []
+    });
   }
 }

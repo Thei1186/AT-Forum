@@ -16,6 +16,10 @@ import {CommentControllerFirebase} from "./comments/comment.controller.firebase"
 import {CommentService} from "./comments/comment.service";
 import {CommentRepository} from "./comments/comment.repository";
 import {CommentRepositoryFirebase} from "./comments/comment.repository.firebase";
+import {RoleRepository} from "./roles/role.repository";
+import {RoleRepositoryFirebase} from "./roles/role.repository.firebase";
+import {RoleService} from "./roles/role.service";
+import {RoleControllerFirebase} from "./roles/role.controller.firebase";
 
 export class DependencyFactory {
     getUserController(): UserController {
@@ -46,5 +50,6 @@ export class DependencyFactory {
     getRoleController() {
         const repo: RoleRepository = new RoleRepositoryFirebase();
         const service: RoleService = new RoleService(repo);
+        return new RoleControllerFirebase(service)
     }
 }

@@ -4,10 +4,10 @@ import {Topic} from '../../shared/topic';
 import {TopicService} from './topic.service';
 import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetFavorites, GetTopic} from './topic.action';
 import {tap} from 'rxjs/operators';
-import {GetAllTopicComments} from '../../comment/shared/comment.action';
+import {EditComment, GetAllTopicComments} from '../../comment/shared/comment.action';
 import {Comment} from '../../shared/comment';
-import {Logout} from "../../../auth/shared/auth.action";
-import {AuthStateModel} from "../../../auth/shared/auth.state";
+import {Logout} from '../../../auth/shared/auth.action';
+
 
 export class TopicStateModel {
   topics: Topic[];

@@ -8,25 +8,18 @@ import {Logout} from '../../../auth/shared/auth.action';
 import {Router} from '@angular/router';
 
 export class CommentStateModel {
-  comments: Comment[];
   comment: Comment;
 }
 
 @State<CommentStateModel>({
   name: 'comment',
   defaults: {
-    comments: [],
     comment: undefined
   }
 })
 @Injectable()
 export class CommentState {
   constructor(private commentService: CommentService, private router: Router) {
-  }
-
-  @Selector()
-  static comments(state: CommentStateModel) {
-    return state.comments;
   }
 
   @Selector()
@@ -59,10 +52,9 @@ export class CommentState {
       .pipe(
         tap(() => {
           const state = getState();
-          const filteredArray = state.comments.filter(comment => comment.id !== action.id);
+        //  const filteredArray = state.comments.filter(comment => comment.id !== action.id);
           setState({
-            ...state,
-            comments: filteredArray
+            ...state
           });
         })
       );
@@ -84,7 +76,6 @@ export class CommentState {
   @Action(Logout)
   logout({setState}: StateContext<CommentStateModel>) {
     setState({
-      comments: [],
       comment: undefined
     });
   }

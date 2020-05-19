@@ -7,7 +7,7 @@ import {Role} from '../../users/shared/role';
 import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
 import {GetUser} from '../../users/shared/user.action';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -82,6 +82,7 @@ export class AuthState {
           role: undefined,
           roles: undefined
         });
+        this.router.navigateByUrl('');
       }));
   }
 

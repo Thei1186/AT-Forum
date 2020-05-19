@@ -32,6 +32,5 @@ export class CreateCategoryComponent implements OnInit {
       description: categoryFromForm.description
     };
     this.store.dispatch(new CreateCategory(newCategory as Category));
-    this.router.navigateByUrl('posts/categories');
   }
 }

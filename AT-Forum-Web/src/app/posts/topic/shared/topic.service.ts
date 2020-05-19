@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Comment} from '../../shared/comment';
+import {FavoriteTopic} from '../../shared/favoriteTopic';
 
 @Injectable({
   providedIn: 'root'
@@ -78,20 +79,21 @@ export class TopicService {
       }));
   }
 
-  getFavorites(id: string): Observable<Topic> {
-    return this.afs.collection('favoriteTopics').doc(id).snapshotChanges()
+  getFavorites(id: string): Observable<Topic[]> {
+    return this.afs.collection('favoriteTopics').doc<FavoriteTopic>(id).snapshotChanges()
       .pipe(
         map((document) => {
           const data = document.payload.data();
           if (data) {
-            const topic: Topic = {
+            const favoriteArray: Topic[] = [];
+            const favTopic: FavoriteTopic = {
               id: document.payload.id,
-              categoryId: data.categoryId,
-              author: data.author,
-              topicName: data.topicName,
-              description: data.description,
+              favoriteTopics: data.favoriteTopics
             };
-            return topic;
+            favTopic.favoriteTopics.forEach(topic => {
+              favoriteArray.push(topic);
+            });
+            return favoriteArray;
           }
         })
       );

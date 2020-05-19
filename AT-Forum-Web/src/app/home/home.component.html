@@ -2,8 +2,9 @@
 <header style="text-align: center">Favorites</header>
 <br>
 <br>
-  <div *ngIf="authUser$ | async as user">
-    <div *ngFor="let topic of favoriteTopics$ | async as topic">
+<div *ngIf="authUser$ | async as user; else welcome">
+  <div *ngFor="let topic of favoriteTopics$ | async as topic">
+    <div *ngIf="favoriteTopics$; else welcome">
       <mat-card>
         <mat-card-content>
           <mat-list>
@@ -13,10 +14,13 @@
           </mat-list>
         </mat-card-content>
       </mat-card>
-            </div>
-          </div>
+    </div>
+  </div>
+</div>
 
-
+<ng-template #welcome>
+<h2>Pick a favorite topic and it will be shown here!</h2>
+</ng-template>
 
 
 

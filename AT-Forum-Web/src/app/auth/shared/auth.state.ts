@@ -1,13 +1,12 @@
-import {User} from '../../users/shared/user';
 import {Injectable} from '@angular/core';
-import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetRole, GetRoles, LoginWithEmail, Logout, SetRole, SignUp} from './auth.action';
+import {ChangePassword, GetRole, GetRoles, LoginWithEmail, Logout, SetRole, SignUp} from './auth.action';
 import {Role} from '../../users/shared/role';
 import {tap} from 'rxjs/operators';
 import {AuthUser} from './auth-user';
 import {GetUser} from '../../users/shared/user.action';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -71,6 +70,7 @@ export class AuthState {
         });
       }));
   }
+
   @Action(Logout)
   logout({getState, setState}: StateContext<AuthStateModel>) {
     return this.authService.logout()
@@ -136,5 +136,9 @@ export class AuthState {
     return this.authService.setRole(action.uid, action.newRoleName);
   }
 
+  @Action(ChangePassword)
+  changePassword({getState, setState}: StateContext<AuthStateModel>, action: ChangePassword) {
+    return this.authService.changePassword(action.newPassword);
+  }
 
 }

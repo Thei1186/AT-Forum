@@ -32,6 +32,13 @@ export class Logout {
   static readonly type = '[Auth] Logout';
 }
 
+export class ChangePassword {
+  static readonly type = '[Auth] ChangePassword';
+
+  constructor(public newPassword: string) {
+  }
+}
+
 export class GetRoles {
   static readonly type = '[Auth] GetRoles';
 }

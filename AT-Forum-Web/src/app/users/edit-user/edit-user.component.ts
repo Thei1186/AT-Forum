@@ -5,9 +5,10 @@ import {Select, Store} from '@ngxs/store';
 import {User} from '../shared/user';
 import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
-import {finalize, first} from 'rxjs/operators';
+import {finalize, first, tap} from 'rxjs/operators';
 import {UploadsService} from '../../shared/uploads/uploads.service';
 import {EditUser} from '../shared/user.action';
+import {ChangePassword} from '../../auth/shared/auth.action';
 
 @Component({
   selector: 'app-edit-user',
@@ -34,18 +35,20 @@ export class EditUserComponent implements OnInit {
       username: '',
       password: ''
     });
-    this.user$.subscribe(user => {
-      if (!user) {
-        return;
-      }
-      this.uid = user.uid;
-      this.photoURL = user.photoURL;
+    this.user$.pipe(
+      first(),
+      tap(user => {
+        if (!user) {
+          return;
+        }
+        this.uid = user.uid;
+        this.photoURL = user.photoURL;
 
-      this.editUserForm.patchValue({
-        name: user.name,
-        username: user.username,
-      });
-    });
+        this.editUserForm.patchValue({
+          name: user.name,
+          username: user.username,
+        });
+      })).subscribe();
   }
 
   editProfile(user: User) {
@@ -56,7 +59,11 @@ export class EditUserComponent implements OnInit {
       email: user.email,
       photoURL: this.photoURL
     };
+    const password = this.editUserForm.get('password').value;
     this.store.dispatch(new EditUser(newUser));
+    if (password !== '') {
+      this.store.dispatch(new ChangePassword(password));
+    }
   }
 
   handleFileInput(event) {

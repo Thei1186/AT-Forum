@@ -41,11 +41,16 @@ export class CommentService {
     return from(this.afs.collection('comments').doc<Comment>(id).delete());
   }
 
-  editComment(comment: Comment, topicId: string) {
+  editComment(comment: Comment) {
     const userRef: AngularFirestoreDocument<Comment> = this.afs.doc(`comments/${comment.id}`);
-    return from(userRef.set(comment, {merge: true}))
+    const editComment: Comment = {
+      message: comment.message,
+      topicId: comment.topicId,
+      author: comment.author
+    };
+    return from(userRef.set(editComment, {merge: true}))
       .pipe(map(() => {
-        return comment;
+        return editComment;
       }));
   }
 }

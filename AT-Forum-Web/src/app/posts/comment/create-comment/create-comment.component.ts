@@ -23,7 +23,6 @@ export class CreateCommentComponent implements OnInit {
 
   ngOnInit() {
     this.newCommentForm = this.fb.group({
-      header: '',
       message: ''
     });
     this.topicId = this.route.snapshot.paramMap.get('id');
@@ -36,7 +35,6 @@ export class CreateCommentComponent implements OnInit {
         if (user) {
           const CommentFromForm = this.newCommentForm.value;
           const newComment = {
-            header: CommentFromForm.header,
             message: CommentFromForm.message,
             author: user,
             topicId: this.topicId

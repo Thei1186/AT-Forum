@@ -26,6 +26,6 @@ export class DeleteComment {
 
 export class EditComment {
   static readonly type = '[Comment] EditComment';
-  constructor(public comment: Comment, public topicId: string) {
+  constructor(public comment: Comment) {
   }
 }

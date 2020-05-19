@@ -6,6 +6,7 @@ import {Comment} from '../../shared/comment';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EditComment, GetComment} from '../shared/comment.action';
+import {first, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-comment',
@@ -43,8 +44,10 @@ export class EditCommentComponent implements OnInit {
       id: comment.id,
       message: this.editCommentForm.get('message').value,
       author: comment.author,
+      topicId: comment.topicId
     };
-    this.store.dispatch(new EditComment(editComment, comment.topicId));
+    this.store.dispatch(new EditComment(editComment));
+    this.router.navigateByUrl('posts/topic-details/' + comment.topicId);
   }
 }
 

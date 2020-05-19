@@ -70,14 +70,13 @@ export class CommentState {
 
   @Action(EditComment)
   editComment({getState, setState}: StateContext<CommentStateModel>, action: EditComment) {
-    return this.commentService.editComment(action.comment, action.topicId)
+    return this.commentService.editComment(action.comment)
       .pipe(tap((result) => {
           const state = getState();
           setState({
             ...state,
             comment: result
           });
-          this.router.navigateByUrl('posts/topic-details/' + action.topicId);
         })
       );
   }

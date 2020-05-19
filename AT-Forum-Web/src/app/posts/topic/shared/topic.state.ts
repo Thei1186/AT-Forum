@@ -2,7 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
 import {TopicService} from './topic.service';
-import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetTopic} from './topic.action';
+import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetFavorites, GetTopic} from './topic.action';
 import {tap} from 'rxjs/operators';
 import {GetAllTopicComments} from '../../comment/shared/comment.action';
 import {Comment} from '../../shared/comment';
@@ -11,6 +11,7 @@ export class TopicStateModel {
   topics: Topic[];
   topic: Topic;
   topicComments: Comment[];
+  favoriteTopics: Topic[];
 }
 
 @State<TopicStateModel>({
@@ -18,7 +19,8 @@ export class TopicStateModel {
   defaults: {
     topics: [],
     topic: undefined,
-    topicComments: []
+    topicComments: [],
+    favoriteTopics: []
   }
 })
 
@@ -40,6 +42,11 @@ export class TopicState {
   @Selector()
   static topicComments(state: TopicStateModel) {
     return state.topicComments;
+  }
+
+  @Selector()
+  static favoriteTopics(state: TopicStateModel) {
+    return state.favoriteTopics;
   }
 
   @Action(CreateTopic)
@@ -110,6 +117,19 @@ export class TopicState {
           setState({
             ...state,
             topic: result
+          });
+        })
+      );
+  }
+
+  @Action(GetFavorites)
+  getFavorites({getState, setState}: StateContext<TopicStateModel>, action: GetFavorites) {
+    return this.topicService.getFavorites(action.id)
+      .pipe(tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            favoriteTopics: result
           });
         })
       );

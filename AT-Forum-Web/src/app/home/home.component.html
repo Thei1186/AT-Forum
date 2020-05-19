@@ -1,1 +1,24 @@
-<p>home works!</p>
+<br>
+<header style="text-align: center">Favorites</header>
+<br>
+<br>
+  <div *ngIf="authUser$ | async as user">
+    <div *ngFor="let topic of favoriteTopics$ | async as topic">
+      <mat-card>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Author: {{topic.author.username}}</mat-list-item>
+            <mat-list-item>Topic Name: {{topic.topicName}}</mat-list-item>
+            <mat-list-item>Description: {{topic.description}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+            </div>
+          </div>
+
+
+
+
+
+
+

@@ -29,3 +29,9 @@ export class EditTopic {
   constructor(public topic: Topic) {
   }
 }
+
+export class GetFavorites {
+  static readonly type = '[Topic] GetFavorites';
+  constructor(public id: string) {
+  }
+}

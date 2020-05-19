@@ -5,7 +5,7 @@
 <div *ngIf="role$ | async as currentUserRole">
   <div *ngIf="roles$ | async; let roles">
     <div *ngFor="let user of users$ | async as user">
-      <div style="margin-left: 25%">
+      <div>
         <mat-card>
           <mat-card-content>
             <div style="position: absolute">

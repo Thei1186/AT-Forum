@@ -7,5 +7,5 @@ export interface Topic {
   description: string;
   author: User;
   categoryId?: string;
-  comments: Comment[];
+  comments?: Comment[];
 }

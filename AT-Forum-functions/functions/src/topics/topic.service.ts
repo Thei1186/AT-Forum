@@ -16,4 +16,8 @@ export class TopicService {
     removeCommentFromTopic(comment: Comment, topicId: string) {
         return this.topicRepository.removeCommentFromTopic(comment, topicId);
     }
+
+    editTopicComments(commentAfter: Comment) {
+        return this.topicRepository.editTopicComments(commentAfter);
+    }
 }

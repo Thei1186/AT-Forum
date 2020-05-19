@@ -51,3 +51,9 @@ exports.removeRoleWhenUserDeleted = functions.firestore
        return difa.getRoleController().deleteRole(snap, context);
     });
 
+exports.editCommentEditsTopicComments = functions.firestore
+    .document('comments/{id}')
+    .onUpdate((change, context) => {
+       return difa.getTopicController().editTopicComments(change, context);
+    });
+

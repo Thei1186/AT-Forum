@@ -6,4 +6,6 @@ export interface TopicRepository {
     deleteTopics(catId: String): Promise<void>;
 
     removeCommentFromTopic(comment: Comment, topicId: string): Promise<void>;
+
+    editTopicComments(commentAfter: Comment): Promise<void>;
 }

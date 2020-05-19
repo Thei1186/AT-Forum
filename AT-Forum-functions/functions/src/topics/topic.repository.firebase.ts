@@ -47,4 +47,15 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 return Promise.reject('Failed to remove comment from Topic with message: ' + err.message);
             });
     }
+
+    async editTopicComments(commentAfter: Comment): Promise<void> {
+        await this.db().collection(`${this.topicPath}`).doc(`${commentAfter.topicId}`)
+            .update({
+                comments: admin.firestore.FieldValue.arrayUnion(commentAfter)
+            }).then(() => {
+                return Promise.resolve()
+            }).catch(err => {
+                return Promise.reject('Failed to update comment in Topic with message: ' + err.message);
+            });
+    }
 }

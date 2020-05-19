@@ -1,5 +1,5 @@
 import {TopicController} from "./topic.controller";
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
 import {TopicService} from "./topic.service";
 import {Comment} from "../models/comment";
@@ -25,5 +25,11 @@ export class TopicControllerFirebase implements TopicController {
         comment.id = context.params.id;
         const topicId = comment.topicId as string;
         return this.service.removeCommentFromTopic(comment, topicId);
+    }
+
+    editTopicComments(change: Change<DocumentSnapshot>, context: EventContext) {
+        const commentAfter = change.after.data() as Comment;
+        commentAfter.id = context.params.id;
+        return this.service.editTopicComments(commentAfter);
     }
 }

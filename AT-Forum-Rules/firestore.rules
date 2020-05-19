@@ -2,16 +2,47 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // This rule allows anyone on the internet to view, edit, and delete
-    // all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // your app will lose access to your Firestore database
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2020, 5, 23);
-    }
+    function userHasRole(role) {
+        return get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.roleName == role;
+        }
+
+        function userExists() {
+            return exists(/databases/$(database)/documents/users/$(request.auth.uid));
+            }
+
+    // Allows super admin to read or write to any document
+        match /{document=**} {
+          allow read, write: if request.auth != null && (userHasRole('superAdmin'))
+        }
+
+        match /categories/{uId} {
+                allow read: if true;
+                allow create: if request.auth != null && (userHasRole('admin'));
+                allow delete: if request.auth != null && (userHasRole('admin'));
+                allow update: if request.auth != null && (userHasRole('admin'));
+              }
+
+        match /topics/{uId} {
+                allow read: if true;
+                allow create: if request.auth != null;
+                allow delete: if request.auth != null && (userHasRole('admin'));
+                allow update: if request.auth != null && (userHasRole('admin') || request.auth != null
+                 && request.resource.author.uid == request.auth.uid);
+              }
+
+        match /users/{uId} {
+                        allow read: if request.auth != null;
+                        allow create: if request.auth != null && (userHasRole('admin'));
+                        allow delete: if request.auth != null && (userHasRole('admin'));
+                        allow update: if request.auth != null && (userHasRole('admin'));
+                      }
+
+          match /comments/{uId} {
+                                allow read: if true;
+                                allow create: if request.auth != null && userExists();
+                                allow delete: if request.auth != null && userExists() && request.resource.author.uid == request.auth.uid
+                                 || request.auth != null && (userHasRole('admin'));
+                                allow update: if request.auth != null && userExists() && request.resource.author.uid == request.auth.uid;
+                              }
   }
 }

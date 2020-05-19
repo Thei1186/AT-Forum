@@ -2,8 +2,6 @@
 <header style="text-align: center">Admin Page</header>
 <br>
 <br>
-<div *ngIf="roles$ | async; let roles">
-  <div *ngFor="let user of users$ | async as user"> 
 <div *ngIf="role$ | async as currentUserRole">
   <div *ngIf="roles$ | async; let roles">
     <div *ngFor="let user of users$ | async as user">
@@ -30,6 +28,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>

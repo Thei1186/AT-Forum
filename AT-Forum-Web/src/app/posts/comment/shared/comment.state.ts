@@ -4,8 +4,8 @@ import {CommentService} from './comment.service';
 import {CreateComment, DeleteComment, EditComment, GetComment} from './comment.action';
 import {Comment} from '../../shared/comment';
 import {tap} from 'rxjs/operators';
-import {Logout} from "../../../auth/shared/auth.action";
-import {TopicStateModel} from "../../topic/shared/topic.state";
+import {Logout} from '../../../auth/shared/auth.action';
+import {Router} from '@angular/router';
 
 export class CommentStateModel {
   comments: Comment[];
@@ -21,7 +21,7 @@ export class CommentStateModel {
 })
 @Injectable()
 export class CommentState {
-  constructor(private commentService: CommentService) {
+  constructor(private commentService: CommentService, private router: Router) {
   }
 
   @Selector()

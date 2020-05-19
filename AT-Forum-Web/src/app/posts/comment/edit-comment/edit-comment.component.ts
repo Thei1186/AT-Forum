@@ -6,6 +6,7 @@ import {Comment} from '../../shared/comment';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EditComment, GetComment} from '../shared/comment.action';
+import {first, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-comment',
@@ -16,7 +17,7 @@ export class EditCommentComponent implements OnInit {
   @Select(CommentState.comment) comment$: Observable<Comment>;
 
   editCommentForm: FormGroup;
-  topicId: string;
+  commentId: string;
 
   constructor(private store: Store, private fb: FormBuilder,
               private route: ActivatedRoute, private router: Router) {
@@ -24,17 +25,15 @@ export class EditCommentComponent implements OnInit {
 
   ngOnInit() {
     this.editCommentForm = this.fb.group({
-      header: '',
       message: ''
     });
-    this.topicId = this.route.snapshot.paramMap.get('id');
-    this.store.dispatch(new GetComment(this.topicId));
+    this.commentId = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new GetComment(this.commentId));
     this.comment$.subscribe(comment => {
       if (!comment) {
         return;
       }
       this.editCommentForm.patchValue({
-        header: comment.header,
         message: comment.message,
       });
     });
@@ -43,11 +42,12 @@ export class EditCommentComponent implements OnInit {
   editComment(comment: Comment) {
     const editComment: Comment = {
       id: comment.id,
-      header: this.editCommentForm.get('header').value,
       message: this.editCommentForm.get('message').value,
       author: comment.author,
+      topicId: comment.topicId
     };
     this.store.dispatch(new EditComment(editComment));
+    this.router.navigateByUrl('posts/topic-details/' + comment.topicId);
   }
 }
 

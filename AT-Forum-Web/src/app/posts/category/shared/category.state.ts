@@ -12,8 +12,8 @@ import {
 } from './category.action';
 import {tap} from 'rxjs/operators';
 import {Topic} from '../../shared/topic';
-import {Logout} from "../../../auth/shared/auth.action";
-import {CommentStateModel} from "../../comment/shared/comment.state";
+import {Logout} from '../../../auth/shared/auth.action';
+import {Router} from "@angular/router";
 
 
 export class CategoryStateModel {
@@ -33,7 +33,7 @@ export class CategoryStateModel {
 
 @Injectable()
 export class CategoryState {
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private router: Router) {
   }
 
   @Selector()
@@ -53,7 +53,9 @@ export class CategoryState {
 
   @Action(CreateCategory)
   createCategory({getState, setState}: StateContext<CategoryStateModel>, action: CreateCategory) {
-    return this.categoryService.createCategory(action.category);
+    return this.categoryService.createCategory(action.category).pipe(tap(() => {
+      this.router.navigateByUrl('posts/categories');
+    }));
   }
 
   @Action(GetAllCategoryTopics)

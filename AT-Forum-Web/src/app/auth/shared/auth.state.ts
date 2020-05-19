@@ -82,6 +82,7 @@ export class AuthState {
           role: undefined,
           roles: undefined
         });
+        this.router.navigateByUrl('');
       }));
   }
 

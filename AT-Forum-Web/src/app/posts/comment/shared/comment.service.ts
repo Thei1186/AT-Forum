@@ -21,8 +21,8 @@ export class CommentService {
             const comment: Comment = {
               id: document.payload.id,
               author: data.author,
-              header: data.header,
-              message: data.message
+              message: data.message,
+              topicId: data.topicId
             };
             return comment;
           }
@@ -43,9 +43,14 @@ export class CommentService {
 
   editComment(comment: Comment) {
     const userRef: AngularFirestoreDocument<Comment> = this.afs.doc(`comments/${comment.id}`);
-    return from(userRef.set(comment, {merge: true}))
+    const editComment: Comment = {
+      message: comment.message,
+      topicId: comment.topicId,
+      author: comment.author
+    };
+    return from(userRef.set(editComment, {merge: true}))
       .pipe(map(() => {
-        return comment;
+        return editComment;
       }));
   }
 }

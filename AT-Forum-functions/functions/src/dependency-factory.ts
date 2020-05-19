@@ -12,6 +12,10 @@ import {TopicRepository} from "./topics/topic.repository";
 import {TopicRepositoryFirebase} from "./topics/topic.repository.firebase";
 import {TopicService} from "./topics/topic.service";
 import {TopicControllerFirebase} from "./topics/topic.controller.firebase";
+import {CommentControllerFirebase} from "./comments/comment.controller.firebase";
+import {CommentService} from "./comments/comment.service";
+import {CommentRepository} from "./comments/comment.repository";
+import {CommentRepositoryFirebase} from "./comments/comment.repository.firebase";
 
 export class DependencyFactory {
     getUserController(): UserController {
@@ -31,12 +35,16 @@ export class DependencyFactory {
         const service: TopicService = new TopicService(repo);
         return new TopicControllerFirebase(service);
     }
-/*
+
     getCommentController() {
         const repo: CommentRepository = new CommentRepositoryFirebase();
         const service: CommentService = new CommentService(repo);
         return new CommentControllerFirebase(service);
     }
 
- */
+
+    getRoleController() {
+        const repo: RoleRepository = new RoleRepositoryFirebase();
+        const service: RoleService = new RoleService(repo);
+    }
 }

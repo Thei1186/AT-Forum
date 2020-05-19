@@ -33,9 +33,21 @@ exports.deleteTopicWhenCategoryDeleted = functions.firestore
         return difa.getTopicController().deleteTopics(snap, context);
     });
 
+exports.deleteCommentsWhenTopicDeleted = functions.firestore
+    .document('topics/{id}')
+    .onDelete((snap, context) => {
+    return difa.getCommentController().deleteComments(snap, context);
+    });
+
 exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
     .document('comments/{id}')
     .onDelete((snap, context) => {
         return difa.getTopicController().removeCommentFromTopic(snap, context);
+    });
+
+exports.removeRoleWhenUserDeleted = functions.firestore
+    .document('users/{uid}')
+    .onDelete((snap, context) => {
+       return difa.getRoleController().deleteRole(snap, context);
     });
 

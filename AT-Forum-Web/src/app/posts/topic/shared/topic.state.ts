@@ -2,12 +2,20 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
 import {TopicService} from './topic.service';
-import {CreateTopic, DeleteTopic, EditTopic, GetAllTopics, GetFavorites, GetTopic} from './topic.action';
+import {
+  CreateTopic,
+  DeleteTopic,
+  EditTopic,
+  GetAllTopics,
+  GetFavorites,
+  GetTopic,
+  RemoveFavoriteTopic
+} from './topic.action';
 import {tap} from 'rxjs/operators';
 import {EditComment, GetAllTopicComments} from '../../comment/shared/comment.action';
 import {Comment} from '../../shared/comment';
 import {Logout} from '../../../auth/shared/auth.action';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 
 export class TopicStateModel {
@@ -147,5 +155,20 @@ export class TopicState {
       topicComments: [],
       favoriteTopics: []
     });
+  }
+
+  @Action(RemoveFavoriteTopic)
+  removeFavoriteTopic({getState, setState}: StateContext<TopicStateModel>, action: RemoveFavoriteTopic) {
+    return this.topicService.removeFavorites(action.topic, action.userUid)
+      .pipe(
+        tap(() => {
+          const state = getState();
+          const filteredArray = state.favoriteTopics.filter(topic => topic.id !== action.topic.id);
+          setState({
+            ...state,
+            favoriteTopics: filteredArray
+          });
+        })
+      );
   }
 }

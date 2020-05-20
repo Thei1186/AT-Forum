@@ -1,4 +1,5 @@
 import {Topic} from '../../shared/topic';
+import {FavoriteTopic} from "../../shared/favoriteTopic";
 
 export class CreateTopic {
   static readonly type = '[Topic] CreateTopic';
@@ -33,5 +34,11 @@ export class EditTopic {
 export class GetFavorites {
   static readonly type = '[Topic] GetFavorites';
   constructor(public id: string) {
+  }
+}
+
+export class RemoveFavoriteTopic {
+  static readonly type = '[Topic] RemoveFavoriteTopic';
+  constructor(public topic: Topic, public userUid: string) {
   }
 }

@@ -13,6 +13,9 @@
             <mat-list-item>Description: {{topic.description}}</mat-list-item>
           </mat-list>
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="removeFavoriteTopic(topic, user.uid)">Remove</button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

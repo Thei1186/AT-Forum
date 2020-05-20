@@ -3,10 +3,11 @@ import {Select, Store} from '@ngxs/store';
 import {TopicState} from '../posts/topic/shared/topic.state';
 import {Observable} from 'rxjs';
 import {Topic} from '../posts/shared/topic';
-import {GetFavorites} from '../posts/topic/shared/topic.action';
+import {GetFavorites, RemoveFavoriteTopic} from '../posts/topic/shared/topic.action';
 import {AuthState} from '../auth/shared/auth.state';
 import {AuthUser} from '../auth/shared/auth-user';
 import {first, tap} from 'rxjs/operators';
+import {FavoriteTopic} from '../posts/shared/favoriteTopic';
 
 @Component({
   selector: 'app-home',
@@ -23,5 +24,9 @@ export class HomeComponent implements OnInit {
       tap((user) => {
       this.store.dispatch(new GetFavorites(user.uid));
     })).subscribe();
+  }
+
+  removeFavoriteTopic(topic: Topic, userUid: string) {
+    this.store.dispatch(new RemoveFavoriteTopic(topic, userUid));
   }
 }

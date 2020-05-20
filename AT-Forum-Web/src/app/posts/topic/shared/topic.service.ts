@@ -5,6 +5,7 @@ import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Comment} from '../../shared/comment';
 import {FavoriteTopic} from '../../shared/favoriteTopic';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -98,5 +99,12 @@ export class TopicService {
           }
         })
       );
+  }
+
+  removeFavorites(topic: Topic, userUid: string) {
+    const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
+    return from(this.afs.collection('favoriteTopics').doc(userUid).update({
+      favoriteTopics: arrayRemove(topic)
+    }));
   }
 }

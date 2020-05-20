@@ -3,6 +3,7 @@ import {Topic} from "../models/topic";
 
 export interface CategoryRepository {
 
-    updateCategoryTopics(topic: Topic): Promise<void>;
+    addTopicToCategoryTopics(topic: Topic): Promise<void>;
 
+    editCategoryTopics(topicBefore: Topic, topicAfter: Topic): Promise<void>;
 }

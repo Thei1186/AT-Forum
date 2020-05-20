@@ -7,8 +7,11 @@ export class CategoryService {
 
     }
 
-    updateCategoryTopics(topic: Topic): Promise<void> {
-        return this.categoryRepository.updateCategoryTopics(topic);
+    addTopicToCategoryTopics(topic: Topic): Promise<void> {
+        return this.categoryRepository.addTopicToCategoryTopics(topic);
     }
 
+    editCategoryTopics(topicBefore: Topic, topicAfter: Topic) {
+        return this.categoryRepository.editCategoryTopics(topicBefore, topicAfter);
+    }
 }

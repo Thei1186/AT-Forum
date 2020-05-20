@@ -1,8 +1,10 @@
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 
 
 export interface CategoryController {
 
-    updateCategoryTopics(snap: DocumentSnapshot, context: EventContext): Promise<void>;
+    addTopicToCategoryTopics(snap: DocumentSnapshot, context: EventContext): Promise<void>;
+
+    editCategoryTopics(change: Change<DocumentSnapshot>, context: EventContext): Promise<void>;
 }

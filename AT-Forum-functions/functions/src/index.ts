@@ -17,7 +17,7 @@ exports.userDeleted = functions.firestore
 exports.createTopicUpdatesCategory = functions.firestore
     .document('topics/{id}')
     .onCreate((snap, context) => {
-        return difa.getCategoryController().updateCategoryTopics(snap, context);
+        return difa.getCategoryController().addTopicToCategoryTopics(snap, context);
     });
 
 exports.createCommentUpdatesTopic = functions.firestore
@@ -56,4 +56,10 @@ exports.editCommentEditsTopicComments = functions.firestore
     .onUpdate((change, context) => {
        return difa.getTopicController().editTopicComments(change, context);
     });
+
+exports.editTopicEditsCategoryTopics = functions.firestore
+    .document('topics/{id}')
+    .onUpdate(((change, context) => {
+        return difa.getCategoryController().editCategoryTopics(change, context);
+    }));
 

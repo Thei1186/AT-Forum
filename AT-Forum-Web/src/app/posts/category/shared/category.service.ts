@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {from, Observable} from 'rxjs';
 import {Category} from '../../shared/category';
 import {map} from 'rxjs/operators';
-import {Topic} from "../../shared/topic";
+import {Topic} from '../../shared/topic';
 
 @Injectable({
   providedIn: 'root'

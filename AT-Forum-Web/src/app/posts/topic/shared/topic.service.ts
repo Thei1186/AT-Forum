@@ -32,7 +32,8 @@ export class TopicService {
               author: data.author,
               comments: data.comments,
               description: data.description,
-              topicName: data.topicName
+              topicName: data.topicName,
+              categoryId: data.categoryId
             };
             return topic;
           });
@@ -59,7 +60,7 @@ export class TopicService {
               author: data.author,
               topicName: data.topicName,
               description: data.description,
-              comments: data.comments
+              comments: data.comments,
             };
             return topic;
           }

@@ -7,6 +7,7 @@ import {tap} from 'rxjs/operators';
 import {EditComment, GetAllTopicComments} from '../../comment/shared/comment.action';
 import {Comment} from '../../shared/comment';
 import {Logout} from '../../../auth/shared/auth.action';
+import {Router} from "@angular/router";
 
 
 export class TopicStateModel {
@@ -28,7 +29,7 @@ export class TopicStateModel {
 
 @Injectable()
 export class TopicState {
-  constructor(private topicService: TopicService) {
+  constructor(private topicService: TopicService, private router: Router) {
   }
 
   @Selector()
@@ -120,6 +121,7 @@ export class TopicState {
             ...state,
             topic: result
           });
+          this.router.navigateByUrl('posts/category-details/' + result.categoryId);
         })
       );
   }

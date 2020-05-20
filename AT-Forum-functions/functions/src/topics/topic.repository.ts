@@ -7,5 +7,5 @@ export interface TopicRepository {
 
     removeCommentFromTopic(comment: Comment, topicId: string): Promise<void>;
 
-    editTopicComments(commentAfter: Comment): Promise<void>;
+    editTopicComments(commentAfter: Comment, commentBefore: Comment): Promise<void>;
 }

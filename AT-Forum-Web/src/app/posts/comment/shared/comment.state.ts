@@ -69,6 +69,7 @@ export class CommentState {
             ...state,
             comment: result
           });
+          this.router.navigateByUrl('posts/topic-details/' + result.topicId);
         })
       );
   }

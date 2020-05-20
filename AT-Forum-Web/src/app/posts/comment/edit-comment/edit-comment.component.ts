@@ -20,7 +20,7 @@ export class EditCommentComponent implements OnInit {
   commentId: string;
 
   constructor(private store: Store, private fb: FormBuilder,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -47,7 +47,6 @@ export class EditCommentComponent implements OnInit {
       topicId: comment.topicId
     };
     this.store.dispatch(new EditComment(editComment));
-    this.router.navigateByUrl('posts/topic-details/' + comment.topicId);
   }
 }
 

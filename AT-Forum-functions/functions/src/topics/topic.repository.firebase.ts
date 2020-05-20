@@ -1,6 +1,7 @@
 import {TopicRepository} from "./topic.repository";
 import {Comment} from "../models/comment";
 import * as admin from "firebase-admin";
+import {Topic} from "../models/topic";
 
 export class TopicRepositoryFirebase implements TopicRepository {
     topicPath = 'topics';
@@ -48,10 +49,14 @@ export class TopicRepositoryFirebase implements TopicRepository {
             });
     }
 
-    async editTopicComments(commentAfter: Comment): Promise<void> {
+    async editTopicComments(commentAfter: Comment, commentBefore: Comment): Promise<void> {
+        const topic = await this.db().collection(`${this.topicPath}`).doc(`${commentAfter.topicId}`).get();
+        const topicData = topic.data() as Topic;
+        const comment = topicData.comments.find(com => com.id === commentAfter.id) as Comment;
+        comment.message = commentAfter.message;
         await this.db().collection(`${this.topicPath}`).doc(`${commentAfter.topicId}`)
             .update({
-                comments: admin.firestore.FieldValue.arrayUnion(commentAfter)
+                comments: topicData.comments
             }).then(() => {
                 return Promise.resolve()
             }).catch(err => {

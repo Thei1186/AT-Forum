@@ -28,8 +28,10 @@ export class TopicControllerFirebase implements TopicController {
     }
 
     editTopicComments(change: Change<DocumentSnapshot>, context: EventContext) {
+        const commentBefore = change.before.data() as Comment;
+        commentBefore.id = context.params.id;
         const commentAfter = change.after.data() as Comment;
         commentAfter.id = context.params.id;
-        return this.service.editTopicComments(commentAfter);
+        return this.service.editTopicComments(commentAfter, commentBefore);
     }
 }

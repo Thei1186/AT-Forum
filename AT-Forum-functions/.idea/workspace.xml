@@ -116,5 +116,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1588860513940" />
+    <state x="683" y="149" key="refactoring.ChangeSignatureDialog" timestamp="1589958954736">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="683" y="149" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1589958954736" />
   </component>
 </project>

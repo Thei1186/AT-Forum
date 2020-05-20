@@ -54,7 +54,6 @@ export class CreateUserComponent implements OnInit {
 
     this.password = this.newSignUpForm.get('password').value;
     this.store.dispatch(new SignUp(newUser as User, this.password));
-    this.router.navigateByUrl('user/profile');
   }
 
   signUpWithPicture() {
@@ -73,7 +72,6 @@ export class CreateUserComponent implements OnInit {
 
           this.password = this.newSignUpForm.get('password').value;
           this.store.dispatch(new SignUp(newUser as User, this.password));
-          this.router.navigateByUrl('user/profile');
         });
       })
     ).subscribe();

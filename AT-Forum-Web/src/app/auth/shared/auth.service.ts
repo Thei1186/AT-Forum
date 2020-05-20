@@ -49,27 +49,6 @@ export class AuthService {
         });
         return newUser;
       }));
-
-    /*
-    .then(res => {
-      this.afs.collection('users').doc(res.user.uid).set({
-        email: user.email,
-        username: user.username,
-        photoUrl: user.photoURL,
-        name: user.name,
-        role: 'user'
-      });
-      this.angularFireAuth.auth.currentUser.updateProfile({
-        displayName: user.username,
-        photoURL: user.photoURL
-      });
-      console.log('You are Successfully signed up!', res);
-    })
-    .catch(error => {
-      console.log('Something is wrong:', error.message);
-    });
-
-     */
   }
 
   loginWithEmail(email: string, password: string): Observable<AuthUser> {

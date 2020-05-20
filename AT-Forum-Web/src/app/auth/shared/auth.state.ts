@@ -99,25 +99,10 @@ export class AuthState {
           dispatch(new SetRole(result.uid, 'user'));
           dispatch(new GetUser(result.uid));
           dispatch(new GetRole(result.uid));
+          this.router.navigateByUrl('user/profile/' + result.uid);
         }));
   }
 
-  /*
-  @Action(UpdateAuthProfile)
-  updateAuthProfile({getState, setState}: StateContext<AuthStateModel>, action: UpdateAuthProfile) {
-  return this.authService.updateAuthProfile(action.user)
-    .pipe(
-      tap((result) => {
-        const state = getState();
-        setState({
-          ...state,
-          loggedInUser: result
-        });
-      })
-    );
-  }
-
-   */
   @Action(GetRole)
   getRole({getState, setState, dispatch}: StateContext<AuthStateModel>, action: GetRole) {
     return this.authService.getRole(action.uid)

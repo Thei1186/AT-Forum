@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
-import {AuthState} from '../shared/auth.state';
-import {AuthUser} from '../shared/auth-user';
+import {AuthState} from '../../auth/shared/auth.state';
+import {AuthUser} from '../../auth/shared/auth-user';
 import {map, tap} from 'rxjs/operators';
 
 @Injectable({

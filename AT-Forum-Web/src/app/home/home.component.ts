@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.authUser$.pipe(first(),
       tap((user) => {
-      this.store.dispatch(new GetFavorites(user.uid));
+        if (user) {
+          this.store.dispatch(new GetFavorites(user.uid));
+        }
     })).subscribe();
   }
 

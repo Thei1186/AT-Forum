@@ -37,7 +37,7 @@ service cloud.firestore {
                         allow update: if request.auth != null && (userHasRole('admin'));
                       }
 
-          match /comments/{uId} {
+        match /comments/{uId} {
                                 allow read: if true;
                                 allow create: if request.auth != null && userExists();
                                 allow delete: if request.auth != null && userExists() &&
@@ -45,5 +45,12 @@ service cloud.firestore {
                                  || request.auth != null && (userHasRole('admin'));
                                 allow update: if request.auth != null && userExists() && request.resource.author.uid == request.auth.uid;
                               }
+
+                        match /favoriteTopics/{uId} {
+                                               allow read: if request.auth != null && userExists() &&
+                                               uId == request.auth.uid;
+                                               allow write: if request.auth != null && userExists() &&
+                                               uId == request.auth.uid;
+                                                }
   }
 }

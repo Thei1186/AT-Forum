@@ -62,3 +62,9 @@ exports.deleteTopicDeletesAllComments = functions.firestore
     .onDelete((snap, context) => {
         return difa.getCommentController().deleteCommentsFromTopic(snap, context);
     });
+
+exports.removeTopicFromCategoryWhenTopicDeleted = functions.firestore
+    .document('topics/{id}')
+    .onDelete((snap, context) => {
+        return difa.getCategoryController().removeTopicFromCategory(snap, context);
+    });

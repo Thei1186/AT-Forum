@@ -25,4 +25,11 @@ export class CategoryControllerFirebase implements CategoryController {
         return this.categoryService.editCategoryTopics(topicBefore, topicAfter);
     }
 
+    removeTopicFromCategory(snap: DocumentSnapshot, context: EventContext): Promise<void> {
+        const topic = snap.data() as Topic;
+        topic.id = context.params.id;
+        const categoryId = topic.categoryId;
+        return this.categoryService.removeTopicFromCategory(topic, categoryId);
+    }
+
 }

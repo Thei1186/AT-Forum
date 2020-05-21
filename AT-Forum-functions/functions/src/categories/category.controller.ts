@@ -7,4 +7,6 @@ export interface CategoryController {
     addTopicToCategoryTopics(snap: DocumentSnapshot, context: EventContext): Promise<void>;
 
     editCategoryTopics(change: Change<DocumentSnapshot>, context: EventContext): Promise<void>;
+
+    removeTopicFromCategory(snap: DocumentSnapshot, context: EventContext): Promise<void>;
 }

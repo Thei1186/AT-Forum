@@ -38,4 +38,17 @@ export class CategoryRepositoryFirebase implements CategoryRepository {
             }));
     }
 
+    async removeTopicFromCategory(topic: Topic, categoryId: string): Promise<void> {
+        console.log("Topic", topic);
+        await this.db().collection(`${this.categoryPath}`).doc(`${categoryId}`)
+            .update({
+                topics: admin.firestore.FieldValue.arrayRemove(topic)
+            }).then(() => {
+                return Promise.resolve()
+            })
+            .catch(err => {
+                return Promise.reject('Failed to remove topic from category with message: ' + err.message);
+            });
+    }
+
 }

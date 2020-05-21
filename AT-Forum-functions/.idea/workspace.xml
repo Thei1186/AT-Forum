@@ -36,7 +36,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="" />
-    <property name="ts.external.directory.path" value="D:\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Users\Kokushi\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.npm">

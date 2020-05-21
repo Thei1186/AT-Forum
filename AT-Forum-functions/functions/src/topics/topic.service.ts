@@ -1,6 +1,7 @@
 import {Comment} from "../models/comment";
 import {TopicRepository} from "./topic.repository";
 
+
 export class TopicService {
     constructor(private topicRepository: TopicRepository) {
     }

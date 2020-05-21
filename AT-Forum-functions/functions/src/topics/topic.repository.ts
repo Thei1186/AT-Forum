@@ -1,5 +1,6 @@
 import {Comment} from "../models/comment";
 
+
 export interface TopicRepository {
     updateTopicComments(comment: Comment): Promise<void>;
 
@@ -8,4 +9,5 @@ export interface TopicRepository {
     removeCommentFromTopic(comment: Comment, topicId: string): Promise<void>;
 
     editTopicComments(commentAfter: Comment, commentBefore: Comment): Promise<void>;
+
 }

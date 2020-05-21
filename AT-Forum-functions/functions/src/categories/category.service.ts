@@ -15,7 +15,7 @@ export class CategoryService {
         return this.categoryRepository.editCategoryTopics(topicBefore, topicAfter);
     }
 
-    removeTopicFromCategory(topic: Topic, categoryId: string) {
-        return this.categoryRepository.removeTopicFromCategory(topic, categoryId);
+    removeTopicFromCategory(topic: Topic) {
+        return this.categoryRepository.removeTopicFromCategory(topic);
     }
 }

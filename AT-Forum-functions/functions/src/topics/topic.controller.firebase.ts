@@ -34,4 +34,6 @@ export class TopicControllerFirebase implements TopicController {
         commentAfter.id = context.params.id;
         return this.service.editTopicComments(commentAfter, commentBefore);
     }
+
+
 }

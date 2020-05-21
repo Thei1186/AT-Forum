@@ -3,7 +3,6 @@ import {Topic} from "../models/topic";
 import * as admin from "firebase-admin";
 import {Category} from "../models/category";
 
-
 export class CategoryRepositoryFirebase implements CategoryRepository {
     categoryPath = 'categories';
 
@@ -38,11 +37,13 @@ export class CategoryRepositoryFirebase implements CategoryRepository {
             }));
     }
 
-    async removeTopicFromCategory(topic: Topic, categoryId: string): Promise<void> {
-        console.log("Topic", topic);
-        await this.db().collection(`${this.categoryPath}`).doc(`${categoryId}`)
+    async removeTopicFromCategory(topic: Topic): Promise<void> {
+        const category = await this.db().collection(`${this.categoryPath}`).doc(`${topic.categoryId}`).get();
+        const categoryData = category.data() as Category;
+        const topics = categoryData.topics.filter(top => top.id !== topic.id);
+        await this.db().collection(`${this.categoryPath}`).doc(`${topic.categoryId}`)
             .update({
-                topics: admin.firestore.FieldValue.arrayRemove(topic)
+                topics: topics
             }).then(() => {
                 return Promise.resolve()
             })
@@ -50,5 +51,4 @@ export class CategoryRepositoryFirebase implements CategoryRepository {
                 return Promise.reject('Failed to remove topic from category with message: ' + err.message);
             });
     }
-
 }

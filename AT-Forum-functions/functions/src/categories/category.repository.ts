@@ -7,5 +7,5 @@ export interface CategoryRepository {
 
     editCategoryTopics(topicBefore: Topic, topicAfter: Topic): Promise<void>;
 
-    removeTopicFromCategory(topic: Topic, categoryId: string): Promise<void>;
+    removeTopicFromCategory(topic: Topic): Promise<void>;
 }

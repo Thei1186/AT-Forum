@@ -3,8 +3,10 @@ import {Comment} from "../models/comment";
 import * as admin from "firebase-admin";
 import {Topic} from "../models/topic";
 
+
 export class TopicRepositoryFirebase implements TopicRepository {
     topicPath = 'topics';
+    favoriteTopicPath = 'favoriteTopics';
 
     async updateTopicComments(comment: Comment): Promise<void> {
         await this.db().collection(`${this.topicPath}`).doc(`${comment.topicId}`)
@@ -37,7 +39,6 @@ export class TopicRepositoryFirebase implements TopicRepository {
     }
 
     async removeCommentFromTopic(comment: Comment, topicId: string): Promise<void> {
-        console.log("Comment", comment);
         await this.db().collection(`${this.topicPath}`).doc(`${topicId}`)
             .update({
                 comments: admin.firestore.FieldValue.arrayRemove(comment)
@@ -63,4 +64,6 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 return Promise.reject('Failed to update comment in Topic with message: ' + err.message);
             });
     }
+
+
 }

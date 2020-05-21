@@ -33,12 +33,6 @@ exports.deleteTopicWhenCategoryDeleted = functions.firestore
         return difa.getTopicController().deleteTopics(snap, context);
     });
 
-exports.deleteCommentsWhenTopicDeleted = functions.firestore
-    .document('topics/{id}')
-    .onDelete((snap, context) => {
-    return difa.getCommentController().deleteComments(snap, context);
-    });
-
 exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
     .document('comments/{id}')
     .onDelete((snap, context) => {
@@ -63,3 +57,8 @@ exports.editTopicEditsCategoryTopics = functions.firestore
         return difa.getCategoryController().editCategoryTopics(change, context);
     }));
 
+exports.deleteTopicDeletesAllComments = functions.firestore
+    .document('topics/{id}')
+    .onDelete((snap, context) => {
+        return difa.getCommentController().deleteCommentsFromTopic(snap, context);
+    });

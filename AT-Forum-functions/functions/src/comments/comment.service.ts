@@ -4,7 +4,7 @@ export class CommentService {
     constructor(private commentRepository: CommentRepository) {
     }
 
-    deleteComments(topicId: string): Promise<void> {
-        return this.commentRepository.deleteComments(topicId);
+    deleteCommentsFromTopic(commentId: string) {
+        return this.commentRepository.deleteCommentsFromTopic(commentId);
     }
 }

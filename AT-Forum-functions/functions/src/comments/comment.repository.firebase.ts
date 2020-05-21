@@ -3,9 +3,10 @@ import * as admin from "firebase-admin";
 
 export class CommentRepositoryFirebase implements CommentRepository{
     commentPath = 'comments';
-    async deleteComments(topicId: string): Promise<void> {
+
+    async deleteCommentsFromTopic(commentId: string): Promise<void> {
         await this.db().collection(`${this.commentPath}`)
-            .where('topicId', '==', `${topicId}`).get()
+            .where('topicId', '==', `${commentId}`).get()
             .then((query) => {
                 const batch = this.db().batch();
                 query.forEach((doc) => {
@@ -13,12 +14,13 @@ export class CommentRepositoryFirebase implements CommentRepository{
                 });
                 return batch.commit();
             }).catch((err) => {
-                return Promise.reject('Failed to delete all comments with the topicId of ' + topicId
-                    + '\n threw error: ' + err.message)
-            })
+                return Promise.reject('Failed to delete all topics with category id: ' + commentId + '\n threw error: ' +
+                    err.message)
+            });
     }
 
     db() {
         return admin.firestore();
     }
+
 }

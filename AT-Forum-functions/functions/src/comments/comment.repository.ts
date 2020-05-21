@@ -1,4 +1,4 @@
 export interface CommentRepository {
 
-    deleteComments(topicId: string): Promise<void>;
+    deleteCommentsFromTopic(commentId: string): Promise<void>;
 }

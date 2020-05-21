@@ -9,11 +9,8 @@ export class CommentControllerFirebase implements CommentController{
     constructor(private commentService: CommentService) {
     }
 
-    deleteComments(snap: DocumentSnapshot, context: EventContext): Promise<void> {
-        const topicId = context.params.id as string;
-        return this.commentService.deleteComments(topicId);
+    deleteCommentsFromTopic(snap: DocumentSnapshot, context: EventContext) {
+        const commentId = context.params.id as string;
+        return this.commentService.deleteCommentsFromTopic(commentId);
     }
-
-
-
 }

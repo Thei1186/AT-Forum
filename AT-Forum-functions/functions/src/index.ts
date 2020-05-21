@@ -3,8 +3,9 @@ import {DependencyFactory} from "./dependency-factory";
 import * as admin from "firebase-admin";
 
 const difa = new DependencyFactory();
-
+const serviceAccount = require("../secret.json");
 admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://at-forum.firebaseio.com'
 });
 

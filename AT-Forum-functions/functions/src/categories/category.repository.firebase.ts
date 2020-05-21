@@ -10,11 +10,12 @@ export class CategoryRepositoryFirebase implements CategoryRepository {
         await this.db().collection(`${this.categoryPath}`).doc(`${topic.categoryId}`)
             .update({
                 topics: admin.firestore.FieldValue.arrayUnion(topic)
+            }).then(() => {
+                return Promise.resolve();
             })
             .catch(err => {
                 console.log(err.message);
             });
-        return Promise.resolve();
     }
 
     db() {

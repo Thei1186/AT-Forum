@@ -27,15 +27,15 @@ service cloud.firestore {
                 allow create: if request.auth != null;
                 allow delete: if request.auth != null && (userHasRole('admin'));
                 allow update: if request.auth != null && (userHasRole('admin') || request.auth != null
-                 && request.resource.author.uid == request.auth.uid);
+                 && resource.author.uid == request.auth.uid);
               }
 
         // Needs rewriting
         match /users/{uId} {
                         allow read: if request.auth != null;
-                        allow create: if request.auth != null && (userHasRole('admin'));
+                        allow create: if true;
                         allow delete: if request.auth != null && (userHasRole('admin'));
-                        allow update: if request.auth != null && (userHasRole('admin'));
+                        allow update: if request.auth != null && uId == request.auth.uid;
                       }
 
         match /comments/{uId} {
@@ -44,7 +44,7 @@ service cloud.firestore {
                                 allow delete: if request.auth != null && userExists() &&
                                 resource.data.author.uid == request.auth.uid
                                  || request.auth != null && (userHasRole('admin'));
-                                allow update: if request.auth != null && userExists() && request.resource.author.uid == request.auth.uid;
+                                allow update: if request.auth != null && userExists() && resource.author.uid == request.auth.uid;
                               }
 
                           match /favoriteTopics/{uId} {
@@ -57,8 +57,6 @@ service cloud.firestore {
        match /roles/{uId} {
                      allow read: if true;
                      allow create: if true;
-                     allow delete: if request.auth != null && (userHasRole('admin'));
-                     allow update: if request.auth != null && (userHasRole('admin'));
                    }
   }
 }

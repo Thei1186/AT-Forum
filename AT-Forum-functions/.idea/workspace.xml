@@ -10,8 +10,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -125,9 +125,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="683" y="149" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1590054347248" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590065050357">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590155179759">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1590065050357" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1590155179759" />
   </component>
 </project>

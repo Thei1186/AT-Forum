@@ -40,7 +40,6 @@ export class DataTestHelper {
         description: 'yum',
         topicName: 'sweet',
         author: this.user1,
-        comments: [this.comment1]
     };
 
     topic2: Topic = {
@@ -49,7 +48,6 @@ export class DataTestHelper {
         description: 'haha',
         topicName: 'we',
         author: this.user1,
-        comments: [this.comment2]
     };
 
     topic3: Topic = {
@@ -58,7 +56,6 @@ export class DataTestHelper {
         description: 'haha',
         topicName: 'we',
         author: this.user1,
-        comments: [this.comment3]
     };
 
     topic4: Topic = {
@@ -67,15 +64,19 @@ export class DataTestHelper {
         description: 'ha',
         topicName: 'w',
         author: this.user1,
-        comments: [this.comment3]
     };
+
     category1: Category = {
         categoryName:'Cakes',
         id: 'c1',
         description: 'yummy',
-        topics: [this.topic2]
     };
 
+    category2: Category = {
+        categoryName:'Cakes',
+        id: '',
+        description: 'yummy',
+    };
 
 
 }

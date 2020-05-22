@@ -10,7 +10,7 @@ export class TopicControllerFirebase implements TopicController {
 
     deleteTopicsWhenCategoryDeleted(snap: DocumentSnapshot, context: EventContext): Promise<void> {
         const catId = context.params.id as string;
-        return this.service.deleteTopics(catId);
+        return this.service.deleteTopicsWhenCategoryDeleted(catId);
     }
 
     /*

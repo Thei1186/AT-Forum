@@ -23,7 +23,7 @@ export class TopicRepositoryFirebase implements TopicRepository {
         return admin.firestore();
     }
 
-    async deleteTopics(catId: String): Promise<void> {
+    async deleteTopicsWhenCategoryDeleted(catId: String): Promise<void> {
         await this.db().collection(`${this.topicPath}`)
             .where('categoryId', '==', `${catId}`).get()
             .then((query) => {

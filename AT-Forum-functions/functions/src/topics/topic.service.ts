@@ -10,18 +10,22 @@ export class TopicService {
         return this.topicRepository.updateTopicComments(comment);
     }
 
-    deleteTopics(catId: String) {
-       return this.topicRepository.deleteTopics(catId);
+    deleteTopicsWhenCategoryDeleted(catId: String): Promise<void> {
+        if (catId === undefined || catId === '') {
+            throw new TypeError('Id has to be defined');
+        }
+
+        return this.topicRepository.deleteTopicsWhenCategoryDeleted(catId);
     }
 
     removeCommentFromTopic(comment: Comment, topicId: string) {
         return this.topicRepository.removeCommentFromTopic(comment, topicId);
     }
 
-/*
-    editTopicComments(commentAfter: Comment, commentBefore: Comment) {
-        return this.topicRepository.editTopicComments(commentAfter, commentBefore);
-    }
- */
+    /*
+        editTopicComments(commentAfter: Comment, commentBefore: Comment) {
+            return this.topicRepository.editTopicComments(commentAfter, commentBefore);
+        }
+     */
 
 }

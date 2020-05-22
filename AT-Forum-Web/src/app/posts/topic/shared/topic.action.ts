@@ -1,5 +1,4 @@
 import {Topic} from '../../shared/topic';
-import {FavoriteTopic} from "../../shared/favoriteTopic";
 
 export class CreateTopic {
   static readonly type = '[Topic] CreateTopic';
@@ -7,9 +6,9 @@ export class CreateTopic {
   }
 }
 
-export class GetAllTopics {
+export class GetAllTopicsFromCategory {
   static readonly type = '[Topic] GetAllTopics';
-  constructor() {
+  constructor(public catId: string) {
   }
 }
 

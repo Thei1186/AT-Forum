@@ -8,7 +8,8 @@ import {GetTopic} from '../shared/topic.action';
 import {Comment} from '../../shared/comment';
 import {AuthState} from '../../../auth/shared/auth.state';
 import {AuthUser} from '../../../auth/shared/auth-user';
-import {DeleteComment, GetAllTopicComments} from '../../comment/shared/comment.action';
+import {DeleteComment, GetAllCommentsFromTopic} from '../../comment/shared/comment.action';
+import {CommentState} from '../../comment/shared/comment.state';
 
 @Component({
   selector: 'app-topic-details',
@@ -17,7 +18,7 @@ import {DeleteComment, GetAllTopicComments} from '../../comment/shared/comment.a
 })
 export class TopicDetailsComponent implements OnInit {
   @Select(TopicState.topic) topic$: Observable<Topic>;
-  @Select(TopicState.topicComments) comments$: Observable<Comment[]>;
+  @Select(CommentState.comments) comments$: Observable<Comment[]>;
   @Select(AuthState.loggedInUser) authUser$: Observable<AuthUser>;
   id: string;
 
@@ -28,7 +29,7 @@ export class TopicDetailsComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new GetTopic(this.id));
-    this.store.dispatch(new GetAllTopicComments(this.id));
+    this.store.dispatch(new GetAllCommentsFromTopic(this.id));
   }
 
   goToCreateComment(id: any) {

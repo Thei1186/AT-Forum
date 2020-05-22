@@ -22,31 +22,19 @@ export class TopicService {
       }));
   }
 
-  getAllTopics(): Observable<Topic[]> {
-    return this.afs.collection<Topic>('topics').snapshotChanges()
+  getAllTopicsFromCategory(catId: string): Observable<Topic[]> {
+    return from(this.afs.collection<Topic>('topics').ref.where('categoryId', '==', catId).get())
       .pipe(
-        map(docActions => {
-          return docActions.map(docAction => {
-            const data = docAction.payload.doc.data();
-            const topic: Topic = {
-              id: docAction.payload.doc.id,
-              author: data.author,
-              comments: data.comments,
-              description: data.description,
-              topicName: data.topicName,
-              categoryId: data.categoryId
-            };
-            return topic;
+        map((query) => {
+          const topics: Topic[] = [];
+          query.forEach((snap) => {
+            const topic = snap.data() as Topic;
+            topic.id = snap.id;
+            topics.push(topic);
           });
-        }));
-  }
-
-  getAllTopicComments(id: string): Observable<Comment[]> {
-    return this.afs.collection('topics').doc<Topic>(id)
-      .snapshotChanges()
-      .pipe(map(snap => {
-        return snap.payload.data().comments;
-      }));
+          return topics;
+        })
+      );
   }
 
   getTopic(id: string): Observable<Topic> {
@@ -61,7 +49,6 @@ export class TopicService {
               author: data.author,
               topicName: data.topicName,
               description: data.description,
-              comments: data.comments,
             };
             return topic;
           }

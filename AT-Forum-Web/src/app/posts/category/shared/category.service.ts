@@ -28,12 +28,10 @@ export class CategoryService {
           const catArray: Category[] = [];
           doc.forEach(document => {
             const category = document.payload.doc.data();
-            console.log('id ' + document.payload.doc.id);
             catArray.push({
               id: document.payload.doc.id,
               categoryName: category.categoryName,
               description: category.description,
-              topics: category.topics
             });
           });
           return catArray;
@@ -60,18 +58,9 @@ export class CategoryService {
         const category: Category = {
           id: document.payload.id,
           categoryName: data.categoryName,
-          description: data.description,
-          topics: data.topics
+          description: data.description
         };
         return category;
-      }));
-  }
-
-  getAllCategoryTopics(id: string): Observable<Topic[]> {
-    return this.afs.collection('categories').doc<Category>(id)
-      .snapshotChanges()
-      .pipe(map(snap => {
-        return snap.payload.data().topics;
       }));
   }
 }

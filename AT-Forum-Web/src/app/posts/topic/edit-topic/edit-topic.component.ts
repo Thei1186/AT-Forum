@@ -43,7 +43,6 @@ export class EditTopicComponent implements OnInit {
     const newTopic: Topic = {
       topicName: this.editTopicForm.get('topicName').value,
       description: this.editTopicForm.get('description').value,
-      comments: topic.comments,
       author: topic.author,
       categoryId: topic.categoryId
     };

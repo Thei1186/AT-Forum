@@ -7,19 +7,16 @@ import {
   DeleteCategory,
   EditCategory,
   GetAllCategories,
-  GetAllCategoryTopics,
   GetCategory
 } from './category.action';
 import {tap} from 'rxjs/operators';
-import {Topic} from '../../shared/topic';
 import {Logout} from '../../../auth/shared/auth.action';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 
 export class CategoryStateModel {
   categories: Category[];
   category: Category;
-  categoryTopics: Topic[];
 }
 
 @State<CategoryStateModel>({
@@ -27,18 +24,12 @@ export class CategoryStateModel {
   defaults: {
     categories: [],
     category: undefined,
-    categoryTopics: []
   }
 })
 
 @Injectable()
 export class CategoryState {
   constructor(private categoryService: CategoryService, private router: Router) {
-  }
-
-  @Selector()
-  static categoryTopics(state: CategoryStateModel) {
-    return state.categoryTopics;
   }
 
   @Selector()
@@ -58,18 +49,6 @@ export class CategoryState {
     }));
   }
 
-  @Action(GetAllCategoryTopics)
-  getAllCategoryTopics({getState, setState}: StateContext<CategoryStateModel>, action: GetAllCategoryTopics) {
-    return this.categoryService.getAllCategoryTopics(action.id)
-      .pipe(tap((result) => {
-          const state = getState();
-          setState({
-            ...state,
-            categoryTopics: result
-          });
-        })
-      );
-  }
 
   @Action(GetAllCategories)
   getAllCategories({getState, setState}: StateContext<CategoryStateModel>) {
@@ -128,7 +107,6 @@ export class CategoryState {
     setState({
       categories: [],
       category: undefined,
-      categoryTopics: []
     });
   }
 }

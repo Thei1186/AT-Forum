@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {CommentService} from './comment.service';
-import {CreateComment, DeleteComment, EditComment, GetComment} from './comment.action';
+import {CreateComment, DeleteComment, EditComment, GetAllCommentsFromTopic, GetComment} from './comment.action';
 import {Comment} from '../../shared/comment';
 import {tap} from 'rxjs/operators';
 import {Logout} from '../../../auth/shared/auth.action';
@@ -9,12 +9,14 @@ import {Router} from '@angular/router';
 
 export class CommentStateModel {
   comment: Comment;
+  comments: Comment[];
 }
 
 @State<CommentStateModel>({
   name: 'comment',
   defaults: {
-    comment: undefined
+    comment: undefined,
+    comments: []
   }
 })
 @Injectable()
@@ -27,6 +29,11 @@ export class CommentState {
     return state.comment;
   }
 
+  @Selector()
+  static comments(state: CommentStateModel) {
+    return state.comments;
+  }
+
   @Action(GetComment)
   getComment({getState, setState}: StateContext<CommentStateModel>, action: GetComment) {
     return this.commentService.getComment(action.id)
@@ -36,6 +43,20 @@ export class CommentState {
           setState({
             ...state,
             comment: result
+          });
+        })
+      );
+  }
+
+  @Action(GetAllCommentsFromTopic)
+  getAllCommentsFromTopic({getState, setState}: StateContext<CommentStateModel>, action: GetAllCommentsFromTopic) {
+    return this.commentService.getAllCommentsFromTopic(action.topicId)
+      .pipe(
+        tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            comments: result
           });
         })
       );
@@ -77,7 +98,8 @@ export class CommentState {
   @Action(Logout)
   logout({setState}: StateContext<CommentStateModel>) {
     setState({
-      comment: undefined
+      comment: undefined,
+      comments: []
     });
   }
 }

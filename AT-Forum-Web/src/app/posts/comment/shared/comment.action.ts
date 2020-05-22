@@ -12,9 +12,9 @@ export class GetComment {
   }
 }
 
-export class GetAllTopicComments {
+export class GetAllCommentsFromTopic {
   static readonly type = '[Comment] GetAllTopicComments';
-  constructor(public id: string) {
+  constructor(public topicId: string) {
   }
 }
 

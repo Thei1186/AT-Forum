@@ -6,14 +6,12 @@ import {
   CreateTopic,
   DeleteTopic,
   EditTopic,
-  GetAllTopics,
+  GetAllTopicsFromCategory,
   GetFavorites,
   GetTopic,
   RemoveFavoriteTopic
 } from './topic.action';
 import {tap} from 'rxjs/operators';
-import {EditComment, GetAllTopicComments} from '../../comment/shared/comment.action';
-import {Comment} from '../../shared/comment';
 import {Logout} from '../../../auth/shared/auth.action';
 import {Router} from '@angular/router';
 
@@ -21,7 +19,6 @@ import {Router} from '@angular/router';
 export class TopicStateModel {
   topics: Topic[];
   topic: Topic;
-  topicComments: Comment[];
   favoriteTopics: Topic[];
 }
 
@@ -30,7 +27,6 @@ export class TopicStateModel {
   defaults: {
     topics: [],
     topic: undefined,
-    topicComments: [],
     favoriteTopics: []
   }
 })
@@ -51,11 +47,6 @@ export class TopicState {
   }
 
   @Selector()
-  static topicComments(state: TopicStateModel) {
-    return state.topicComments;
-  }
-
-  @Selector()
   static favoriteTopics(state: TopicStateModel) {
     return state.favoriteTopics;
   }
@@ -65,9 +56,9 @@ export class TopicState {
     return this.topicService.createTopic(action.topic);
   }
 
-  @Action(GetAllTopics)
-  getAllTopics({getState, setState}: StateContext<TopicStateModel>) {
-    return this.topicService.getAllTopics()
+  @Action(GetAllTopicsFromCategory)
+  getAllTopicsFromCategory({getState, setState}: StateContext<TopicStateModel>, action: GetAllTopicsFromCategory) {
+    return this.topicService.getAllTopicsFromCategory(action.catId)
       .pipe(
         tap((result) => {
           const state = getState();
@@ -76,19 +67,6 @@ export class TopicState {
             topics: result
           });
         }));
-  }
-
-  @Action(GetAllTopicComments)
-  getAllTopicComments({getState, setState}: StateContext<TopicStateModel>, action: GetAllTopicComments) {
-    return this.topicService.getAllTopicComments(action.id)
-      .pipe(tap((result) => {
-          const state = getState();
-          setState({
-            ...state,
-            topicComments: result
-          });
-        })
-      );
   }
 
   @Action(GetTopic)
@@ -152,7 +130,6 @@ export class TopicState {
     setState({
       topics: [],
       topic: undefined,
-      topicComments: [],
       favoriteTopics: []
     });
   }

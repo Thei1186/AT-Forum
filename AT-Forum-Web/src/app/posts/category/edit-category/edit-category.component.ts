@@ -46,7 +46,6 @@ export class EditCategoryComponent implements OnInit {
       id: category.id,
       categoryName: this.editCategoryForm.get('catName').value,
       description: this.editCategoryForm.get('description').value,
-      topics: category.topics
     };
     this.store.dispatch(new EditCategory(newCat));
     this.router.navigateByUrl('posts/categories');

@@ -6,13 +6,12 @@ import {Role} from '../../../users/shared/role';
 import {CategoryState} from '../shared/category.state';
 import {Topic} from '../../shared/topic';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserState} from '../../../users/shared/user.state';
-import {User} from '../../../users/shared/user';
-import {GetAllCategoryTopics, GetCategory} from '../shared/category.action';
+import {GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
-import {DeleteTopic} from '../../topic/shared/topic.action';
-import {AuthUser} from "../../../auth/shared/auth-user";
-import {SetFavoriteTopic} from "../../../users/shared/user.action";
+import {DeleteTopic, GetAllTopicsFromCategory} from '../../topic/shared/topic.action';
+import {AuthUser} from '../../../auth/shared/auth-user';
+import {SetFavoriteTopic} from '../../../users/shared/user.action';
+import {TopicState} from '../../topic/shared/topic.state';
 
 
 @Component({
@@ -22,7 +21,7 @@ import {SetFavoriteTopic} from "../../../users/shared/user.action";
 })
 export class CategoryDetailsComponent implements OnInit {
   @Select(AuthState.role) role$: Observable<Role>;
-  @Select(CategoryState.categoryTopics) topics$: Observable<Topic[]>;
+  @Select(TopicState.topics) topics$: Observable<Topic[]>;
   @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   @Select(CategoryState.category) category$: Observable<Category>;
   id: string;
@@ -33,7 +32,7 @@ export class CategoryDetailsComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new GetCategory(this.id));
-    this.store.dispatch(new GetAllCategoryTopics(this.id));
+    this.store.dispatch(new GetAllTopicsFromCategory(this.id));
   }
 
   deleteTopic(id: string) {

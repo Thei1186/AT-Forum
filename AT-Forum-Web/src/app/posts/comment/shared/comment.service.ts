@@ -53,4 +53,19 @@ export class CommentService {
         return editComment;
       }));
   }
+
+  getAllCommentsFromTopic(topicId: string): Observable<Comment[]> {
+    return from(this.afs.collection<Comment>('comments').ref.where('topicId', '==', topicId).get())
+      .pipe(
+        map((query) => {
+          const comments: Comment[] = [];
+          query.forEach((snap) => {
+            const comment = snap.data() as Comment;
+            comment.id = snap.id;
+            comments.push(comment);
+          });
+          return comments;
+        })
+      );
+  }
 }

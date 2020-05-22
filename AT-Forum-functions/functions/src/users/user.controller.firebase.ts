@@ -1,7 +1,8 @@
 import {UserController} from "./user.controller";
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 import {UserService} from "./user.service";
+import {User} from "../models/user";
 
 export class UserControllerFirebase implements UserController {
     constructor(private userService: UserService) {
@@ -9,5 +10,14 @@ export class UserControllerFirebase implements UserController {
 
     deletedUsers(snap: DocumentSnapshot, context: EventContext): Promise<void> {
         return this.userService.deleteUser(context.params.uid);
+    }
+
+    updateUserUpdatesAuthor(change: Change<DocumentSnapshot>, context: EventContext): Promise<User> {
+        const userBefore = change.before.data() as User;
+        userBefore.uid = context.params.id;
+        const userAfter = change.after.data() as User;
+        userAfter.uid = context.params.id;
+
+        return this.userService.updateUserUpdatesAuthor(userBefore, userAfter);
     }
 }

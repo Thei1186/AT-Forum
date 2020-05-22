@@ -15,6 +15,12 @@ exports.userDeleted = functions.firestore
         return difa.getUserController().deletedUsers(snap, context);
     });
 
+exports.updateUserUpdatesAuthor = functions.firestore
+    .document('users/{uid}')
+    .onUpdate((change, context) => {
+        return difa.getUserController().updateUserUpdatesAuthor(change, context);
+    });
+
 exports.deleteTopicsWhenCategoryDeleted = functions.firestore
     .document('categories/{id}')
     .onDelete((snap, context) => {

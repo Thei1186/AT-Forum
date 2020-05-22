@@ -22,7 +22,7 @@ describe('UserService', () => {
         expect(userService).toBe(userService);
     });
 
-    it('deleteTopicsWhenCategoryDeleted is called only once', async () => {
+    it('deleteUser is called only once', async () => {
         await userService.deleteUser(dataTestHelper.user1.uid);
         userRepository.verify(userRepo => userRepo.deleteUser(dataTestHelper.user1.uid), Times.Exactly(1));
     });

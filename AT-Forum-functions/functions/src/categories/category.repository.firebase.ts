@@ -1,8 +1,4 @@
-import {CategoryRepository} from "./category.repository";
-import {Topic} from "../models/topic";
-import * as admin from "firebase-admin";
-import {Category} from "../models/category";
-
+/*
 export class CategoryRepositoryFirebase implements CategoryRepository {
     categoryPath = 'categories';
 
@@ -53,3 +49,5 @@ export class CategoryRepositoryFirebase implements CategoryRepository {
             });
     }
 }
+
+ */

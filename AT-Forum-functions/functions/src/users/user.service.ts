@@ -9,7 +9,7 @@ export class UserService {
         return this.userRepository.deleteUser(uid);
     }
 
-    updateUserUpdatesAuthor(userBefore: User, userAfter: User) {
+    updateUserUpdatesAuthor(userBefore: User, userAfter: User): Promise<User> {
         return this.userRepository.updateUserUpdatesAuthor(userBefore, userAfter);
     }
 }

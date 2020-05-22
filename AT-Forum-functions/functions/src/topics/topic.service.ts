@@ -18,7 +18,10 @@ export class TopicService {
         return this.topicRepository.removeCommentFromTopic(comment, topicId);
     }
 
+/*
     editTopicComments(commentAfter: Comment, commentBefore: Comment) {
         return this.topicRepository.editTopicComments(commentAfter, commentBefore);
     }
+ */
+
 }

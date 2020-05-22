@@ -15,12 +15,6 @@ exports.userDeleted = functions.firestore
         return difa.getUserController().deletedUsers(snap, context);
     });
 
-exports.updateUserUpdatesAuthor = functions.firestore
-    .document('users/{uid}')
-    .onUpdate((change, context) => {
-        return difa.getUserController().updateUserUpdatesAuthor(change, context);
-    });
-
 exports.deleteTopicsWhenCategoryDeleted = functions.firestore
     .document('categories/{id}')
     .onDelete((snap, context) => {
@@ -39,12 +33,13 @@ exports.deleteTopicDeletesAllComments = functions.firestore
         return difa.getCommentController().deleteCommentsFromTopic(snap, context);
     });
 
-/*
-exports.removeCommentFromTopicWhenCommentDeleted = functions.firestore
-    .document('comments/{id}')
-    .onDelete((snap, context) => {
-        return difa.getTopicController().removeCommentFromTopic(snap, context);
+exports.updateUserUpdatesAuthor = functions.firestore
+    .document('users/{uid}')
+    .onUpdate((change, context) => {
+        return difa.getUserController().updateUserUpdatesAuthor(change, context);
     });
+
+/*
 
 exports.removeTopicFromCategoryWhenTopicDeleted = functions.firestore
     .document('topics/{id}')

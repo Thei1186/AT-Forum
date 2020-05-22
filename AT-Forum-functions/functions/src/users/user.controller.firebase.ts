@@ -14,10 +14,10 @@ export class UserControllerFirebase implements UserController {
 
     updateUserUpdatesAuthor(change: Change<DocumentSnapshot>, context: EventContext): Promise<User> {
         const userBefore = change.before.data() as User;
-        userBefore.uid = context.params.id;
+        userBefore.uid = context.params.uid;
         const userAfter = change.after.data() as User;
-        userAfter.uid = context.params.id;
-
+        userAfter.uid = context.params.uid;
+        console.log(context.params.uid);
         return this.userService.updateUserUpdatesAuthor(userBefore, userAfter);
     }
 }

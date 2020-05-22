@@ -1,7 +1,7 @@
 import {TopicRepository} from "./topic.repository";
 import {Comment} from "../models/comment";
 import * as admin from "firebase-admin";
-import {Topic} from "../models/topic";
+
 
 
 export class TopicRepositoryFirebase implements TopicRepository {
@@ -49,7 +49,7 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 return Promise.reject('Failed to remove comment from Topic with message: ' + err.message);
             });
     }
-
+    /*
     async editTopicComments(commentAfter: Comment, commentBefore: Comment): Promise<void> {
         const topic = await this.db().collection(`${this.topicPath}`).doc(`${commentAfter.topicId}`).get();
         const topicData = topic.data() as Topic;
@@ -64,6 +64,6 @@ export class TopicRepositoryFirebase implements TopicRepository {
                 return Promise.reject('Failed to update comment in Topic with message: ' + err.message);
             });
     }
-
+     */
 
 }

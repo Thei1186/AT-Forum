@@ -38,7 +38,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Users\Kokushi\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.npm">
@@ -82,7 +82,8 @@
       <workItem from="1589523489629" duration="5455000" />
       <workItem from="1589869692389" duration="7254000" />
       <workItem from="1589891093539" duration="3216000" />
-      <workItem from="1590128562778" duration="3553000" />
+      <workItem from="1590128562778" duration="5251000" />
+      <workItem from="1590143320568" duration="4815000" />
     </task>
     <servers />
   </component>

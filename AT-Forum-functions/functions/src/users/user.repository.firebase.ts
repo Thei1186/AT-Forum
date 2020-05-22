@@ -17,31 +17,35 @@ export class UserRepositoryFirebase implements UserRepository {
             });
     }
 
-    updateUserUpdatesAuthor(userBefore: User, userAfter: User): Promise<User> {
+    async updateUserUpdatesAuthor(userBefore: User, userAfter: User): Promise<User> {
         const batch = this.db().batch();
-        this.db().collection(`${this.topicsPath}`).where('author', '==', `${userBefore}`).get()
+        console.log(userBefore);
+        await this.db().collection(`${this.topicsPath}`).where('author', '==', `${userBefore}`).get()
             .then((query) => {
                 query.forEach((doc) => {
                     const data = doc.data() as Topic;
                     data.author = userAfter;
-                    const topicRef = this.db().collection(`${this.topicsPath}`).doc(`${userBefore.uid}`);
-                    batch.set(topicRef, userAfter, {merge: true});
+                    const topicRef = doc.ref;
+                    batch.set(topicRef, data, {merge: true});
                 });
             }).catch(err => {
-            return Promise.reject('Failed to update author' + err.message);
-        });
-        this.db().collection(`${this.commentsPath}`).where('author', '==', `${userBefore}`).get()
+                return Promise.reject('Failed to update author' + err.message);
+            });
+
+        await this.db().collection(`${this.commentsPath}`).where('author', '==', `${userBefore}`).get()
             .then((query) => {
                 query.forEach((doc) => {
                     const data = doc.data() as Comment;
+
                     data.author = userAfter;
-                    const commentRef = this.db().collection(`${this.commentsPath}`).doc(`${userBefore.uid}`);
-                    batch.set(commentRef, userAfter, {merge: true});
+                    const commentRef = doc.ref;
+                    batch.set(commentRef, data, {merge: true});
                 });
             }).catch(err => {
-            return Promise.reject('Failed to update author' + err.message);
-        });
-        return batch.commit().then(() => {
+                return Promise.reject('Failed to update author' + err.message);
+            });
+
+        return await batch.commit().then(() => {
             return Promise.resolve(userAfter);
         }).catch(err => {
             return Promise.reject('Failed to update author' + err.message);

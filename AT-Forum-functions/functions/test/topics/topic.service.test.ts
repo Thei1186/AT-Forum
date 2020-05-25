@@ -28,9 +28,6 @@ describe('TopicService', () => {
     });
 
     it('deleteTopicsWhenCategoryDeleted should throw an exception if id is undefined', async () => {
-        await expect(topicService.deleteTopicsWhenCategoryDeleted(dataTestHelper.category2.id)).rejects.toThrow(new TypeError('Id has to be defined'));
-        await expect(topicService.deleteTopicsWhenCategoryDeleted(dataTestHelper.category2.id)).rejects.toThrow('Id has to be defined');
+        await expect(topicService.deleteTopicsWhenCategoryDeleted(dataTestHelper.category2.id)).rejects.toThrow(TypeError);
     })
-
-
 });

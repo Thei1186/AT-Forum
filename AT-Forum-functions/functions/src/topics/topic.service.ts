@@ -12,13 +12,23 @@ export class TopicService {
 
     deleteTopicsWhenCategoryDeleted(catId: String): Promise<void> {
         if (catId === undefined || catId === '') {
-            throw new TypeError('Id has to be defined');
+            const error = new TypeError('Id has to be defined');
+           return Promise.reject(error);
         }
 
         return this.topicRepository.deleteTopicsWhenCategoryDeleted(catId);
     }
 
-    removeCommentFromTopic(comment: Comment, topicId: string) {
+    removeCommentFromTopic(comment: Comment, topicId: string): Promise<void> {
+        if (comment === null)
+        {
+            const error = new TypeError('no comment found');
+            return Promise.reject(error);
+        }
+        if (topicId === '' || topicId === undefined) {
+            const error = new TypeError('topicId has to be defined');
+            return Promise.reject(error);
+        }
         return this.topicRepository.removeCommentFromTopic(comment, topicId);
     }
 

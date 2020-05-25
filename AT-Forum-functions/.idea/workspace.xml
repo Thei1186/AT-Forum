@@ -38,7 +38,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/functions/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Users\Kokushi\WebstormProjects\AT-Forum\AT-Forum-functions\functions\node_modules\typescript\lib" />
   </component>
   <component name="RunManager" selected="Jest.TopicService. removeCommentFromTopic should throw an exception if id or comment is undefined">
     <configuration name="TopicService. removeCommentFromTopic should throw an exception if id or comment is undefined" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -120,6 +120,7 @@
       <workItem from="1590143320568" duration="4815000" />
       <workItem from="1590156419558" duration="1676000" />
       <workItem from="1590389669577" duration="4820000" />
+      <workItem from="1590401656392" duration="9363000" />
     </task>
     <servers />
   </component>
@@ -166,6 +167,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="683" y="149" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1590054347248" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1590403054964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1920.0.1858.1080@0.0.1920.1040" timestamp="1590403054964" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590155179759">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

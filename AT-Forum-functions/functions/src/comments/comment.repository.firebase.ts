@@ -2,6 +2,11 @@ import {CommentRepository} from "./comment.repository";
 import * as admin from "firebase-admin";
 
 export class CommentRepositoryFirebase implements CommentRepository{
+    /*
+This class is no longer used, but is kept to show how it was before refactoring.
+It is not commented out to avoid having to deal with tsLint
+ */
+
     commentPath = 'comments';
 
     async deleteCommentsFromTopic(commentId: string): Promise<void> {

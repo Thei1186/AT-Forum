@@ -40,6 +40,7 @@ exports.updateUserUpdatesAuthor = functions.firestore
     });
 
 /*
+These functions are no longer used
 
 exports.removeTopicFromCategoryWhenTopicDeleted = functions.firestore
     .document('topics/{id}')

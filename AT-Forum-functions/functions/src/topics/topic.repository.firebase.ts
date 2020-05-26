@@ -24,6 +24,23 @@ export class TopicRepositoryFirebase implements TopicRepository {
             });
     }
 
+    async deleteFavoriteWhenTopicIsDeleted(topId: string): Promise<void> {
+        await this.db().collection(`${this.favoriteTopicPath}`)
+            .where('favoriteTopics', 'array-contains', `${topId}`).get()
+            .then((query) => {
+                const batch = this.db().batch();
+                if (query) {
+                    query.forEach((doc) => {
+                        batch.delete(doc.ref)
+                    });
+                }
+                return batch.commit();
+            }).catch((err) => {
+                return Promise.reject('Failed to delete Topic from favorite topics collection. Threw error \n '
+                    + err.message);
+            });
+    }
+
 
     /*
        async updateTopicComments(comment: Comment): Promise<void> {

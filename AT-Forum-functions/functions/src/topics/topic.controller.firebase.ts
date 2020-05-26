@@ -13,6 +13,11 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.deleteTopicsWhenCategoryDeleted(catId);
     }
 
+    deleteFavoriteWhenTopicIsDeleted(snapshot: DocumentSnapshot, context: EventContext) {
+        const topId = context.params.id as string;
+        return this.service.deleteFavoriteWhenTopicIsDeleted(topId);
+    }
+
     /*
     updateTopicComments(snap: DocumentSnapshot, context: EventContext): Promise<void> {
         const comment = snap.data() as Comment;
@@ -35,4 +40,5 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.editTopicComments(commentAfter, commentBefore);
     }
      */
+
 }

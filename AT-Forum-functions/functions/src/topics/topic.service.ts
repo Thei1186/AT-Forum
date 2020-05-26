@@ -13,6 +13,11 @@ export class TopicService {
         return this.topicRepository.deleteTopicsWhenCategoryDeleted(catId);
     }
 
+    deleteFavoriteWhenTopicIsDeleted(topId: string) {
+        return this.topicRepository.deleteFavoriteWhenTopicIsDeleted(topId);
+    }
+
+
     /*
 
      updateTopicComments(comment: Comment): Promise<void> {
@@ -37,5 +42,6 @@ export class TopicService {
            return this.topicRepository.editTopicComments(commentAfter, commentBefore);
        }
     */
+
 
 }

@@ -5,7 +5,7 @@
 <div *ngIf="authUser$ | async as user; else welcome">
   <div *ngFor="let topic of favoriteTopics$ | async as topic">
     <div *ngIf="favoriteTopics$; else welcome">
-      <mat-card>
+      <mat-card (click)="goToComments(topic.id)" style="cursor: pointer">
         <mat-card-content>
           <mat-list>
             <mat-list-item>Author: {{topic.author.username}}</mat-list-item>
@@ -13,7 +13,7 @@
             <mat-list-item>Description: {{topic.description}}</mat-list-item>
           </mat-list>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions align="end">
           <button mat-raised-button (click)="removeFavoriteTopic(topic, user.uid)">Remove</button>
         </mat-card-actions>
       </mat-card>

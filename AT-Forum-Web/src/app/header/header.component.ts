@@ -6,7 +6,6 @@ import {Role} from '../users/shared/role';
 import {AuthUser} from '../auth/shared/auth-user';
 import {Router} from '@angular/router';
 import {Logout} from '../auth/shared/auth.action';
-import {GetUser} from '../users/shared/user.action';
 
 @Component({
   selector: 'app-header',

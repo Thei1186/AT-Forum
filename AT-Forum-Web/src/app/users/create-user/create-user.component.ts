@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../shared/user';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {SignUp} from '../../auth/shared/auth.action';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';

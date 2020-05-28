@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { PostsRoutingModule } from './posts-routing.module';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
-import { TopicComponent } from './topic/topic.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateTopicComponent } from './topic/create-topic/create-topic.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -25,7 +24,6 @@ import { EditCommentComponent } from './comment/edit-comment/edit-comment.compon
 @NgModule({
   declarations: [
     CreateCategoryComponent,
-    TopicComponent,
     CommentComponent,
     CreateTopicComponent,
     CategoryComponent,

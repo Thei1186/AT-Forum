@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {AuthState} from '../shared/auth.state';
 import {AuthUser} from '../shared/auth-user';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

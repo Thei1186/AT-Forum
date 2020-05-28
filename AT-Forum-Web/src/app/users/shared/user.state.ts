@@ -4,10 +4,8 @@ import {Injectable} from '@angular/core';
 import {UserService} from './user.service';
 import {tap} from 'rxjs/operators';
 import {DeleteUser, EditUser, GetAllUsers, GetUser, SetFavoriteTopic} from './user.action';
-import {from} from 'rxjs';
 import {Topic} from '../../posts/shared/topic';
 import {Logout} from '../../auth/shared/auth.action';
-import {CategoryStateModel} from '../../posts/category/shared/category.state';
 
 export class UserStateModel {
   currentUser: User;

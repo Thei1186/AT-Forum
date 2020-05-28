@@ -14,8 +14,7 @@ export class CreateCategoryComponent implements OnInit {
 
   newCategoryForm: FormGroup;
 
-  constructor(private store: Store, private fb: FormBuilder,
-              private router: Router) {
+  constructor(private store: Store, private fb: FormBuilder) {
   }
 
   ngOnInit() {

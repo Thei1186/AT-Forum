@@ -19,7 +19,7 @@ export class EditTopicComponent implements OnInit {
   id: string;
 
   constructor(private store: Store, private fb: FormBuilder,
-              private route: ActivatedRoute, private router: Router) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.editTopicForm = this.fb.group({

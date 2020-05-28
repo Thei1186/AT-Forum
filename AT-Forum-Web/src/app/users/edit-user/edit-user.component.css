@@ -1,12 +1,3 @@
-mat-card{
-  max-width: 80%;
-}
-.mat-card-center{
-  width: 40%;
-  text-align: center;
-  margin-left: 30%;
-}
-
 button {
   background-color: #7d8085;
 }

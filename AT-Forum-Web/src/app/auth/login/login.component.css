@@ -1,15 +1,4 @@
-header {
-  font-size: 40px;
-  font-weight: bold;
-}
-.mat-card-center {
-  margin-left: 25%;
-  max-width: 50%;
-}
 button {
   background: #7d8085;
 }
 
-.example-container .mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}

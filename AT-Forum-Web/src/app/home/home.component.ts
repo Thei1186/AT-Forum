@@ -7,8 +7,7 @@ import {GetFavorites, RemoveFavoriteTopic} from '../posts/topic/shared/topic.act
 import {AuthState} from '../auth/shared/auth.state';
 import {AuthUser} from '../auth/shared/auth-user';
 import {first, tap} from 'rxjs/operators';
-import {FavoriteTopic} from '../posts/shared/favoriteTopic';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',

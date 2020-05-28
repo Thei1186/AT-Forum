@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {finalize, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
 

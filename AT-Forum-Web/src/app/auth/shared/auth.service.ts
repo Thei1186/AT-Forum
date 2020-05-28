@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../../users/shared/user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {from, Observable, pipe} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {AuthUser} from './auth-user';

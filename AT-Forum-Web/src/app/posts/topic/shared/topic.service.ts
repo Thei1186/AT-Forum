@@ -3,7 +3,6 @@ import {Topic} from '../../shared/topic';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Comment} from '../../shared/comment';
 import {FavoriteTopic} from '../../shared/favoriteTopic';
 import * as firebase from 'firebase';
 

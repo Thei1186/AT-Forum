@@ -26,7 +26,7 @@ import {CategoryState} from './posts/category/shared/category.state';
 import {TopicState} from './posts/topic/shared/topic.state';
 import {MatMenuModule} from '@angular/material/menu';
 import {CommentState} from './posts/comment/shared/comment.state';
-import {MatListModule} from "@angular/material/list";
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({

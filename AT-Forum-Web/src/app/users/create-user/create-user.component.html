@@ -3,10 +3,8 @@
 <br>
 <br>
 <div>
-
   <mat-card class="mat-card-center">
     <mat-card-content style="text-align: center">
-      <img src="{{photoURL}}" alt="Profile picture" style="height: 150px; width: 150px">
       <br>
       <label>
         <input type="file" id="file" (change)="handleFileInput($event)">
@@ -15,19 +13,19 @@
 
         <mat-form-field>
           <label>
-            <input matInput placeholder="email" type="string" formControlName="email">
+            <input matInput placeholder="email" type="email" formControlName="email">
           </label>
         </mat-form-field>
         <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="Username" type="string" formControlName="username">
+            <input matInput placeholder="Username" type="text" formControlName="username">
           </label>
         </mat-form-field>
         <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="name" type="string" formControlName="name">
+            <input matInput placeholder="name" type="text" formControlName="name">
           </label>
         </mat-form-field>
         <br>

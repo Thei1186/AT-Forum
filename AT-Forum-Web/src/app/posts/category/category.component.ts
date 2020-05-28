@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {CategoryState} from './shared/category.state';
 import {Observable} from 'rxjs';
 import {Category} from '../shared/category';
-import {DeleteCategory, GetAllCategories, GetCategory} from './shared/category.action';
+import {DeleteCategory, GetAllCategories} from './shared/category.action';
 import {Router} from '@angular/router';
 import {AuthState} from '../../auth/shared/auth.state';
 import {Role} from '../../users/shared/role';

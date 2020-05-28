@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
-import {Observable, pipe} from 'rxjs';
+import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Topic} from '../../shared/topic';
 import {UserState} from '../../../users/shared/user.state';
 import {User} from '../../../users/shared/user';
 import {CreateTopic} from '../shared/topic.action';
-import {first, map, tap} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 
 

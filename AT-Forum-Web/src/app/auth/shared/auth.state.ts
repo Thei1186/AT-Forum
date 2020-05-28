@@ -60,7 +60,7 @@ export class AuthState {
   }
 
   @Action(GetRoles)
-  getRoles({getState, setState, dispatch}: StateContext<AuthStateModel>) {
+  getRoles({getState, setState}: StateContext<AuthStateModel>) {
     return this.authService.getRoles()
       .pipe(tap((result) => {
         const state = getState();

@@ -4,16 +4,16 @@
 <br>
 <div *ngIf="category$ | async as category">
   <div *ngIf="user$ | async as user">
-  <mat-card class="mat-card-center">
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>Create your own Topic here</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button (click)="goToCreateTopic(category.id)">Create Topic</button>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card class="mat-card-center">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Create your own Topic here</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button (click)="goToCreateTopic(category.id)">Create Topic</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div *ngFor="let topic of topics$ | async as topic">
     <div>
@@ -38,6 +38,10 @@
         </div>
       </mat-card>
     </div>
+  </div>
+  <div align="center">
+    <button mat-raised-button (click)="goToPrevPage()">PREVIOUS</button>
+    <button mat-raised-button (click)="goToNextPage()">NEXT</button>
   </div>
 </div>
 

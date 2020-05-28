@@ -39,14 +39,15 @@ exports.updateUserUpdatesAuthor = functions.firestore
         return difa.getUserController().updateUserUpdatesAuthor(change, context);
     });
 
+
+/*
+These functions are no longer used
+
 exports.removeTopicFromFavoritesWhenTopicIsDeleted = functions.firestore
     .document('topics/{id}')
     .onDelete((snapshot, context) => {
        return difa.getTopicController().deleteFavoriteWhenTopicIsDeleted(snapshot, context);
     });
-
-/*
-These functions are no longer used
 
 exports.updateTopicUpdateFavoriteTopic = functions.firestore
     .document('topics/{id}')

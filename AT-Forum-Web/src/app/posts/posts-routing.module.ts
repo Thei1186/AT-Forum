@@ -9,17 +9,19 @@ import {TopicDetailsComponent} from './topic/topic-details/topic-details.compone
 import {CreateCommentComponent} from './comment/create-comment/create-comment.component';
 import {EditTopicComponent} from './topic/edit-topic/edit-topic.component';
 import {EditCommentComponent} from './comment/edit-comment/edit-comment.component';
+import {AuthGuard} from '../shared/guards/auth.guard';
+import {AdminGuard} from '../shared/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'categories', component: CategoryComponent},
-  { path: 'create-category', component: CreateCategoryComponent},
-  { path: 'edit-category/:id', component: EditCategoryComponent},
-  { path: 'create-topic/:id', component: CreateTopicComponent},
-  { path: 'edit-topic/:id', component: EditTopicComponent},
+  { path: 'create-category', component: CreateCategoryComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'edit-category/:id', component: EditCategoryComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'create-topic/:id', component: CreateTopicComponent, canActivate: [AuthGuard]},
+  { path: 'edit-topic/:id', component: EditTopicComponent, canActivate: [AuthGuard]},
   { path: 'category-details/:id', component: CategoryDetailsComponent},
   { path: 'topic-details/:id', component: TopicDetailsComponent},
-  { path: 'create-comment/:id', component: CreateCommentComponent},
-  { path: 'edit-comment/:id', component: EditCommentComponent},
+  { path: 'create-comment/:id', component: CreateCommentComponent, canActivate: [AuthGuard]},
+  { path: 'edit-comment/:id', component: EditCommentComponent, canActivate: [AuthGuard]},
   ];
 
 

@@ -41,7 +41,7 @@ import {MatListModule} from '@angular/material/list';
     NgxsModule.forRoot([AuthState, UserState, CategoryState, TopicState, CommentState]
       , {developmentMode: !environment.production}),
     NgxsLoggerPluginModule.forRoot(),
-    NgxsStoragePluginModule.forRoot({key: ['auth', 'user', 'category', 'topic', 'comment']}),
+    NgxsStoragePluginModule.forRoot({key: ['auth', 'user']}),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,

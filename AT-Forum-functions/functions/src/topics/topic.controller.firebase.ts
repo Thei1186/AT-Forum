@@ -15,6 +15,20 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.deleteTopicsWhenCategoryDeleted(catId);
     }
 
+    deleteFavoriteWhenTopicIsDeleted(snapshot: DocumentSnapshot, context: EventContext) {
+        const topic = snapshot.data() as Topic;
+        const topId = context.params.id as string;
+        topic.id = topId;
+        return this.service.deleteFavoriteWhenTopicIsDeleted(topic);
+    }
+	
+	updateTopicUpdateFavoriteTopic(change: Change<DocumentSnapshot>, context: EventContext) {
+        const favoriteTopicBefore = change.before.data() as FavoriteTopic;
+        favoriteTopicBefore.id = context.params.id;
+        const favoriteTopicAfter = change.after.data() as FavoriteTopic;
+        favoriteTopicAfter.id = context.params.id;
+        return this.service.updateTopicUpdateFavoriteTopic(favoriteTopicBefore, favoriteTopicAfter);
+
     /*
     updateTopicComments(snap: DocumentSnapshot, context: EventContext): Promise<void> {
         const comment = snap.data() as Comment;
@@ -37,11 +51,6 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.editTopicComments(commentAfter, commentBefore);
     }
      */
-    updateTopicUpdateFavoriteTopic(change: Change<DocumentSnapshot>, context: EventContext) {
-        const favoriteTopicBefore = change.before.data() as FavoriteTopic;
-        favoriteTopicBefore.id = context.params.id;
-        const favoriteTopicAfter = change.after.data() as FavoriteTopic;
-        favoriteTopicAfter.id = context.params.id;
-        return this.service.updateTopicUpdateFavoriteTopic(favoriteTopicBefore, favoriteTopicAfter);
+    
     }
 }

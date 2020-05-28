@@ -17,7 +17,6 @@ export class UserControllerFirebase implements UserController {
         userBefore.uid = context.params.uid;
         const userAfter = change.after.data() as User;
         userAfter.uid = context.params.uid;
-        console.log(context.params.uid);
         return this.userService.updateUserUpdatesAuthor(userBefore, userAfter);
     }
 }

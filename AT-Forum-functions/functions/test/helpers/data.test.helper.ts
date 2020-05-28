@@ -2,6 +2,7 @@ import {Category} from "../../src/models/category";
 import {Topic} from "../../src/models/topic";
 import {User} from "../../src/models/user";
 import {Comment} from "../../src/models/comment";
+import {Role} from "../../src/models/role";
 
 export class DataTestHelper {
 
@@ -11,6 +12,40 @@ export class DataTestHelper {
         name: 'dave',
         photoURL: '',
         email: 'davezzsi@email.com'
+    };
+
+    user2: User = {
+        uid: '',
+        username: 'Davvvyy',
+        name: 'John',
+        photoURL: '',
+        email: 'davyyy@email.com'
+    };
+
+    user3: User = {
+        uid: 'u1',
+        username: 'NotDavezz',
+        name: 'dave',
+        photoURL: '',
+        email: ''
+    };
+
+    user4: User = {
+        uid: 'u1',
+        username: 'NotDavezz',
+        name: 'dave',
+        photoURL: '',
+        email: 'davi@email.com'
+    };
+
+    role1: Role = {
+        roleName: 'admin',
+        uid: 'r1'
+    };
+
+    role2: Role = {
+        roleName: 'user',
+        uid: ''
     };
 
     comment1: Comment = {
@@ -67,13 +102,13 @@ export class DataTestHelper {
     };
 
     category1: Category = {
-        categoryName:'Cakes',
+        categoryName: 'Cakes',
         id: 'c1',
         description: 'yummy',
     };
 
     category2: Category = {
-        categoryName:'Cakes',
+        categoryName: 'Cakes',
         id: '',
         description: 'yummy',
     };

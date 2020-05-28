@@ -6,7 +6,7 @@ import {
   CreateTopic,
   DeleteTopic,
   EditTopic,
-  GetAllTopicsFromCategory,
+  GetAllTopicsFromCategory, GetTopicsFromCategoryWithPaging,
   GetFavorites,
   GetTopic,
   RemoveFavoriteTopic
@@ -62,6 +62,32 @@ export class TopicState {
       .pipe(
         tap((result) => {
           const state = getState();
+          setState({
+            ...state,
+            topics: result
+          });
+        }));
+  }
+
+  @Action(GetTopicsFromCategoryWithPaging)
+  getTopicsFromCategoryWithPaging({getState, setState}: StateContext<TopicStateModel>, action: GetTopicsFromCategoryWithPaging) {
+    return this.topicService.getTopicsFromCategoryWithPaging(action.limit, undefined, action.catId)
+      .pipe(
+        tap((result) => {
+          const state = getState();
+          setState({
+            ...state,
+            topics: result
+          });
+        }));
+  }
+
+  @Action(GetTopicsFromCategoryWithPaging)
+  getNextTopicsFromCategoryWithPaging({getState, setState}: StateContext<TopicStateModel>, action: GetTopicsFromCategoryWithPaging) {
+    const state = getState();
+    return this.topicService.getTopicsFromCategoryWithPaging(action.limit, state.topics[state.topics.length - 1] , action.catId)
+      .pipe(
+        tap((result) => {
           setState({
             ...state,
             topics: result

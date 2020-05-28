@@ -12,6 +12,12 @@ export class GetAllTopicsFromCategory {
   }
 }
 
+export class GetTopicsFromCategoryWithPaging {
+  static readonly type = '[Topic] GetAllTopicsFromCategoryWithPaging';
+  constructor(public limit: number, public topicStart, public catId: string) {
+  }
+}
+
 export class GetTopic {
  static readonly type = '[Topic] GetTopic';
  constructor(public id: string) {

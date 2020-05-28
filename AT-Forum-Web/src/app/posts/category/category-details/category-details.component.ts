@@ -8,7 +8,11 @@ import {Topic} from '../../shared/topic';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
-import {DeleteTopic, GetAllTopicsFromCategory} from '../../topic/shared/topic.action';
+import {
+  DeleteTopic,
+  GetAllTopicsFromCategory,
+  GetTopicsFromCategoryWithPaging
+} from '../../topic/shared/topic.action';
 import {AuthUser} from '../../../auth/shared/auth-user';
 import {SetFavoriteTopic} from '../../../users/shared/user.action';
 import {TopicState} from '../../topic/shared/topic.state';
@@ -25,6 +29,7 @@ export class CategoryDetailsComponent implements OnInit {
   @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   @Select(CategoryState.category) category$: Observable<Category>;
   id: string;
+  limit = 5;
 
   constructor(private store: Store, private router: Router,
               private route: ActivatedRoute) { }
@@ -32,7 +37,8 @@ export class CategoryDetailsComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new GetCategory(this.id));
-    this.store.dispatch(new GetAllTopicsFromCategory(this.id));
+    this.store.dispatch(new GetTopicsFromCategoryWithPaging(this.limit, undefined, this.id));
+    // this.store.dispatch(new GetAllTopicsFromCategory(this.id));
   }
 
   deleteTopic(id: string) {

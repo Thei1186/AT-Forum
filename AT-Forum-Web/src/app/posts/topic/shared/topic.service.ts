@@ -21,6 +21,23 @@ export class TopicService {
       }));
   }
 
+  getTopicsFromCategoryWithPaging(limit: number, topicStart: Topic, catId: string): Observable<Topic[]> {
+    return from(this.afs.collection<Topic>('topics').ref.limit(limit).orderBy('topicName')
+      .where('categoryId', '==', catId)
+      .get())
+      .pipe(
+        map((query) => {
+          const topics: Topic[] = [];
+          query.forEach((snap) => {
+            const topic = snap.data() as Topic;
+            topic.id = snap.id;
+            topics.push(topic);
+          });
+          return topics;
+        })
+      );
+  }
+
   getAllTopicsFromCategory(catId: string): Observable<Topic[]> {
     return from(this.afs.collection<Topic>('topics').ref.where('categoryId', '==', catId).get())
       .pipe(

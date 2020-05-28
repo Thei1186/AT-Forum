@@ -54,4 +54,12 @@ export class CategoryDetailsComponent implements OnInit {
   markAsFavorite(topic: Topic, user: AuthUser) {
     this.store.dispatch(new SetFavoriteTopic(topic, user.uid));
   }
+
+  goToNextPage() {
+
+  }
+
+  goToPrevPage() {
+
+  }
 }

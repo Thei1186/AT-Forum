@@ -1,5 +1,6 @@
 import {TopicRepository} from "./topic.repository";
 import * as admin from "firebase-admin";
+import {Topic} from "../models/topic";
 
 export class TopicRepositoryFirebase implements TopicRepository {
     topicPath = 'topics';
@@ -24,9 +25,9 @@ export class TopicRepositoryFirebase implements TopicRepository {
             });
     }
 
-    async deleteFavoriteWhenTopicIsDeleted(topId: string): Promise<void> {
+    async deleteFavoriteWhenTopicIsDeleted(topic: Topic): Promise<void> {
         await this.db().collection(`${this.favoriteTopicPath}`)
-            .where('favoriteTopics', 'array-contains', `${topId}`).get()
+            .where('favoriteTopics', 'array-contains', `${topic}`).get()
             .then((query) => {
                 const batch = this.db().batch();
                 if (query) {

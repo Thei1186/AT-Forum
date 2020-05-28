@@ -1,4 +1,5 @@
 import {TopicRepository} from "./topic.repository";
+import {Topic} from "../models/topic";
 
 
 export class TopicService {
@@ -13,8 +14,8 @@ export class TopicService {
         return this.topicRepository.deleteTopicsWhenCategoryDeleted(catId);
     }
 
-    deleteFavoriteWhenTopicIsDeleted(topId: string) {
-        return this.topicRepository.deleteFavoriteWhenTopicIsDeleted(topId);
+    deleteFavoriteWhenTopicIsDeleted(topic: Topic) {
+        return this.topicRepository.deleteFavoriteWhenTopicIsDeleted(topic);
     }
 
 

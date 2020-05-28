@@ -2,6 +2,7 @@ import {TopicController} from "./topic.controller";
 import {EventContext} from "firebase-functions";
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
 import {TopicService} from "./topic.service";
+import {Topic} from "../models/topic";
 
 export class TopicControllerFirebase implements TopicController {
 
@@ -14,8 +15,10 @@ export class TopicControllerFirebase implements TopicController {
     }
 
     deleteFavoriteWhenTopicIsDeleted(snapshot: DocumentSnapshot, context: EventContext) {
+        const topic = snapshot.data() as Topic;
         const topId = context.params.id as string;
-        return this.service.deleteFavoriteWhenTopicIsDeleted(topId);
+        topic.id = topId;
+        return this.service.deleteFavoriteWhenTopicIsDeleted(topic);
     }
 
     /*

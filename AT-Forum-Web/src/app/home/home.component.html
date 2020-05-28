@@ -5,8 +5,8 @@
 <div *ngIf="authUser$ | async as user; else welcome">
   <div *ngFor="let topic of favoriteTopics$ | async as topic">
     <div *ngIf="favoriteTopics$; else welcome">
-      <mat-card (click)="goToComments(topic.id)" style="cursor: pointer">
-        <mat-card-content>
+      <mat-card>
+        <mat-card-content (click)="goToComments(topic.id)" style="cursor: pointer">
           <mat-list>
             <mat-list-item>Author: {{topic.author.username}}</mat-list-item>
             <mat-list-item>Topic Name: {{topic.topicName}}</mat-list-item>

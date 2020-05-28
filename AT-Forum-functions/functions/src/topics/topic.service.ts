@@ -1,5 +1,6 @@
 import {Comment} from "../models/comment";
 import {TopicRepository} from "./topic.repository";
+import {FavoriteTopic} from "../models/favoriteTopic";
 
 
 export class TopicService {
@@ -38,4 +39,7 @@ export class TopicService {
         }
      */
 
+    updateTopicUpdateFavoriteTopic(favoriteTopicBefore: FavoriteTopic, favoriteTopicAfter: FavoriteTopic) {
+
+    }
 }

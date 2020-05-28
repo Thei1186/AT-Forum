@@ -1,7 +1,9 @@
 import {TopicController} from "./topic.controller";
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
 import {TopicService} from "./topic.service";
+import {Topic} from "../models/topic";
+import {FavoriteTopic} from "../models/favoriteTopic";
 
 export class TopicControllerFirebase implements TopicController {
 
@@ -35,4 +37,11 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.editTopicComments(commentAfter, commentBefore);
     }
      */
+    updateTopicUpdateFavoriteTopic(change: Change<DocumentSnapshot>, context: EventContext) {
+        const favoriteTopicBefore = change.before.data() as FavoriteTopic;
+        favoriteTopicBefore.id = context.params.id;
+        const favoriteTopicAfter = change.after.data() as FavoriteTopic;
+        favoriteTopicAfter.id = context.params.id;
+        return this.service.updateTopicUpdateFavoriteTopic(favoriteTopicBefore, favoriteTopicAfter);
+    }
 }

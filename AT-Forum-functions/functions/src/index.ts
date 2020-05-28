@@ -39,6 +39,12 @@ exports.updateUserUpdatesAuthor = functions.firestore
         return difa.getUserController().updateUserUpdatesAuthor(change, context);
     });
 
+exports.updateTopicUpdateFavoriteTopic = functions.firestore
+    .document('favoriteTopic/{uid}')
+    .onUpdate((change, context) => {
+        return difa.getTopicController().updateTopicUpdateFavoriteTopic(change, context);
+    });
+
 /*
 
 exports.removeTopicFromCategoryWhenTopicDeleted = functions.firestore

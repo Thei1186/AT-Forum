@@ -8,6 +8,7 @@ import {AuthState} from '../auth/shared/auth.state';
 import {AuthUser} from '../auth/shared/auth-user';
 import {first, tap} from 'rxjs/operators';
 import {FavoriteTopic} from '../posts/shared/favoriteTopic';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ import {FavoriteTopic} from '../posts/shared/favoriteTopic';
 export class HomeComponent implements OnInit {
 @Select(TopicState.favoriteTopics) favoriteTopics$: Observable<Topic[]>;
 @Select(AuthState.loggedInUser) authUser$: Observable<AuthUser>;
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit() {
     this.authUser$.pipe(first(),
@@ -30,5 +31,9 @@ export class HomeComponent implements OnInit {
 
   removeFavoriteTopic(topic: Topic, userUid: string) {
     this.store.dispatch(new RemoveFavoriteTopic(topic, userUid));
+  }
+
+  goToComments(id: string) {
+    this.router.navigateByUrl('posts/topic-details/' + id);
   }
 }

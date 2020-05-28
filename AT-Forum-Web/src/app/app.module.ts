@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import {NgxsModule} from '@ngxs/store';
-import {environment, firebaseConfig} from '../environments/environment';
+import {environment} from '../environments/environment';
 import {AuthState} from './auth/shared/auth.state';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {LoginComponent} from './auth/login/login.component';
@@ -45,7 +45,7 @@ import {MatListModule} from '@angular/material/list';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
     MatCardModule,

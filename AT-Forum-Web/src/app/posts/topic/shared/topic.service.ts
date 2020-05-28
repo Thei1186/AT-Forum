@@ -4,7 +4,8 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {from, Observable} from 'rxjs';
 import {first, map, switchMap} from 'rxjs/operators';
 import {FavoriteTopic} from '../../shared/favoriteTopic';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'

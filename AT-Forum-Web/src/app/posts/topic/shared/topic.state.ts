@@ -9,9 +9,9 @@ import {
   GetAllTopicsFromCategory, GetTopicsFromCategoryWithPaging,
   GetFavorites,
   GetTopic,
-  RemoveFavoriteTopic
+  RemoveFavoriteTopic, GetNextTopicsFromCategoryWithPaging, GetPrevTopicsFromCategoryWithPaging, UpdateNavigation
 } from './topic.action';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {Logout} from '../../../auth/shared/auth.action';
 import {Router} from '@angular/router';
 
@@ -20,6 +20,8 @@ export class TopicStateModel {
   topics: Topic[];
   topic: Topic;
   favoriteTopics: Topic[];
+  isFirstTopic: boolean;
+  isLastTopic: boolean;
 }
 
 @State<TopicStateModel>({
@@ -27,7 +29,9 @@ export class TopicStateModel {
   defaults: {
     topics: [],
     topic: undefined,
-    favoriteTopics: []
+    favoriteTopics: [],
+    isFirstTopic: false,
+    isLastTopic: false
   }
 })
 
@@ -39,6 +43,16 @@ export class TopicState {
   @Selector()
   static topics(state: TopicStateModel) {
     return state.topics;
+  }
+
+  @Selector()
+  static isFirstTopic(state: TopicStateModel) {
+    return state.isFirstTopic;
+  }
+
+  @Selector()
+  static isLastTopic(state: TopicStateModel) {
+    return state.isLastTopic;
   }
 
   @Selector()
@@ -82,16 +96,58 @@ export class TopicState {
         }));
   }
 
-  @Action(GetTopicsFromCategoryWithPaging)
-  getNextTopicsFromCategoryWithPaging({getState, setState}: StateContext<TopicStateModel>, action: GetTopicsFromCategoryWithPaging) {
+  @Action(GetNextTopicsFromCategoryWithPaging)
+  getNextTopicsFromCategoryWithPaging({getState, setState, dispatch}: StateContext<TopicStateModel>, action: GetNextTopicsFromCategoryWithPaging) {
     const state = getState();
-    return this.topicService.getTopicsFromCategoryWithPaging(action.limit, state.topics[state.topics.length - 1] , action.catId)
+    return this.topicService.getTopicsFromCategoryWithPaging(action.limit, state.topics[state.topics.length - 1], action.catId)
       .pipe(
         tap((result) => {
           setState({
             ...state,
             topics: result
           });
+          if (result.length > 0) {
+            dispatch(new UpdateNavigation(result[0].id, result[result.length - 1].id, action.catId));
+          }
+        }));
+  }
+
+
+
+  @Action(UpdateNavigation)
+  updateNavigation({getState, setState}: StateContext<TopicStateModel>, action: UpdateNavigation) {
+    const state = getState();
+    return this.topicService.isFirstInArray(action.topicFirstId, action.catId)
+      .pipe(
+        switchMap(start => {
+          return this.topicService
+            .isLastInArray(action.topicLastId, action.catId)
+            .pipe(
+              tap(end => {
+                setState({
+                  ...state,
+                  isFirstTopic: start,
+                  isLastTopic: end
+                });
+              })
+            );
+        })
+      );
+  }
+
+  @Action(GetPrevTopicsFromCategoryWithPaging)
+  getPrevTopicsFromCategoryWithPaging({getState, setState, dispatch}: StateContext<TopicStateModel>, action: GetPrevTopicsFromCategoryWithPaging) {
+    const state = getState();
+    return this.topicService.getPrevTopicsFromCategoryWithPaging(action.limit, state.topics[0], action.catId)
+      .pipe(
+        tap((result) => {
+          setState({
+            ...state,
+            topics: result
+          });
+          if (result.length > 0) {
+            dispatch(new UpdateNavigation(result[0].id, result[result.length - 1].id, action.catId));
+          }
         }));
   }
 
@@ -156,7 +212,9 @@ export class TopicState {
     setState({
       topics: [],
       topic: undefined,
-      favoriteTopics: []
+      favoriteTopics: [],
+      isLastTopic: false,
+      isFirstTopic: false
     });
   }
 

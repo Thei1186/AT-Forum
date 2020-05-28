@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Topic} from '../../shared/topic';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {from, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {first, map, switchMap} from 'rxjs/operators';
 import {FavoriteTopic} from '../../shared/favoriteTopic';
 import * as firebase from 'firebase';
 
@@ -22,21 +22,68 @@ export class TopicService {
   }
 
   getTopicsFromCategoryWithPaging(limit: number, topicStart: Topic, catId: string): Observable<Topic[]> {
-    return from(this.afs.collection<Topic>('topics').ref.limit(limit).orderBy('topicName')
-      .where('categoryId', '==', catId)
-      .get())
-      .pipe(
-        map((query) => {
-          const topics: Topic[] = [];
-          query.forEach((snap) => {
-            const topic = snap.data() as Topic;
-            topic.id = snap.id;
-            topics.push(topic);
-          });
-          return topics;
+    if (topicStart === undefined) {
+      return from(this.afs.collection<Topic>('topics').ref.limit(limit).orderBy('topicName')
+        .where('categoryId', '==', catId)
+        .get())
+        .pipe(
+          first(),
+          map((query) => {
+            const topics: Topic[] = [];
+            query.forEach((snap) => {
+              const topic = snap.data() as Topic;
+              topic.id = snap.id;
+              topics.push(topic);
+            });
+            return topics;
+          })
+        );
+    } else {
+      return this.afs.collection<Topic>('topics').doc(topicStart.id).get().pipe(
+        first(),
+        switchMap(doc => {
+          return this.afs.collection<Topic>('topics', ref => ref.orderBy('topicName').startAfter(doc).limit(limit)
+            .where('categoryId', '==', catId))
+            .get()
+            .pipe(
+              map(docs => {
+                const topics: Topic[] = [];
+                docs.forEach((snap) => {
+                  const topic = snap.data() as Topic;
+                  topic.id = snap.id;
+                  topics.push(topic);
+                });
+                return topics;
+              })
+            );
         })
       );
+    }
   }
+
+  getPrevTopicsFromCategoryWithPaging(limit: number, topicEnd: Topic, catId: string): Observable<Topic[]> {
+    return this.afs.collection('topics').doc(topicEnd.id).get().pipe(
+      first(),
+      switchMap(doc => {
+        return this.afs
+          .collection('topics', ref => ref.orderBy('topicName').endBefore(doc).limitToLast(limit)
+            .where('categoryId', '==', catId))
+          .get()
+          .pipe(
+            map(docs => {
+              const topics: Topic[] = [];
+              docs.forEach((snap) => {
+                const topic = snap.data() as Topic;
+                topic.id = snap.id;
+                topics.push(topic);
+              });
+              return topics;
+            })
+          );
+      })
+    );
+  }
+
 
   getAllTopicsFromCategory(catId: string): Observable<Topic[]> {
     return from(this.afs.collection<Topic>('topics').ref.where('categoryId', '==', catId).get())
@@ -109,5 +156,29 @@ export class TopicService {
     return from(this.afs.collection('favoriteTopics').doc(userUid).update({
       favoriteTopics: arrayRemove(topic)
     }));
+  }
+
+  isFirstInArray(topicFirstId: string, catId: string): Observable<boolean> {
+    return this.afs.collection('topics', ref => ref.orderBy('topicName').limit(1)
+      .where('categoryId', '==', catId)).get().pipe(
+      first(),
+      map(query => {
+        if (query.docs.length > 0) {
+          return query.docs[0].id === topicFirstId;
+        }
+      })
+    );
+  }
+
+  isLastInArray(topicLastId: string, catId: string): Observable<boolean> {
+    return this.afs.collection('topics', ref => ref.orderBy('topicName', 'desc').limit(1)
+      .where('categoryId', '==', catId)).get().pipe(
+      first(),
+      map(query => {
+        if (query.docs.length > 0) {
+          return query.docs[0].id === topicLastId;
+        }
+      })
+    );
   }
 }

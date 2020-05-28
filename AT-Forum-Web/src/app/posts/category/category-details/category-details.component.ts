@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthState} from '../../../auth/shared/auth.state';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
@@ -10,7 +10,7 @@ import {GetCategory} from '../shared/category.action';
 import {Category} from '../../shared/category';
 import {
   DeleteTopic,
-  GetAllTopicsFromCategory,
+  GetNextTopicsFromCategoryWithPaging, GetPrevTopicsFromCategoryWithPaging,
   GetTopicsFromCategoryWithPaging
 } from '../../topic/shared/topic.action';
 import {AuthUser} from '../../../auth/shared/auth-user';
@@ -26,23 +26,26 @@ import {TopicState} from '../../topic/shared/topic.state';
 export class CategoryDetailsComponent implements OnInit {
   @Select(AuthState.role) role$: Observable<Role>;
   @Select(TopicState.topics) topics$: Observable<Topic[]>;
+  @Select(TopicState.isFirstTopic) isFirstTopic$: Observable<boolean>;
+  @Select(TopicState.isLastTopic) isLastTopic$: Observable<boolean>;
   @Select(AuthState.loggedInUser) user$: Observable<AuthUser>;
   @Select(CategoryState.category) category$: Observable<Category>;
   id: string;
   limit = 5;
 
   constructor(private store: Store, private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new GetCategory(this.id));
-    this.store.dispatch(new GetTopicsFromCategoryWithPaging(this.limit, undefined, this.id));
+    this.store.dispatch(new GetTopicsFromCategoryWithPaging(this.limit, this.id));
     // this.store.dispatch(new GetAllTopicsFromCategory(this.id));
   }
 
   deleteTopic(id: string) {
-  this.store.dispatch(new DeleteTopic(id));
+    this.store.dispatch(new DeleteTopic(id));
   }
 
   goToEditTopic(id: string) {
@@ -50,7 +53,7 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   goToCreateTopic(id: string) {
-   this.router.navigateByUrl('posts/create-topic/' + id);
+    this.router.navigateByUrl('posts/create-topic/' + id);
   }
 
   goToComments(id: string) {
@@ -62,10 +65,10 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   goToNextPage() {
-
+    this.store.dispatch(new GetNextTopicsFromCategoryWithPaging(this.limit, this.id));
   }
 
   goToPrevPage() {
-
+    this.store.dispatch(new GetPrevTopicsFromCategoryWithPaging(this.limit, this.id));
   }
 }

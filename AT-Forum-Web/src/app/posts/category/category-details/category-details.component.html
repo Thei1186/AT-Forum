@@ -40,8 +40,8 @@
     </div>
   </div>
   <div align="center">
-    <button mat-raised-button (click)="goToPrevPage()">PREVIOUS</button>
-    <button mat-raised-button (click)="goToNextPage()">NEXT</button>
+    <button mat-raised-button (click)="goToPrevPage()" [disabled]="(isFirstTopic$ | async)">PREVIOUS</button>
+    <button mat-raised-button (click)="goToNextPage()" [disabled]="(isLastTopic$ | async)">NEXT</button>
   </div>
 </div>
 

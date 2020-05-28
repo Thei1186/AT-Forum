@@ -39,13 +39,6 @@ exports.updateUserUpdatesAuthor = functions.firestore
         return difa.getUserController().updateUserUpdatesAuthor(change, context);
     });
 
-
-exports.updateTopicUpdateFavoriteTopic = functions.firestore
-    .document('favoriteTopic/{uid}')
-    .onUpdate((change, context) => {
-        return difa.getTopicController().updateTopicUpdateFavoriteTopic(change, context);
-    });
-
 exports.removeTopicFromFavoritesWhenTopicIsDeleted = functions.firestore
     .document('topics/{id}')
     .onDelete((snapshot, context) => {
@@ -55,6 +48,12 @@ exports.removeTopicFromFavoritesWhenTopicIsDeleted = functions.firestore
 /*
 These functions are no longer used
 
+exports.updateTopicUpdateFavoriteTopic = functions.firestore
+    .document('topics/{id}')
+    .onUpdate((change, context) => {
+        return difa.getTopicController().updateTopicUpdateFavoriteTopic(change, context);
+    });
+    
 exports.removeTopicFromCategoryWhenTopicDeleted = functions.firestore
     .document('topics/{id}')
     .onDelete((snap, context) => {

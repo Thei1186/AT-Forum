@@ -42,6 +42,26 @@ export class TopicRepositoryFirebase implements TopicRepository {
             });
     }
 
+    /*
+    async updateTopicUpdateFavoriteTopic(topicBefore: Topic, topicAfter: Topic): Promise<void> {
+        await this.db().collection(`${this.favoriteTopicPath}`)
+            .where('favoriteTopics', 'array-contains', `${topicBefore}`).get()
+            .then((query) => {
+                const batch = this.db().batch();
+                if (query) {
+                    query.forEach((doc) => {
+                        batch.update(doc.ref, topicAfter)
+                    });
+                }
+                return batch.commit();
+            }).catch((err) => {
+                return Promise.reject('Failed to update Topic from favorite topics collection. Threw error \n '
+                    + err.message);
+            });
+    }
+    
+     */
+
 
     /*
        async updateTopicComments(comment: Comment): Promise<void> {

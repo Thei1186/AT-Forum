@@ -1,5 +1,4 @@
 import {TopicRepository} from "./topic.repository";
-import {FavoriteTopic} from "../models/favoriteTopic";
 import {Topic} from "../models/topic";
 
 
@@ -18,11 +17,12 @@ export class TopicService {
     deleteFavoriteWhenTopicIsDeleted(topic: Topic) {
         return this.topicRepository.deleteFavoriteWhenTopicIsDeleted(topic);
     }
-
-	updateTopicUpdateFavoriteTopic(favoriteTopicBefore: FavoriteTopic, favoriteTopicAfter: FavoriteTopic) {
-
-    }
+    
     /*
+
+    updateTopicUpdateFavoriteTopic(topicBefore: Topic, topicAfter: Topic) {
+        return this.topicRepository.updateTopicUpdateFavoriteTopic(topicBefore, topicAfter);
+    }
 
      updateTopicComments(comment: Comment): Promise<void> {
         return this.topicRepository.updateTopicComments(comment);

@@ -1,9 +1,8 @@
 import {TopicController} from "./topic.controller";
-import {Change, EventContext} from "firebase-functions";
+import {EventContext} from "firebase-functions";
 import {DocumentSnapshot} from "firebase-functions/lib/providers/firestore";
 import {TopicService} from "./topic.service";
 import {Topic} from "../models/topic";
-import {FavoriteTopic} from "../models/favoriteTopic";
 
 export class TopicControllerFirebase implements TopicController {
 
@@ -21,15 +20,15 @@ export class TopicControllerFirebase implements TopicController {
         topic.id = topId;
         return this.service.deleteFavoriteWhenTopicIsDeleted(topic);
     }
-	
-	updateTopicUpdateFavoriteTopic(change: Change<DocumentSnapshot>, context: EventContext) {
-        const favoriteTopicBefore = change.before.data() as FavoriteTopic;
-        favoriteTopicBefore.id = context.params.id;
-        const favoriteTopicAfter = change.after.data() as FavoriteTopic;
-        favoriteTopicAfter.id = context.params.id;
-        return this.service.updateTopicUpdateFavoriteTopic(favoriteTopicBefore, favoriteTopicAfter);
 
     /*
+    updateTopicUpdateFavoriteTopic(change: Change<DocumentSnapshot>, context: EventContext) {
+        const topicBefore = change.before.data() as Topic;
+        topicBefore.id = context.params.id;
+        const topicAfter = change.after.data() as Topic;
+        topicAfter.id = context.params.id;
+        return this.service.updateTopicUpdateFavoriteTopic(topicBefore, topicAfter);
+
     updateTopicComments(snap: DocumentSnapshot, context: EventContext): Promise<void> {
         const comment = snap.data() as Comment;
         comment.id = context.params.id;
@@ -51,6 +50,4 @@ export class TopicControllerFirebase implements TopicController {
         return this.service.editTopicComments(commentAfter, commentBefore);
     }
      */
-    
-    }
 }
